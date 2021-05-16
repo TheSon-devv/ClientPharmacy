@@ -1,16 +1,16 @@
 import React from 'react'
-import Checkout from '../../component/Checkout'
+import DetailProduct from '../../component/DetailProduct'
 import Footer from '../../component/Footer'
 import HeaderArea from '../../component/HeaderArea'
 
-const CheckOutContainer = () => {
+const DetailProductContainer = () => {
     return (
         <div>
-            {/* <HeaderArea /> */}
-            <Checkout />
+            <HeaderArea />
+            <DetailProduct />
             <Footer />
         </div>
     )
 }
 
-export default CheckOutContainer
+export default DetailProductContainer

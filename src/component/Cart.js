@@ -5,7 +5,6 @@ import '../css/style.css'
 const Cart = () => {
     return (
         <div>
-            <main class="ps-main">
                 <div class="ps-content pt-80 pb-80">
                     <div class="ps-container">
                         <div class="ps-cart-listing">
@@ -85,7 +84,6 @@ const Cart = () => {
                         </div>
                     </div>
                 </div>
-            </main>
         </div>
     )
 }
