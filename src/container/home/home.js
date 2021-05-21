@@ -1,7 +1,7 @@
 import React from 'react'
 import CategoryProduct from '../../component/CategoryProduct'
 import Footer from '../../component/Footer'
-import HeaderArea from '../../component/HeaderArea'
+import HeaderArea from '../../component/Header/HeaderArea'
 import Slider from '../../component/Slider'
 
 

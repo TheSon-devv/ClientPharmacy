@@ -1,7 +1,36 @@
+import axios from 'axios'
 import React from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { useHistory } from 'react-router'
 import '../css/style.css'
+import { headerAuthorization } from '../header'
+import { reloadCart } from '../store/actions/cart'
 
 const Checkout = () => {
+    const history = useHistory();
+    const dispatch = useDispatch();
+    const totalCart = useSelector(state => state.cart.totalCart)
+    const listCheckout = useSelector(state => state.cart.listCheckout)
+    const listCart = useSelector(state => state.cart.listCart)
+    const quantityCheckout = useSelector(state => state.cart.quantityCheckout)
+
+    const checkOutHandler = (e) => {
+        e.preventDefault();
+        const data = {
+            userId: localStorage.getItem('userId'),
+            quantity: quantityCheckout,
+            totalPrice: totalCart,
+            details: listCheckout
+        }
+        axios.post(`http://localhost:4000/checkout`, data, headerAuthorization())
+            .then(res => {
+                console.log(res.data.saveCheckout);
+                alert('Thanh toán thành công ! Tiếp tục mua sắm nhé')
+                dispatch(reloadCart())
+                history.push('/')
+            })
+            .catch(err => console.log(err))
+    }
     return (
         <>
             <main className="ps-main">
@@ -50,7 +79,7 @@ const Checkout = () => {
                                         <div className="form-group">
                                             <div className="ps-checkbox">
                                                 <input className="form-control" type="checkbox" id="cb01" />
-                                                <label for="cb01">Create an account?</label>
+                                                <label htmlFor="cb01">Create an account?</label>
                                             </div>
                                         </div>
                                         <h3 className="mt-40"> Addition information</h3>
@@ -76,18 +105,16 @@ const Checkout = () => {
                                                     </tr>
                                                 </thead>
                                                 <tbody>
-                                                    <tr>
-                                                        <td>HABITANT x1</td>
-                                                        <td>$300.00</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>Card Subtitle</td>
-                                                        <td>$300.00</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>Order Total</td>
-                                                        <td>$300.00</td>
-                                                    </tr>
+                                                    {
+                                                        listCart.map(e => {
+                                                            return (
+                                                                <tr key={e._id}>
+                                                                    <td>{e.namePharmacy}</td>
+                                                                    <td>{e.pricePharmacy}</td>
+                                                                </tr>
+                                                            )
+                                                        })
+                                                    }
                                                 </tbody>
                                             </table>
                                         </div>
@@ -96,22 +123,22 @@ const Checkout = () => {
                                             <div className="form-group cheque">
                                                 <div className="ps-radio">
                                                     <input className="form-control" type="radio" id="rdo01" name="payment" checked />
-                                                    <label for="rdo01">Thanh toán khi nhận hàng</label>
-
+                                                    <label htmlFor="rdo01">Thanh toán khi nhận hàng</label>
                                                 </div>
                                             </div>
                                             <div className="form-group paypal">
                                                 <div className="ps-radio ps-radio--inline">
                                                     <input className="form-control" type="radio" name="payment" id="rdo02" />
-                                                    <label for="rdo02">Paypal</label>
+                                                    <label htmlFor="rdo02">Paypal</label>
                                                 </div>
                                                 <ul className="ps-payment-method">
                                                     <li><a href="#"><img src="images/payment/1.png" alt="" /></a></li>
                                                     <li><a href="#"><img src="images/payment/2.png" alt="" /></a></li>
                                                     <li><a href="#"><img src="images/payment/3.png" alt="" /></a></li>
                                                 </ul>
-                                                <button className="ps-btn ps-btn--fullwidth">Place Order<i className="ps-icon-next"></i></button>
+                                                <button className="ps-btn ps-btn--fullwidth" onClick={checkOutHandler}>Place Order<i className="ps-icon-next"></i></button>
                                             </div>
+
                                         </footer>
                                     </div>
                                     <div className="ps-shipping">

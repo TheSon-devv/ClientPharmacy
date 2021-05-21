@@ -1,16 +1,16 @@
 import React from 'react'
-import DetailProduct from '../../component/DetailProduct'
+import Contact from '../../component/Contact'
 import Footer from '../../component/Footer'
 import HeaderArea from '../../component/Header/HeaderArea'
 
-const DetailProductContainer = () => {
+const ContactContainer = () => {
     return (
         <div>
             <HeaderArea />
-            <DetailProduct />
+            <Contact />
             <Footer />
         </div>
     )
 }
 
-export default DetailProductContainer
+export default ContactContainer

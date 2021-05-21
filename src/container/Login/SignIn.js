@@ -7,24 +7,24 @@ import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import { Link, useHistory } from "react-router-dom";
-import { useForm } from 'react-hook-form';
 import visibility from "../../asset/visibility.png";
 import visibility_hide from "../../asset/visibility_hide.png";
-
+import { useForm } from "react-hook-form";
 
 //redux
 // import * as actions from "../../actions/admin";
 // import { connect, useDispatch, useSelector } from 'react-redux';
 import { Button } from "@material-ui/core";
 import axios from "axios";
-// import { auth } from "../../actions/auth";
+import { useDispatch, useSelector } from "react-redux";
+import { auth } from "../../store/actions/auth";
 
 function Copyright() {
     return (
         <Typography variant="body2" color="textSecondary" align="center">
             {"Copyright © "}
             <Link color="inherit" to="/">
-                VietSkin
+                Restaurant
             </Link>{" "}
             {new Date().getFullYear()}
             {""}
@@ -78,34 +78,15 @@ const useStyles = makeStyles((theme) => ({
 const SignIn = ({ ...props }) => {
     const classes = useStyles();
     const history = useHistory();
-
+    const dispatch = useDispatch();
+    const error = useSelector(state => state.auth.message);
+    const [show, setShow] = useState(false);
     const { register, handleSubmit, formState: { errors } } = useForm();
-    const [show, setShow] = useState(false)
-    const [error, setError] = useState("")
+
     const onSubmit = data => {
-        const dataLogin = {
-            email: data.email,
-            password: data.password
-        }
-        axios.post('http://localhost:4000/auth/login', dataLogin)
-            .then(res => {
-                if (res.data.code === 200) {
-                    console.log(res.data)
-                    localStorage.setItem('token', res.data.dataLogin.accessToken)
-                    localStorage.setItem('expiresIn', res.data.dataLogin.expiresIn)
-                    history.push('/')
-                    setTimeout(() => {
-                        localStorage.clear();
-                        window.location.reload();
-                    },res.data.dataLogin.expiresIn )
-                }
-                else {
-                    setError("Tài khoản hoặc mật khẩu không chính xác !")
-                }
-            })
-            .catch(err => console.log(err))
-        console.log(dataLogin)
+        dispatch(auth(data.email, data.password))
     }
+
     return (
         <>
             <Grid container component="main" className={classes.root}>
@@ -121,7 +102,7 @@ const SignIn = ({ ...props }) => {
                         </Typography>
                         <form className={classes.form} onSubmit={handleSubmit(onSubmit)}>
                             <div className="row px-3 py-2">
-                                <input type="text" placeholder="Email (*)" {...register("email", { required: true, pattern: /[^@ \t\r\n]+@[^@ \t\r\n]+\..[^@ \t\r\n]+/i })}
+                                <input type="text" placeholder="Email (*)" {...register("email", { required: true })}
                                     className="w-100 form-control focus-remove-shadow"
                                     style={{ boxShadow: "none !important", paddingTop: 25, paddingBottom: 25 }}
                                 />
@@ -131,7 +112,7 @@ const SignIn = ({ ...props }) => {
                             </div>
                             <div className="row px-3 py-2" style={{ display: 'flex' }}>
 
-                                <input type={show ? "text" : "password"} placeholder="Mật khẩu (*)" {...register("password", { required: true, minLength: 6, maxLength: 15 })}
+                                <input type={show ? "text" : "password"} placeholder="Mật khẩu (*)" {...register("password", { required: true })}
                                     className="w-100 form-control focus-remove-shadow"
                                     style={{ boxShadow: "none !important", paddingTop: 25, paddingBottom: 25 }}
                                     maxLength="15"
@@ -152,9 +133,6 @@ const SignIn = ({ ...props }) => {
                             >
                                 Sign In
                             </Button>
-                            <div style={{width:'100%',display:'flex',justifyContent:'center'}}>
-                                Bạn chưa có tài khoản ? <Link to="/signUp" style={{textDecoration:'none',color:'red'}}>Đăng ký tại đây</Link>
-                            </div>
                             <div style={{ width: '100%', height: 380 }}>
                                 {
                                     error !== null ? (
@@ -176,3 +154,7 @@ const SignIn = ({ ...props }) => {
 };
 
 export default SignIn;
+
+{/* <div style={{ width: '100%', display: 'flex', justifyContent: 'center' }}>
+    Bạn chưa có tài khoản ? <Link to="/signUp" style={{ textDecoration: 'none', color: 'red' }}>Đăng ký tại đây</Link>
+</div> */}

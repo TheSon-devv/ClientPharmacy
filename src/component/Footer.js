@@ -1,65 +1,66 @@
 import React from 'react'
 import '../css/style.css'
+import { Link } from "react-router-dom";
 
 const Footer = () => {
     return (
         <>
-            <div class="ps-subscribe">
-                <div class="ps-container">
-                    <div class="row">
-                        <div class="col-lg-3 col-md-12 col-sm-12 col-xs-12 ">
-                            <h3><i class="fa fa-envelope"></i>Sign up to Newsletter</h3>
+            <div className="ps-subscribe">
+                <div className="ps-container">
+                    <div className="row">
+                        <div className="col-lg-3 col-md-12 col-sm-12 col-xs-12 ">
+                            <h3><i className="fa fa-envelope"></i>Đăng ký tài khoản</h3>
                         </div>
-                        <div class="col-lg-5 col-md-7 col-sm-12 col-xs-12 ">
-                            <form class="ps-subscribe__form" action="do_action" method="post">
-                                <input class="form-control" type="text" placeholder="" />
-                                <button>Sign up now</button>
+                        <div className="col-lg-5 col-md-7 col-sm-12 col-xs-12 ">
+                            <form className="ps-subscribe__form">
+                                <input className="form-control" type="text" placeholder="" />
+                                <button><Link to="/signUp" style={{textDecoration:'none',color:'#fff'}}>Đăng ký ngay</Link></button>
                             </form>
                         </div>
-                        <div class="col-lg-4 col-md-5 col-sm-12 col-xs-12 ">
-                            <p>...and receive  <span>$20</span>  coupon for first shopping.</p>
+                        <div className="col-lg-4 col-md-5 col-sm-12 col-xs-12 ">
+                            <p>...tặng <span> 200.000 </span> cho lần đầu tiên mua sắm.</p>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <div class="ps-footer bg--cover" data-background="images/background/parallax.jpg">
-                <div class="ps-footer__content">
-                    <div class="ps-container">
-                        <div class="row">
-                            <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12 ">
-                                <aside class="ps-widget--footer ps-widget--info">
-                                    <header><a class="ps-logo" href="index.html"><img src="images/logo-white.png" alt="" /></a>
-                                        <h3 class="ps-widget__title">Address Office 1</h3>
+            <div className="ps-footer bg--cover" data-background="images/background/parallax.jpg">
+                <div className="ps-footer__content">
+                    <div className="ps-container">
+                        <div className="row">
+                            <div className="col-lg-3 col-md-3 col-sm-12 col-xs-12 ">
+                                <aside className="ps-widget--footer ps-widget--info">
+                                    <header><a className="ps-logo" href="index.html"><img src="images/logo-white.png" alt="" /></a>
+                                        <h3 className="ps-widget__title">Địa chỉ 1 </h3>
                                     </header>
                                     <footer>
-                                        <p><strong>460 West 34th Street, 15th floor, New York</strong></p>
-                                        <p>Email: <a href='mailto:support@store.com'>support@store.com</a></p>
-                                        <p>Phone: +323 32434 5334</p>
-                                        <p>Fax: ++323 32434 5333</p>
+                                        <p><strong>Số 3 Ngõ 152 P. Phương Liệt, Phương Liệt, Thanh Xuân, Hà Nội</strong></p>
+                                        <p>Email: <a href='mailto:support@store.com'>vietskin@gmail.com</a></p>
+                                        <p>Phone: 036.678.2288</p>
+                                        
                                     </footer>
                                 </aside>
                             </div>
-                            <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12 ">
-                                <aside class="ps-widget--footer ps-widget--info second">
+                            <div className="col-lg-3 col-md-3 col-sm-12 col-xs-12 ">
+                                <aside className="ps-widget--footer ps-widget--info second">
                                     <header>
-                                        <h3 class="ps-widget__title">Address Office 2</h3>
+                                        <h3 className="ps-widget__title">Địa chỉ 2</h3>
                                     </header>
                                     <footer>
-                                        <p><strong>PO Box 16122 Collins  Victoria 3000 Australia</strong></p>
-                                        <p>Email: <a href='mailto:support@store.com'>support@store.com</a></p>
-                                        <p>Phone: +323 32434 5334</p>
-                                        <p>Fax: ++323 32434 5333</p>
+                                        <p><strong>235 Hoàng Quốc Việt, Hà Nội</strong></p>
+                                        <p>Email: <a href='mailto:support@store.com'>luudinhkien@gmail.com</a></p>
+                                        <p>Phone: 032.142.2512</p>
+                                        
                                     </footer>
                                 </aside>
                             </div>
-                            <div class="col-lg-2 col-md-2 col-sm-4 col-xs-12 ">
-                                <aside class="ps-widget--footer ps-widget--link">
+                            <div className="col-lg-2 col-md-2 col-sm-4 col-xs-12 ">
+                                <aside className="ps-widget--footer ps-widget--link">
                                     <header>
-                                        <h3 class="ps-widget__title">Find Our store</h3>
+                                        <h3 className="ps-widget__title">Find Our store</h3>
                                     </header>
                                     <footer>
-                                        <ul class="ps-list--link">
+                                        <ul className="ps-list--link">
                                             <li><a href="#">Coupon Code</a></li>
                                             <li><a href="#">SignUp For Email</a></li>
                                             <li><a href="#">Site Feedback</a></li>
@@ -68,33 +69,32 @@ const Footer = () => {
                                     </footer>
                                 </aside>
                             </div>
-                            <div class="col-lg-2 col-md-2 col-sm-4 col-xs-12 ">
-                                <aside class="ps-widget--footer ps-widget--link">
+                            <div className="col-lg-2 col-md-2 col-sm-4 col-xs-12 ">
+                                <aside className="ps-widget--footer ps-widget--link">
                                     <header>
-                                        <h3 class="ps-widget__title">Get Help</h3>
+                                        <h3 className="ps-widget__title">Vể VietSkin</h3>
                                     </header>
                                     <footer>
-                                        <ul class="ps-list--line">
-                                            <li><a href="#">Order Status</a></li>
-                                            <li><a href="#">Shipping and Delivery</a></li>
-                                            <li><a href="#">Returns</a></li>
-                                            <li><a href="#">Payment Options</a></li>
-                                            <li><a href="#">Contact Us</a></li>
+                                        <ul className="ps-list--line">
+                                            <li><a href="#">Các sản phẩm bán chạy</a></li>
+                                            <li><a href="#">Giới thiệu về chúng tôi</a></li>
+                                            <li><a href="#">Chính sách đảm bảo</a></li>
+                                            <li><a href="#">Vận chuyển nhanh chóng</a></li>
                                         </ul>
                                     </footer>
                                 </aside>
                             </div>
-                            <div class="col-lg-2 col-md-2 col-sm-4 col-xs-12 ">
-                                <aside class="ps-widget--footer ps-widget--link">
+                            <div className="col-lg-2 col-md-2 col-sm-4 col-xs-12 ">
+                                <aside className="ps-widget--footer ps-widget--link">
                                     <header>
-                                        <h3 class="ps-widget__title">Products</h3>
+                                        <h3 className="ps-widget__title">Nổi bật</h3>
                                     </header>
                                     <footer>
-                                        <ul class="ps-list--line">
-                                            <li><a href="#">Shoes</a></li>
-                                            <li><a href="#">Clothing</a></li>
-                                            <li><a href="#">Accessries</a></li>
-                                            <li><a href="#">Football Boots</a></li>
+                                        <ul className="ps-list--line">
+                                            <li><a href="#">Tự chuẩn đoán</a></li>
+                                            <li><a href="#">Tin tức</a></li>
+                                            <li><a href="#">Bệnh da liễu</a></li>
+                                            <li><a href="#">Chăm sóc da</a></li>
                                         </ul>
                                     </footer>
                                 </aside>
@@ -102,18 +102,18 @@ const Footer = () => {
                         </div>
                     </div>
                 </div>
-                <div class="ps-footer__copyright">
-                    <div class="ps-container">
-                        <div class="row">
-                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 ">
-                                <p>&copy; <a href="#">SKYTHEMES</a>, Inc. All rights Resevered. Design by <a href="#"> Alena Studio</a></p>
+                <div className="ps-footer__copyright">
+                    <div className="ps-container">
+                        <div className="row">
+                            <div className="col-lg-6 col-md-6 col-sm-6 col-xs-12 ">
+                                <p>&copy; <a href="#">VIETSKIN</a>, Inc. All rights Resevered. Design by <a href="#"> Kien </a></p>
                             </div>
-                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 ">
-                                <ul class="ps-social">
-                                    <li><a href="#"><i class="fa fa-facebook"></i></a></li>
-                                    <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
-                                    <li><a href="#"><i class="fa fa-twitter"></i></a></li>
-                                    <li><a href="#"><i class="fa fa-instagram"></i></a></li>
+                            <div className="col-lg-6 col-md-6 col-sm-6 col-xs-12 ">
+                                <ul className="ps-social">
+                                    <li><a href="#"><i className="fa fa-facebook"></i></a></li>
+                                    <li><a href="#"><i className="fa fa-google-plus"></i></a></li>
+                                    <li><a href="#"><i className="fa fa-twitter"></i></a></li>
+                                    <li><a href="#"><i className="fa fa-instagram"></i></a></li>
                                 </ul>
                             </div>
                         </div>

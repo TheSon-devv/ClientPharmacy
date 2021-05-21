@@ -1,7 +1,7 @@
 import React from 'react'
 import Cart from '../../component/Cart'
 import Footer from '../../component/Footer'
-import HeaderArea from '../../component/HeaderArea'
+import HeaderArea from '../../component/Header/HeaderArea'
 
 const CartContainer = () => {
     return (
