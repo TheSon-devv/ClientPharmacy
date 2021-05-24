@@ -6,13 +6,14 @@ import '../../css/style.css'
 // import '../css/plugins/Magnific-Popup/dist/magnific-popup.css'
 // import '../css/plugins/revolution/css/settings.css'
 // import '../css/plugins/revolution/css/layers.css'
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 import Logo from "../../asset/logo-app.png";
 import { useDispatch, useSelector } from 'react-redux';
-import { logOut } from '../../store/actions/auth';
+import { authLogOut, logOut } from '../../store/actions/auth';
 import SideDrawer from '../SideDrawer/SideDrawer';
 import classes from "../SideDrawer/SideDrawer.module.css";
 import { deleteCart } from '../../store/actions/cart';
+import axios from 'axios';
 
 const HeaderArea = () => {
     const dispatch = useDispatch()
@@ -23,6 +24,7 @@ const HeaderArea = () => {
     function TotalPrice(quantity, price) {
         return Number(quantity * price)
     }
+
     return (
         <div >
             <div className="header--sidebar"></div>
@@ -39,7 +41,7 @@ const HeaderArea = () => {
                         </div>
                         <div className="navigation__column center menu_hidden">
                             <ul className="main-menu menu">
-                                <li className="menu-item menu-item-has-children dropdown"><Link to="/" style={{ textDecoration: 'none' }}>Home</Link>
+                                <li className="menu-item menu-item-has-children dropdown"><Link to="/" style={{ textDecoration: 'none' }}>Trang chủ</Link>
                                     {/* <ul className="sub-menu">
                                         <li className="menu-item"><a href="index.html">Homepage #1</a></li>
                                         <li className="menu-item"><a href="#">Homepage #2</a></li>
@@ -111,7 +113,7 @@ const HeaderArea = () => {
                                 </li>
                             </ul>
                         </div>
-                        <div className="navigation__column right " style={{}}>
+                        <div className="navigation__column right ">
 
                             {
                                 localStorage.getItem('userToken') !== null ? (
@@ -124,7 +126,7 @@ const HeaderArea = () => {
                                                         <li className="menu-item">
                                                             <Link to="/detailUser" style={{ textDecoration: 'none' }}>Thông tin cá nhân</Link>
                                                         </li>
-                                                        <li className="menu-item" onClick={() => dispatch(logOut())}>
+                                                        <li className="menu-item" onClick={() => dispatch(authLogOut())}>
                                                             <Link to="/" style={{ textDecoration: 'none' }}>
                                                                 Đăng xuất
                                                         </Link>
@@ -152,7 +154,7 @@ const HeaderArea = () => {
                                                                         <p className="ps-cart-item__title" style={{ color: '#fff' }}>{e.namePharmacy}</p>
                                                                         <p>
                                                                             <span>Quantity:<i>{e.quantity}</i></span>
-                                                                            <span style={{ marginLeft: '-10px' }}>Total:<i>{TotalPrice(e.quantity,e.pricePharmacy)}</i></span>
+                                                                            <span style={{ marginLeft: '-10px' }}>Total:<i>{TotalPrice(e.quantity, e.pricePharmacy)}</i></span>
                                                                         </p>
                                                                     </div>
                                                                 </div>

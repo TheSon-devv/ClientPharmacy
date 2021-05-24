@@ -10,6 +10,7 @@ import { Link, useHistory } from "react-router-dom";
 import visibility from "../../asset/visibility.png";
 import visibility_hide from "../../asset/visibility_hide.png";
 import { useForm } from "react-hook-form";
+import { GoogleLogin ,GoogleLogout} from 'react-google-login';
 
 //redux
 // import * as actions from "../../actions/admin";
@@ -87,6 +88,19 @@ const SignIn = ({ ...props }) => {
         dispatch(auth(data.email, data.password))
     }
 
+    // const responseGoogle = (response) => {
+    //     console.log(response);
+    //     console.log(response.profileObj);
+    //     if(response.accessToken){
+    //         localStorage.setItem('userToken',response.accessToken)
+    //         localStorage.setItem('email',response.profileObj.email)
+    //         localStorage.setItem('userId',response.googleId)
+    //         localStorage.setItem('name',response.profileObj.name)
+    //         localStorage.setItem('imageUrl',response.profileObj.imageUrl)
+    //         window.location.reload();
+    //     }
+    // }
+
     return (
         <>
             <Grid container component="main" className={classes.root}>
@@ -133,6 +147,27 @@ const SignIn = ({ ...props }) => {
                             >
                                 Sign In
                             </Button>
+                            <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+                                <div style={{ marginRight: 20 }}>
+                                    OR
+                                </div>
+                                {/* <GoogleLogin
+                                    clientId="756196421269-9kneaa6ec0clrjlab3fsifiootk9pblm.apps.googleusercontent.com"
+                                    buttonText="Login"
+                                    onSuccess={responseGoogle}
+                                    onFailure={responseGoogle}
+                                    cookiePolicy={'single_host_origin'}
+                                    isSignedIn={false}
+                                    
+                                /> */}
+                                {/* <GoogleLogout
+                                    clientId="658977310896-knrl3gka66fldh83dao2rhgbblmd4un9.apps.googleusercontent.com"
+                                    buttonText="Logout"
+                                    onLogoutSuccess={logout}
+                                    
+                                >
+                                </GoogleLogout> */}
+                            </div>
                             <div style={{ width: '100%', height: 380 }}>
                                 {
                                     error !== null ? (
@@ -146,6 +181,7 @@ const SignIn = ({ ...props }) => {
                                 <Copyright />
                             </Box>
                         </form>
+
                     </div>
                 </Grid>
             </Grid>

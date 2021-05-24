@@ -6,6 +6,7 @@ import banner2 from "../asset/banner2.jpg";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from 'react-redux';
 import { addCart, addCheckOut, getProduct } from '../store/actions/cart';
+import { totalPage } from '../store/actions/pagination';
 
 const CategoryProduct = () => {
 
@@ -16,7 +17,73 @@ const CategoryProduct = () => {
     }, [])
 
     function PricePromotion(price, promotion) {
-        return (Number(price * promotion) / 100) ;
+        return (Number(price * promotion) / 100);
+    }
+
+    const resultData = () => {
+        dispatch(totalPage(Math.ceil(dataProduct.length / 8)))
+        const indexLastPost = 1 * 8;
+        const indexFirstPost = indexLastPost - 8;
+        const pageSlice = dataProduct.slice(indexFirstPost, indexLastPost)
+        if (dataProduct && dataProduct.length) {
+            let sttAcc = 0;
+            return pageSlice.map((item) => {
+                sttAcc++;
+                return (
+                    <div className="grid-item kids col-md-3 col-xs-1" key={item._id}>
+                        <div className="grid-item__content-wrapper">
+                            <div className="ps-shoe mb-30">
+                                <div className="ps-shoe__thumbnail">
+                                    {item.status === "New" ? (
+                                        <div className="ps-badge"><span>New</span></div>
+                                    ) : null}
+                                    <div className="ps-badge ps-badge--sale ps-badge--2nd">
+                                        <span>-{item.promotion}%</span>
+                                    </div>
+                                    <a className="ps-shoe__favorite" href="#"><i className="fa fa-heart"></i></a>
+                                    <img src={item.pharmacyImage} alt="" width="800" height="350" />
+                                    <Link className="ps-shoe__overlay" to={`/detailProduct/${item._id}`}></Link>
+                                </div>
+                                <div className="ps-shoe__content">
+                                    <div className="ps-shoe__variants">
+                                        {
+                                            localStorage.getItem('userToken') ? (
+                                                <button onClick={() => {
+                                                    dispatch(addCart(item));
+                                                    dispatch(addCheckOut(item._id))
+                                                }}>Thêm vào giỏ hàng</button>
+                                            ) : (
+                                                <Link to="/signIn">Đăng nhập ngay để mua sắm</Link>
+                                            )
+                                        }
+                                    </div>
+                                    <div className="ps-shoe__detail"><a className="ps-shoe__name" href="#">{item.namePharmacy}</a>
+                                        <p className="ps-shoe__categories"><a href="#">Men shoes</a>,<a href="#"> Nike</a>,<a href="#"> Jordan</a></p><span className="ps-shoe__price">
+                                            <del>{item.pricePharmacy}</del>{item.totalPromotion ? item.totalPromotion : null}</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                )
+            })
+        }
+        else {
+            // this.props.getTotalPage(0)
+            return (
+                <div style={{display:'flex',width:'100%',justifyContent:'center'}}>
+                    <p
+                        style={{
+                            fontSize: "18px",
+                            textAlign: "center",
+                            margin: "20px 0 0 0",
+                        }}
+                    >
+                        Không có dữ liệu ! .
+                    </p>
+                </div>
+            );
+        }
     }
     return (
         <main className="ps-main">
@@ -39,50 +106,7 @@ const CategoryProduct = () => {
                         <div className="masonry-wrapper">
                             <div className="ps-masonry row">
                                 {/* <div className="grid-sizer"></div> */}
-                                {
-                                    dataProduct.map((item,key) => {
-                                        return (
-                                            <div className="grid-item kids col-md-3 col-xs-1" key={item._id}>
-                                                <div className="grid-item__content-wrapper">
-                                                    <div className="ps-shoe mb-30">
-                                                        <div className="ps-shoe__thumbnail">
-                                                            {item.status === "New" ? (
-                                                                <div className="ps-badge"><span>New</span></div>
-                                                            ) : null}
-                                                            <div className="ps-badge ps-badge--sale ps-badge--2nd">
-                                                                <span>-{item.promotion}%</span>
-                                                            </div>
-                                                            <a className="ps-shoe__favorite" href="#"><i className="fa fa-heart"></i></a>
-                                                            <img src={item.pharmacyImage} alt="" width="800" height="350" />
-                                                            <Link className="ps-shoe__overlay" to={`/detailProduct/${item._id}`}></Link>
-                                                        </div>
-                                                        <div className="ps-shoe__content">
-                                                            <div className="ps-shoe__variants">
-                                                                {
-                                                                    localStorage.getItem('userToken') ? (
-                                                                        <button onClick={() => {
-                                                                            dispatch(addCart(item));
-                                                                            dispatch(addCheckOut(item._id))
-                                                                        }}>Thêm vào giỏ hàng</button>
-                                                                    ) : (
-                                                                        <Link to="/signIn">Đăng nhập ngay để mua sắm</Link>
-                                                                    )
-                                                                }
-                                                            </div>
-                                                            <div className="ps-shoe__detail"><a className="ps-shoe__name" href="#">{item.namePharmacy}</a>
-                                                                <p className="ps-shoe__categories"><a href="#">Men shoes</a>,<a href="#"> Nike</a>,<a href="#"> Jordan</a></p><span className="ps-shoe__price">
-                                                                    <del>{item.pricePharmacy}</del>{PricePromotion(item.pricePharmacy,item.promotion)}</span>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        )
-                                    })
-                                }
-
-
-
+                                {resultData()}
                             </div>
                         </div>
                     </div>

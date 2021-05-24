@@ -6,6 +6,8 @@ export const logOut = () => {
     localStorage.removeItem('userId');
     localStorage.removeItem('userToken');
     localStorage.removeItem('email');
+    // localStorage.removeItem('name');
+    // localStorage.removeItem('imageUrl');
     window.location.reload();
     return {
         type: actionType.LOG_OUT
@@ -16,12 +18,12 @@ export const authLogOut = (exTime) => {
     return dispatch => {
         setTimeout(() => {
             dispatch(logOut())
-        }, exTime)
+        }, exTime * 5)
     }
 }
 export const authFail = (payload) => {
     return {
-        type : actionType.AUTH_FAIL,
+        type: actionType.AUTH_FAIL,
         payload
     }
 }

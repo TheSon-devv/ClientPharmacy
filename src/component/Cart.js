@@ -26,10 +26,10 @@ const Cart = () => {
                         <table className="table ps-cart__table">
                             <thead>
                                 <tr>
-                                    <th>All Products</th>
-                                    <th>Price</th>
-                                    <th>Quantity</th>
-                                    <th>Total</th>
+                                    <th>Danh mục sản phẩm</th>
+                                    <th>Đơn giá</th>
+                                    <th>Số lượng</th>
+                                    <th>Tổng </th>
                                     <th></th>
                                 </tr>
                             </thead>
@@ -63,21 +63,19 @@ const Cart = () => {
                         <div className="ps-cart__actions">
                             <div className="ps-cart__promotion">
                                 <div className="form-group">
-                                    <div className="ps-form--icon"><i className="fa fa-angle-right"></i>
-                                        <input className="form-control" type="text" placeholder="Promo Code" />
-                                    </div>
+                                   
                                 </div>
                                 <div className="form-group">
-                                    <button className="ps-btn ps-btn--gray" onClick={() => history.push('/')}>Continue Shopping</button>
+                                    <button className="ps-btn ps-btn--gray" onClick={() => history.push('/')}>Tiếp tục mua sắm</button>
                                 </div>
                             </div>
                             <div className="ps-cart__total" onClick={() => dispatch(getTotalCart(Number(TotalCart)))}>
-                                <h3>Total Price: <span>{Number(TotalCart)} VND</span></h3>
+                                <h3>Tổng tiền: <span>{Number(TotalCart)} VND</span></h3>
                                 <Link
                                     className="ps-btn"
                                     style={{ textDecoration: 'none' }}
                                     to="/checkOut"
-                                >Process to checkout<i className="ps-icon-next"></i></Link>
+                                >Quy trình thanh toán<i className="fa fa-arrow-right"></i></Link>
                             </div>
                         </div>
                     </div>

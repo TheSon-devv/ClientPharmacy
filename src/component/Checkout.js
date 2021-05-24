@@ -22,7 +22,7 @@ const Checkout = () => {
             totalPrice: totalCart,
             details: listCheckout
         }
-        axios.post(`http://localhost:4000/checkout`, data, headerAuthorization())
+        axios.post(`http://localhost:4000/checkout`, data,headerAuthorization())
             .then(res => {
                 console.log(res.data.saveCheckout);
                 alert('Thanh toán thành công ! Tiếp tục mua sắm nhé')
@@ -30,6 +30,10 @@ const Checkout = () => {
                 history.push('/')
             })
             .catch(err => console.log(err))
+    }
+
+    function TotalPrice(quantity, price) {
+        return Number(quantity * price)
     }
     return (
         <>
@@ -94,14 +98,14 @@ const Checkout = () => {
                                 <div className="col-lg-4 col-md-4 col-sm-12 col-xs-12">
                                     <div className="ps-checkout__order">
                                         <header>
-                                            <h3>Your Order</h3>
+                                            <h3>Đơn hàng của bạn</h3>
                                         </header>
                                         <div className="content">
                                             <table className="table ps-checkout__products">
                                                 <thead>
                                                     <tr>
-                                                        <th className="text-uppercase">Product</th>
-                                                        <th className="text-uppercase">Total</th>
+                                                        <th className="text-uppercase">Sản phẩm</th>
+                                                        <th className="text-uppercase">Tổng</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
@@ -110,7 +114,7 @@ const Checkout = () => {
                                                             return (
                                                                 <tr key={e._id}>
                                                                     <td>{e.namePharmacy}</td>
-                                                                    <td>{e.pricePharmacy}</td>
+                                                                    <td>{TotalPrice(e.quantity, e.pricePharmacy)}</td>
                                                                 </tr>
                                                             )
                                                         })
@@ -118,8 +122,24 @@ const Checkout = () => {
                                                 </tbody>
                                             </table>
                                         </div>
+                                        <div className="content">
+                                            <table className="table ps-checkout__products" style={{borderTop:'1px solid #fff'}}>
+                                                <thead>
+                                                    <tr>
+                                                        <th className="text-uppercase"></th>
+                                                        <th className="text-uppercase"></th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td></td>
+                                                        <td>{totalCart}</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
                                         <footer>
-                                            <h3>Payment Method</h3>
+                                            <h3>Phương thức thanh toán</h3>
                                             <div className="form-group cheque">
                                                 <div className="ps-radio">
                                                     <input className="form-control" type="radio" id="rdo01" name="payment" checked />
@@ -136,7 +156,7 @@ const Checkout = () => {
                                                     <li><a href="#"><img src="images/payment/2.png" alt="" /></a></li>
                                                     <li><a href="#"><img src="images/payment/3.png" alt="" /></a></li>
                                                 </ul>
-                                                <button className="ps-btn ps-btn--fullwidth" onClick={checkOutHandler}>Place Order<i className="ps-icon-next"></i></button>
+                                                <button className="ps-btn ps-btn--fullwidth" onClick={checkOutHandler}>Đặt hàng<i className="ps-icon-next"></i></button>
                                             </div>
 
                                         </footer>
