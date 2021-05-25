@@ -4,7 +4,8 @@ const initState = {
     listCart: [],
     listProduct: [],
     numberCart: 0,
-    listCheckout: []
+    listCheckout: [],
+    typeProduct : []
 }
 
 export const cart = (state = initState, action) => {
@@ -13,6 +14,11 @@ export const cart = (state = initState, action) => {
             return {
                 ...state,
                 listProduct: [...action.payload]
+            }
+        case actions.GET_TYPE_PRODUCT:
+            return {
+                ...state,
+                typeProduct: [...action.payload]
             }
         case actions.ADD_CART:
             if (state.numberCart === 0) {

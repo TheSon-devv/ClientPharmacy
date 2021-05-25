@@ -46,7 +46,7 @@ const DetailProduct = () => {
                                             </div>
                                             <div className="ps-product__image">
                                                 <div className="item">
-                                                    <img className="zoom" src={item.pharmacyImage} alt="" width="1860" height="600" />
+                                                    <img className="zoom" src={item.pharmacyImage} alt="" width="1860" height="500" />
                                                 </div>
                                             </div>
                                         </div>
@@ -58,8 +58,23 @@ const DetailProduct = () => {
                                             <div className="ps-product__rating">
                                             </div>
                                             <h1>{item.namePharmacy}</h1>
-                                            <p className="ps-product__category"><a href="#"> Men shoes</a></p>
-                                            <h3 className="ps-product__price">{item.totalPromotion} VND<del>{item.pricePharmacy}</del></h3>
+                                            <p className="ps-product__category">
+                                                {
+                                                    item.typePharmacy.map(item => {
+                                                        return (
+                                                            <a href="#" key={item}>{item.nameTypePharmacy}</a>
+                                                        )
+                                                    })
+                                                }
+                                            </p>
+                                            {
+                                                item.promotion ? (
+                                                    <h3 className="ps-product__price">{item.totalPromotion} VND<del>{item.pricePharmacy} VND</del></h3>
+                                                ) : (
+                                                    <h3 className="ps-product__price">{item.pricePharmacy} VND</h3>
+                                                )
+                                            }
+
                                             <div className="ps-product__block ps-product__quickview" style={{ height: '390px' }}>
                                                 <h4>Thông tin chi tiết</h4>
                                                 <p >{item.information}</p>

@@ -9,7 +9,12 @@ export const Success = (payload) => {
         payload
     }
 }
-
+export const TypeProduct = (payload) => {
+    return {
+        type: actionType.GET_TYPE_PRODUCT,
+        payload
+    }
+}
 
 export const getProduct = () => {
     return dispatch => {
@@ -21,6 +26,23 @@ export const getProduct = () => {
             .catch(err => console.log(err))
     }
 }
+
+export const getTypeProduct = () => {
+    return dispatch => {
+        axios.get(`http://localhost:4000/typePharmacy`)
+            .then(res => {
+                if (res.data.code === 200) {
+                    console.log(res.data)
+                    dispatch(TypeProduct(res.data.getTypePharmacy))
+                }
+                if (res.data.code === 401) {
+                    alert('Loi roi')
+                }
+            })
+            .catch(err => console.log(err))
+    }
+}
+
 
 export const addCart = (payload) => {
     return {

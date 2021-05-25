@@ -1,14 +1,16 @@
 import axios from 'axios'
-import React from 'react'
+import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useHistory } from 'react-router'
 import '../css/style.css'
 import { headerAuthorization } from '../header'
 import { reloadCart } from '../store/actions/cart'
+import Paypal from './PayPal'
 
 const Checkout = () => {
     const history = useHistory();
     const dispatch = useDispatch();
+    const [paypal, setPaypal] = useState(false)
     const totalCart = useSelector(state => state.cart.totalCart)
     const listCheckout = useSelector(state => state.cart.listCheckout)
     const listCart = useSelector(state => state.cart.listCart)
@@ -22,7 +24,7 @@ const Checkout = () => {
             totalPrice: totalCart,
             details: listCheckout
         }
-        axios.post(`http://localhost:4000/checkout`, data,headerAuthorization())
+        axios.post(`http://localhost:4000/checkout`, data, headerAuthorization())
             .then(res => {
                 console.log(res.data.saveCheckout);
                 alert('Thanh toán thành công ! Tiếp tục mua sắm nhé')
@@ -123,7 +125,7 @@ const Checkout = () => {
                                             </table>
                                         </div>
                                         <div className="content">
-                                            <table className="table ps-checkout__products" style={{borderTop:'1px solid #fff'}}>
+                                            <table className="table ps-checkout__products" style={{ borderTop: '1px solid #fff' }}>
                                                 <thead>
                                                     <tr>
                                                         <th className="text-uppercase"></th>
@@ -148,8 +150,9 @@ const Checkout = () => {
                                             </div>
                                             <div className="form-group paypal">
                                                 <div className="ps-radio ps-radio--inline">
-                                                    <input className="form-control" type="radio" name="payment" id="rdo02" />
-                                                    <label htmlFor="rdo02">Paypal</label>
+
+                                                    <Paypal />
+
                                                 </div>
                                                 <ul className="ps-payment-method">
                                                     <li><a href="#"><img src="images/payment/1.png" alt="" /></a></li>

@@ -30,36 +30,63 @@ const CategoryProduct = () => {
             return pageSlice.map((item) => {
                 sttAcc++;
                 return (
-                    <div className="grid-item kids col-md-3 col-xs-1" key={item._id}>
+                    <div className="grid-item kids col-md-3 col-sm-6 col-xs-6" key={item._id}>
                         <div className="grid-item__content-wrapper">
                             <div className="ps-shoe mb-30">
                                 <div className="ps-shoe__thumbnail">
                                     {item.status === "New" ? (
                                         <div className="ps-badge"><span>New</span></div>
                                     ) : null}
-                                    <div className="ps-badge ps-badge--sale ps-badge--2nd">
-                                        <span>-{item.promotion}%</span>
-                                    </div>
+                                    {
+                                        item.promotion ? (
+                                            <div className="ps-badge ps-badge--sale ps-badge--2nd">
+                                                <span>-{item.promotion}%</span>
+                                            </div>
+                                        ) : null
+                                    }
                                     <a className="ps-shoe__favorite" href="#"><i className="fa fa-heart"></i></a>
-                                    <img src={item.pharmacyImage} alt="" width="800" height="350" />
+                                    <img src={item.pharmacyImage} alt="" width="700" height="350" />
                                     <Link className="ps-shoe__overlay" to={`/detailProduct/${item._id}`}></Link>
                                 </div>
                                 <div className="ps-shoe__content">
-                                    <div className="ps-shoe__variants">
+                                    <div className="ps-shoe__variants" style={{width:'100%',display:'flex',justifyContent:'center'}}>
                                         {
                                             localStorage.getItem('userToken') ? (
-                                                <button onClick={() => {
-                                                    dispatch(addCart(item));
-                                                    dispatch(addCheckOut(item._id))
-                                                }}>Thêm vào giỏ hàng</button>
+                                                <button
+                                                    onClick={() => {
+                                                        dispatch(addCart(item));
+                                                        dispatch(addCheckOut(item._id))
+                                                    }}
+                                                    style={{border:'none'}}
+                                                >Thêm vào giỏ hàng</button>
                                             ) : (
                                                 <Link to="/signIn">Đăng nhập ngay để mua sắm</Link>
                                             )
                                         }
                                     </div>
                                     <div className="ps-shoe__detail"><a className="ps-shoe__name" href="#">{item.namePharmacy}</a>
-                                        <p className="ps-shoe__categories"><a href="#">Men shoes</a>,<a href="#"> Nike</a>,<a href="#"> Jordan</a></p><span className="ps-shoe__price">
-                                            <del>{item.pricePharmacy}</del>{item.totalPromotion ? item.totalPromotion : null}</span>
+                                        <p className="ps-shoe__categories">
+                                            {
+                                                item.typePharmacy.map(item => {
+                                                    return (
+                                                        <a href="#" key={item._id}>{item.nameTypePharmacy}</a>
+                                                    )
+                                                })
+                                            }
+                                        </p>
+
+                                        {
+                                            item.promotion ? (
+                                                <span className="ps-shoe__price">
+                                                    <del style={{ marginRight: 10 }}>{item.pricePharmacy}</del>{item.totalPromotion}
+                                                </span>
+                                            ) : (
+                                                <span className="ps-shoe__price">
+                                                    {item.totalPromotion}
+                                                </span>
+                                            )
+                                        }
+
                                     </div>
                                 </div>
                             </div>
@@ -71,7 +98,7 @@ const CategoryProduct = () => {
         else {
             // this.props.getTotalPage(0)
             return (
-                <div style={{display:'flex',width:'100%',justifyContent:'center'}}>
+                <div style={{ display: 'flex', width: '100%', justifyContent: 'center' }}>
                     <p
                         style={{
                             fontSize: "18px",

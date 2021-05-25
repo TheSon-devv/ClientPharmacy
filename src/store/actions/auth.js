@@ -18,7 +18,7 @@ export const authLogOut = (exTime) => {
     return dispatch => {
         setTimeout(() => {
             dispatch(logOut())
-        }, exTime * 5)
+        }, exTime)
     }
 }
 export const authFail = (payload) => {
@@ -48,7 +48,7 @@ export const auth = (email, password) => {
                     console.log(res.data);
                     const expriesTime = new Date(new Date().getTime() + (res.data.dataLogin.expiresIn * 100))
                     localStorage.setItem('userToken', res.data.dataLogin.accessToken);
-                    localStorage.setItem('expiresIn', expriesTime);
+                    localStorage.setItem('expiresIn', res.data.dataLogin.expiresIn);
                     localStorage.setItem('userId', res.data.dataLogin.userId);
                     localStorage.setItem('email', res.data.dataLogin.email);
 

@@ -5,6 +5,7 @@ export const AUTH_FAIL= 'AUTH_FAIL';
 
 //Product
 export const GET_PRODUCT= 'GET_PRODUCT';
+export const GET_TYPE_PRODUCT = 'GET_TYPE_PRODUCT';
 
 //Cart
 export const INCREASE_QUANTITY = 'INCREASE_QUANTITY';

@@ -53,19 +53,17 @@ const Blog = () => {
         else {
             // this.props.getTotalPage(0)
             return (
-                <tr style={{ width: '100%' }}>
-                    <td colSpan="7">
-                        <p
-                            style={{
-                                fontSize: "18px",
-                                textAlign: "center",
-                                margin: "20px 0 0 0",
-                            }}
-                        >
-                            Không có dữ liệu phù hợp ! Vui lòng tìm kiếm lại .
+                <div style={{ width: '100%' }}>
+                    <p
+                        style={{
+                            fontSize: "18px",
+                            textAlign: "center",
+                            margin: "20px 0 0 0",
+                        }}
+                    >
+                        Không có dữ liệu phù hợp ! Vui lòng tìm kiếm lại .
                     </p>
-                    </td>
-                </tr>
+                </div>
             );
         }
     }
@@ -77,7 +75,7 @@ const Blog = () => {
                         {resultData()}
                     </div>
                     <div className="mt-30">
-                        <div style={{display:'flex',justifyContent:'center'}}>
+                        <div style={{ display: 'flex', justifyContent: 'center' }}>
                             <PaginationTable />
                         </div>
                     </div>
