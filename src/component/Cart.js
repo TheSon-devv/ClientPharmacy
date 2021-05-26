@@ -16,7 +16,7 @@ const Cart = () => {
     })
 
     function TotalPrice(quantity, price) {
-        return Number(quantity * price)
+        return Number(quantity * price).toFixed(2)
     }
     return (
         <div>
@@ -42,7 +42,7 @@ const Cart = () => {
                                                     <a className="ps-product__preview" href="product-detail.html">
                                                         <img className="mr-15" src="images/product/cart-preview/1.jpg" alt="" /> {item.namePharmacy}</a>
                                                 </td>
-                                                <td>{item.pricePharmacy}</td>
+                                                <td>{item.pricePharmacy} $</td>
                                                 <td>
                                                     <div className="form-group--number">
                                                         <button className="minus" onClick={() => dispatch(decreaseQuantity(key))}><span>-</span></button>
@@ -50,7 +50,7 @@ const Cart = () => {
                                                         <button className="plus" onClick={() => dispatch(increaseQuantity(key))}><span>+</span></button>
                                                     </div>
                                                 </td>
-                                                <td>{TotalPrice(item.quantity, item.pricePharmacy)}</td>
+                                                <td>{TotalPrice(item.quantity, item.pricePharmacy)} $</td>
                                                 <td>
                                                     <div className="ps-remove" onClick={() => dispatch(deleteCart(key))}></div>
                                                 </td>
@@ -69,8 +69,8 @@ const Cart = () => {
                                     <button className="ps-btn ps-btn--gray" onClick={() => history.push('/')}>Tiếp tục mua sắm</button>
                                 </div>
                             </div>
-                            <div className="ps-cart__total" onClick={() => dispatch(getTotalCart(Number(TotalCart)))}>
-                                <h3>Tổng tiền: <span>{Number(TotalCart)} VND</span></h3>
+                            <div className="ps-cart__total" onClick={() => dispatch(getTotalCart(Number(TotalCart).toFixed(2)))}>
+                                <h3>Tổng tiền: <span>{Number(TotalCart).toFixed(2)} $</span></h3>
                                 <Link
                                     className="ps-btn"
                                     style={{ textDecoration: 'none' }}

@@ -22,7 +22,7 @@ const HeaderArea = () => {
     const item = useSelector(state => state.cart.listCart)
 
     function TotalPrice(quantity, price) {
-        return Number(quantity * price)
+        return Number(quantity * price).toFixed(2)
     }
 
     return (
@@ -113,18 +113,20 @@ const HeaderArea = () => {
                                 </li>
                             </ul>
                         </div>
-                        <div className="navigation__column right ">
-
+                        <div className="navigation__column right">
                             {
                                 localStorage.getItem('userToken') !== null ? (
                                     <div className="row" style={{ justifyContent: 'flex-end' }}>
                                         <div className="menu_hidden">
                                             <ul className="main-menu menu">
-                                                <li className="menu-item menu-item-has-children dropdown">
+                                                <li className="menu-item menu-item-has-children dropdown" style={{marginLeft:"-80px"}}>
                                                     <Link to="/" style={{ textDecoration: 'none' }}><i className="fa fa-user"></i></Link>
                                                     <ul className="sub-menu">
                                                         <li className="menu-item">
                                                             <Link to="/detailUser" style={{ textDecoration: 'none' }}>Thông tin cá nhân</Link>
+                                                        </li>
+                                                        <li className="menu-item">
+                                                            <Link to="/order" style={{ textDecoration: 'none' }}>Lịch sử đơn hàng</Link>
                                                         </li>
                                                         <li className="menu-item" onClick={() => dispatch(authLogOut())}>
                                                             <Link to="/" style={{ textDecoration: 'none' }}>
@@ -154,7 +156,7 @@ const HeaderArea = () => {
                                                                         <p className="ps-cart-item__title" style={{ color: '#fff' }}>{e.namePharmacy}</p>
                                                                         <p>
                                                                             <span>Quantity:<i>{e.quantity}</i></span>
-                                                                            <span style={{ marginLeft: '-10px' }}>Total:<i>{TotalPrice(e.quantity, e.pricePharmacy)}</i></span>
+                                                                            <span style={{ marginLeft: '-10px' }}>Total:<i>{TotalPrice(e.quantity, e.pricePharmacy)}$</i></span>
                                                                         </p>
                                                                     </div>
                                                                 </div>

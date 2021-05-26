@@ -69,9 +69,9 @@ const DetailProduct = () => {
                                             </p>
                                             {
                                                 item.promotion ? (
-                                                    <h3 className="ps-product__price">{item.totalPromotion} VND<del>{item.pricePharmacy} VND</del></h3>
+                                                    <h3 className="ps-product__price">{item.totalPromotion} $<del>{item.pricePharmacy} $</del></h3>
                                                 ) : (
-                                                    <h3 className="ps-product__price">{item.pricePharmacy} VND</h3>
+                                                    <h3 className="ps-product__price">{item.pricePharmacy} $</h3>
                                                 )
                                             }
 

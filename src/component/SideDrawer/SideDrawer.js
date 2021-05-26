@@ -33,6 +33,9 @@ const SideDrawer = (props) => {
                     <div className={classes.Link}>
                         <Link to="/detailUser" style={{ display: 'flex', textDecoration: 'none', padding: '10px', color: 'black' }}>Cá nhân</Link>
                     </div>
+                    <div className={classes.Link}>
+                        <Link to="/order" style={{ display: 'flex', textDecoration: 'none', padding: '10px', color: 'black' }}>Lịch sử mua hàng</Link>
+                    </div>
                     <div className={classes.Link} onClick={() => dispatch(logOut())}>
                         <Link to="/" style={{ display: 'flex', textDecoration: 'none', padding: '10px', color: 'black' }}>Đăng xuất</Link>
                     </div>

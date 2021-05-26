@@ -12,6 +12,7 @@ const CategoryProduct = () => {
 
     const dispatch = useDispatch();
     const dataProduct = useSelector(state => state.cart.listProduct)
+
     useEffect(() => {
         dispatch(getProduct())
     }, [])
@@ -78,11 +79,11 @@ const CategoryProduct = () => {
                                         {
                                             item.promotion ? (
                                                 <span className="ps-shoe__price">
-                                                    <del style={{ marginRight: 10 }}>{item.pricePharmacy}</del>{item.totalPromotion}
+                                                    <del style={{ marginRight: 10 }}>{item.pricePharmacy}$</del>{item.totalPromotion}$
                                                 </span>
                                             ) : (
                                                 <span className="ps-shoe__price">
-                                                    {item.totalPromotion}
+                                                    {item.totalPromotion}$
                                                 </span>
                                             )
                                         }

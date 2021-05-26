@@ -5,23 +5,35 @@ import { useHistory } from 'react-router'
 import '../css/style.css'
 import { headerAuthorization } from '../header'
 import { reloadCart } from '../store/actions/cart'
+import Spinner from '../UI/Spinner/Spinner'
 import Paypal from './PayPal'
 
 const Checkout = () => {
     const history = useHistory();
     const dispatch = useDispatch();
-    const [paypal, setPaypal] = useState(false)
     const totalCart = useSelector(state => state.cart.totalCart)
-    const listCheckout = useSelector(state => state.cart.listCheckout)
     const listCart = useSelector(state => state.cart.listCart)
+    const listCheckout = useSelector(state => state.cart.listCheckout)
     const quantityCheckout = useSelector(state => state.cart.quantityCheckout)
+
+    const shipping = useSelector(state => state.cart.shipping)
+    const handling = useSelector(state => state.cart.handling)
+    const shipping_discount = useSelector(state => state.cart.shipping_discount)
+
+    const [totalShip] = useState([
+        { id: 1, name: 'Phí vận chuyển', value: shipping },
+        { id: 2, name: 'Phí đóng gói', value: handling },
+        { id: 3, name: 'Giảm giá chiết khấu', value: -shipping_discount },
+    ])
+
+    let totalCartCheckout = Number(Number(totalCart) + shipping + handling - shipping_discount).toFixed(2)
 
     const checkOutHandler = (e) => {
         e.preventDefault();
         const data = {
             userId: localStorage.getItem('userId'),
             quantity: quantityCheckout,
-            totalPrice: totalCart,
+            totalPrice: totalCartCheckout,
             details: listCheckout
         }
         axios.post(`http://localhost:4000/checkout`, data, headerAuthorization())
@@ -35,7 +47,7 @@ const Checkout = () => {
     }
 
     function TotalPrice(quantity, price) {
-        return Number(quantity * price)
+        return Number(quantity * price).toFixed(2)
     }
     return (
         <>
@@ -88,11 +100,7 @@ const Checkout = () => {
                                                 <label htmlFor="cb01">Create an account?</label>
                                             </div>
                                         </div>
-                                        <h3 className="mt-40"> Addition information</h3>
-                                        <div className="form-group form-group--inline textarea">
-                                            <label>Order Notes</label>
-                                            <textarea className="form-control" rows="5" placeholder="Notes about your order, e.g. special notes for delivery."></textarea>
-                                        </div>
+
                                     </div>
                                 </div>
 
@@ -116,7 +124,29 @@ const Checkout = () => {
                                                             return (
                                                                 <tr key={e._id}>
                                                                     <td>{e.namePharmacy}</td>
-                                                                    <td>{TotalPrice(e.quantity, e.pricePharmacy)}</td>
+                                                                    <td>{TotalPrice(e.quantity, e.pricePharmacy)} $</td>
+                                                                </tr>
+                                                            )
+                                                        })
+                                                    }
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                        <div className="content">
+                                            <table className="table ps-checkout__products" style={{ borderTop: '1px solid #fff' }}>
+                                                <thead>
+                                                    <tr>
+                                                        <th className="text-uppercase"></th>
+                                                        <th className="text-uppercase"></th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    {
+                                                        totalShip.map(e => {
+                                                            return (
+                                                                <tr key={e.id}>
+                                                                    <td>{e.name}</td>
+                                                                    <td>{Number(e.value).toFixed(2)} $</td>
                                                                 </tr>
                                                             )
                                                         })
@@ -135,7 +165,7 @@ const Checkout = () => {
                                                 <tbody>
                                                     <tr>
                                                         <td></td>
-                                                        <td>{totalCart}</td>
+                                                        <td>{totalCartCheckout} $</td>
                                                     </tr>
                                                 </tbody>
                                             </table>
@@ -144,7 +174,7 @@ const Checkout = () => {
                                             <h3>Phương thức thanh toán</h3>
                                             <div className="form-group cheque">
                                                 <div className="ps-radio">
-                                                    <input className="form-control" type="radio" id="rdo01" name="payment" checked />
+                                                    <input className="form-control" type="radio" id="rdo01" name="payment" checked readOnly />
                                                     <label htmlFor="rdo01">Thanh toán khi nhận hàng</label>
                                                 </div>
                                             </div>
@@ -154,20 +184,13 @@ const Checkout = () => {
                                                     <Paypal />
 
                                                 </div>
-                                                <ul className="ps-payment-method">
-                                                    <li><a href="#"><img src="images/payment/1.png" alt="" /></a></li>
-                                                    <li><a href="#"><img src="images/payment/2.png" alt="" /></a></li>
-                                                    <li><a href="#"><img src="images/payment/3.png" alt="" /></a></li>
-                                                </ul>
+
                                                 <button className="ps-btn ps-btn--fullwidth" onClick={checkOutHandler}>Đặt hàng<i className="ps-icon-next"></i></button>
                                             </div>
 
                                         </footer>
                                     </div>
-                                    <div className="ps-shipping">
-                                        <h3>FREE SHIPPING</h3>
-                                        <p>YOUR ORDER QUALIFIES FOR FREE SHIPPING.<br /> <a href="#"> Singup </a> for free shipping on every order, every time.</p>
-                                    </div>
+
                                 </div>
                             </div>
                         </form>

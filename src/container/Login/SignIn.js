@@ -10,11 +10,7 @@ import { Link, useHistory } from "react-router-dom";
 import visibility from "../../asset/visibility.png";
 import visibility_hide from "../../asset/visibility_hide.png";
 import { useForm } from "react-hook-form";
-import { GoogleLogin ,GoogleLogout} from 'react-google-login';
 
-//redux
-// import * as actions from "../../actions/admin";
-// import { connect, useDispatch, useSelector } from 'react-redux';
 import { Button } from "@material-ui/core";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
@@ -81,30 +77,12 @@ const SignIn = ({ ...props }) => {
     const history = useHistory();
     const dispatch = useDispatch();
     const error = useSelector(state => state.auth.message);
+    const loading = useSelector(state => state.auth.loading);
     const [show, setShow] = useState(false);
     const { register, handleSubmit, formState: { errors } } = useForm();
 
     const onSubmit = data => {
         dispatch(auth(data.email, data.password))
-    }
-
-    // const responseGoogle = (response) => {
-    //     console.log(response);
-    //     console.log(response.profileObj);
-    //     if(response.accessToken){
-    //         localStorage.setItem('userToken',response.accessToken)
-    //         localStorage.setItem('email',response.profileObj.email)
-    //         localStorage.setItem('userId',response.googleId)
-    //         localStorage.setItem('name',response.profileObj.name)
-    //         localStorage.setItem('imageUrl',response.profileObj.imageUrl)
-    //         window.location.reload();
-    //     }
-    // }
-
-    const loginGG = () => {
-        axios.get('http://localhost:4000/auth/google')
-            .then(res => console.log(res.data))
-            .catch(err => console.log(err))
     }
 
     return (
@@ -154,27 +132,9 @@ const SignIn = ({ ...props }) => {
                                 Sign In
                             </Button>
                             <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-                                <div style={{ marginRight: 20 }}>
-                                    OR
-                                </div>
-                                {/* <GoogleLogin
-                                    clientId="756196421269-9kneaa6ec0clrjlab3fsifiootk9pblm.apps.googleusercontent.com"
-                                    buttonText="Login"
-                                    onSuccess={responseGoogle}
-                                    onFailure={responseGoogle}
-                                    cookiePolicy={'single_host_origin'}
-                                    
-                                    
-                                /> */}
-                                <button onClick={loginGG}>gg</button>
-                                {/* <GoogleLogout
-                                    clientId="658977310896-knrl3gka66fldh83dao2rhgbblmd4un9.apps.googleusercontent.com"
-                                    buttonText="Logout"
-                                    onLogoutSuccess={logout}
-                                    
-                                >
-                                </GoogleLogout> */}
+                                <p>Bạn chưa có tài khoản ?<Link to="/signUp" style={{textDecoration:'none'}}> Đăng ký tại đây</Link></p>
                             </div>
+
                             <div style={{ width: '100%', height: 380 }}>
                                 {
                                     error !== null ? (

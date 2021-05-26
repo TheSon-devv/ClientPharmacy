@@ -5,7 +5,14 @@ const initState = {
     listProduct: [],
     numberCart: 0,
     listCheckout: [],
-    typeProduct : []
+    typeProduct: [],
+    item_total: 0,
+    shipping: 1.00,
+    handling: 1.00,
+    shipping_discount: 1,
+    listCartPaypal: [],
+    listOrder : [],
+    loading : false
 }
 
 export const cart = (state = initState, action) => {
@@ -14,6 +21,11 @@ export const cart = (state = initState, action) => {
             return {
                 ...state,
                 listProduct: [...action.payload]
+            }
+        case actions.GET_ORDER:
+            return {
+                ...state,
+                listOrder: [...action.payload]
             }
         case actions.GET_TYPE_PRODUCT:
             return {
@@ -25,20 +37,30 @@ export const cart = (state = initState, action) => {
                 let cart = {
                     _id: action.payload._id,
                     namePharmacy: action.payload.namePharmacy,
-                    pricePharmacy: action.payload.pricePharmacy,
+                    pricePharmacy: action.payload.promotion ? action.payload.totalPromotion : action.payload.pricePharmacy,
                     information: action.payload.information,
                     status: action.payload.status,
                     promotion: action.payload.promotion,
                     pharmacyImage: action.payload.pharmacyImage,
                     quantity: 1
                 }
+                let cartPayPal = {
+                    name: action.payload.namePharmacy,
+                    unit_amount: {
+                        currency_code: "USD",
+                        value: action.payload.promotion ? action.payload.totalPromotion : action.payload.pricePharmacy
+                    },
+                    quantity: 1,
+                }
                 state.listCart.push(cart)
+                state.listCartPaypal.push(cartPayPal)
             }
             else {
                 let check = false;
                 state.listCart.map((item, key) => {
                     if (item._id === action.payload._id) {
                         state.listCart[key].quantity++;
+                        state.listCartPaypal[key].quantity++;
                         check = true;
                     }
                     // return (
@@ -49,14 +71,23 @@ export const cart = (state = initState, action) => {
                     let _cart = {
                         _id: action.payload._id,
                         namePharmacy: action.payload.namePharmacy,
-                        pricePharmacy: action.payload.pricePharmacy,
+                        pricePharmacy: action.payload.promotion ? action.payload.totalPromotion : action.payload.pricePharmacy,
                         information: action.payload.information,
                         status: action.payload.status,
                         promotion: action.payload.promotion,
                         pharmacyImage: action.payload.pharmacyImage,
-                        quantity: 1
+                        quantity: 1,
+                    }
+                    let _cartPayPal = {
+                        name: action.payload.namePharmacy,
+                        unit_amount: {
+                            currency_code: "USD",
+                            value: action.payload.promotion ? action.payload.totalPromotion : action.payload.pricePharmacy
+                        },
+                        quantity: 1,
                     }
                     state.listCart.push(_cart);
+                    state.listCartPaypal.push(_cartPayPal)
                 }
 
             }
@@ -97,7 +128,8 @@ export const cart = (state = initState, action) => {
                 ...state,
                 listCart: [],
                 numberCart: 0,
-                listCheckout: []
+                listCheckout: [],
+                listCartPaypal: []
             }
         case actions.INCREASE_QUANTITY:
             state.listCart[action.payload].quantity++;
@@ -119,8 +151,8 @@ export const cart = (state = initState, action) => {
                 numberCart: state.listCart.length - 1,
                 listCart: state.listCart.filter(item => {
                     return item._id !== state.listCart[action.payload]._id
-                })
-
+                }),
+                listCheckout: []
             }
         default:
             return state;

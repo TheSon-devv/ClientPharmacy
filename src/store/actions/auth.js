@@ -21,10 +21,16 @@ export const authLogOut = (exTime) => {
         }, exTime)
     }
 }
+
 export const authFail = (payload) => {
     return {
         type: actionType.AUTH_FAIL,
         payload
+    }
+}
+export const authStart = () => {
+    return {
+        type: actionType.AUTH_START
     }
 }
 
@@ -38,6 +44,7 @@ export const authSuccess = (token, userId) => {
 
 export const auth = (email, password) => {
     return dispatch => {
+        dispatch(authStart())
         const authData = {
             email: email,
             password: password
@@ -51,6 +58,7 @@ export const auth = (email, password) => {
                     localStorage.setItem('expiresIn', res.data.dataLogin.expiresIn);
                     localStorage.setItem('userId', res.data.dataLogin.userId);
                     localStorage.setItem('email', res.data.dataLogin.email);
+                    localStorage.setItem('name', res.data.dataLogin.nameKH);
 
                     dispatch(authSuccess(res.data.dataLogin.accessToken, res.data.dataLogin.userId));
                     dispatch(authLogOut(res.data.dataLogin.expiresIn));
