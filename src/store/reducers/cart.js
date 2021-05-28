@@ -12,7 +12,8 @@ const initState = {
     shipping_discount: 1,
     listCartPaypal: [],
     listOrder : [],
-    loading : false
+    loading : false,
+    quantityCheckout : 0
 }
 
 export const cart = (state = initState, action) => {
@@ -129,10 +130,12 @@ export const cart = (state = initState, action) => {
                 listCart: [],
                 numberCart: 0,
                 listCheckout: [],
-                listCartPaypal: []
+                listCartPaypal: [],
+                quantityCheckout : 0
             }
         case actions.INCREASE_QUANTITY:
             state.listCart[action.payload].quantity++;
+            state.listCartPaypal[action.payload].quantity++;
             return {
                 ...state
             }
@@ -140,6 +143,10 @@ export const cart = (state = initState, action) => {
             let quantity = state.listCart[action.payload].quantity;
             if (quantity > 1) {
                 state.listCart[action.payload].quantity--;
+            }
+            let quantityPayPal = state.listCartPaypal[action.payload].quantity;
+            if (quantityPayPal > 1) {
+                state.listCartPaypal[action.payload].quantity--;
             }
             return {
                 ...state
@@ -152,7 +159,13 @@ export const cart = (state = initState, action) => {
                 listCart: state.listCart.filter(item => {
                     return item._id !== state.listCart[action.payload]._id
                 }),
-                listCheckout: []
+                listCheckout: state.listCheckout.filter(item => {
+                    return item.pharmacyId !== state.listCheckout[action.payload].pharmacyId
+                }),
+                listCartPaypal: state.listCartPaypal.filter(item => {
+                    return item.name !== state.listCartPaypal[action.payload].name
+                }),
+                quantityCheckout: state.listCheckout.length - 1
             }
         default:
             return state;

@@ -5,6 +5,7 @@ import { addCart, addCheckOut, getProduct, getTypeProduct } from '../store/actio
 import { getPage, totalPage } from '../store/actions/pagination';
 import axios from 'axios';
 import PaginationTable from './Pagination/PaginationTable';
+import AddSuccess from '../UI/AddSuccess/AddSuccess';
 
 const ProductList = () => {
     const dispatch = useDispatch();
@@ -15,6 +16,7 @@ const ProductList = () => {
     const [dataCheck, setDataCheck] = useState(false)
     const currentPage = useSelector(state => state.pagination.currentPage)
     const perPageList = useSelector(state => state.pagination.perPageList)
+    const [show, setShow] = useState(false)
 
     const handleChangeType = (value) => {
         setTypePharmacy(value);
@@ -41,6 +43,14 @@ const ProductList = () => {
         console.log('reload')
         getDataReload()
     }, [typePharmacy])
+
+
+    const showButton = () => {
+        setShow(true)
+        setTimeout(() => {
+            setShow(false)
+        }, 2000)
+    }
 
     const resultData = () => {
         dispatch(totalPage(Math.ceil(dataReload.length / perPageList)))
@@ -77,7 +87,8 @@ const ProductList = () => {
                                                 <button
                                                     onClick={() => {
                                                         dispatch(addCart(item));
-                                                        dispatch(addCheckOut(item._id))
+                                                        dispatch(addCheckOut(item._id));
+                                                        showButton()
                                                     }}
                                                     style={{ border: 'none' }}
                                                 >Thêm vào giỏ hàng</button>
@@ -136,6 +147,9 @@ const ProductList = () => {
     }
     return (
         <div className="row px-3 mt-30">
+            {
+                show ? <AddSuccess /> : null
+            }
             <div className="col-md-3 col-sm-12 col-xs-12">
                 <div className="ps-sidebar" data-mh="product-listing">
                     <aside className="ps-widget--sidebar ps-widget--category">
