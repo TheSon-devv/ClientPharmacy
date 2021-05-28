@@ -6,7 +6,7 @@ import '../css/style.css'
 import { headerAuthorization } from '../header'
 import { reloadCart } from '../store/actions/cart'
 import Spinner from '../UI/Spinner/Spinner'
-import Paypal from './PayPal'
+import Paypal from './PayPal';
 
 const Checkout = () => {
     const history = useHistory();
@@ -15,18 +15,29 @@ const Checkout = () => {
     const listCart = useSelector(state => state.cart.listCart)
     const listCheckout = useSelector(state => state.cart.listCheckout)
     const quantityCheckout = useSelector(state => state.cart.quantityCheckout)
+    const [check, setCheck] = useState(false)
+
 
     const shipping = useSelector(state => state.cart.shipping)
     const handling = useSelector(state => state.cart.handling)
     const shipping_discount = useSelector(state => state.cart.shipping_discount)
 
-    const [totalShip] = useState([
-        { id: 1, name: 'Phí vận chuyển', value: shipping },
-        { id: 2, name: 'Phí đóng gói', value: handling },
-        { id: 3, name: 'Giảm giá chiết khấu', value: -shipping_discount },
-    ])
-
-    let totalCartCheckout = Number(Number(totalCart) + shipping + handling - shipping_discount).toFixed(2)
+    let totalCartCheckout = Number(Number(totalCart) + shipping + handling).toFixed(2)
+    let totalShip = []
+    if (check) {
+        totalShip = [
+            { id: 1, name: 'Phí vận chuyển', value: shipping },
+            { id: 2, name: 'Phí đóng gói', value: handling },
+            { id: 3, name: 'Miễn phí vận chuyển', value: -shipping_discount }
+        ];
+        totalCartCheckout = Number(Number(totalCart) + shipping + handling - shipping_discount).toFixed(2)
+    }
+    else {
+        totalShip = [
+            { id: 1, name: 'Phí vận chuyển', value: shipping },
+            { id: 2, name: 'Phí đóng gói', value: handling }
+        ]
+    }
 
     const checkOutHandler = (e) => {
         e.preventDefault();
@@ -49,6 +60,8 @@ const Checkout = () => {
     function TotalPrice(quantity, price) {
         return Number(quantity * price).toFixed(2)
     }
+
+    console.log(check, 'check')
     return (
         <>
             <main className="ps-main">
@@ -56,56 +69,43 @@ const Checkout = () => {
                     <div className="ps-container">
                         <form className="ps-checkout__form">
                             <div className="row">
-                                <div className="col-lg-8 col-md-8 col-sm-12 col-xs-12">
+                                <div className="col-lg-6 col-md-6 col-sm-12 col-xs-12">
                                     <div className="ps-checkout__billing">
-                                        <h3>Billing Detail</h3>
+                                        <h3>Thông tin liên hệ</h3>
                                         <div className="form-group form-group--inline">
-                                            <label>First Name<span>*</span>
+                                            <label>Họ<span></span>
                                             </label>
                                             <input className="form-control" type="text" />
                                         </div>
                                         <div className="form-group form-group--inline">
-                                            <label>Last Name<span>*</span>
+                                            <label>Tên<span></span>
                                             </label>
                                             <input className="form-control" type="text" />
                                         </div>
+
                                         <div className="form-group form-group--inline">
-                                            <label>Company Name<span>*</span>
-                                            </label>
-                                            <input className="form-control" type="text" />
-                                        </div>
-                                        <div className="form-group form-group--inline">
-                                            <label>Email Address<span>*</span>
+                                            <label>Địa chỉ email<span></span>
                                             </label>
                                             <input className="form-control" type="email" />
                                         </div>
+
                                         <div className="form-group form-group--inline">
-                                            <label>Company Name<span>*</span>
+                                            <label>Số điện thoại<span></span>
                                             </label>
                                             <input className="form-control" type="text" />
                                         </div>
                                         <div className="form-group form-group--inline">
-                                            <label>Phone<span>*</span>
+                                            <label>Địa chỉ<span></span>
                                             </label>
                                             <input className="form-control" type="text" />
                                         </div>
-                                        <div className="form-group form-group--inline">
-                                            <label>Address<span>*</span>
-                                            </label>
-                                            <input className="form-control" type="text" />
-                                        </div>
-                                        <div className="form-group">
-                                            <div className="ps-checkbox">
-                                                <input className="form-control" type="checkbox" id="cb01" />
-                                                <label htmlFor="cb01">Create an account?</label>
-                                            </div>
-                                        </div>
+                                      
 
                                     </div>
                                 </div>
 
 
-                                <div className="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                                <div className="col-lg-6 col-md-6 col-sm-12 col-xs-12">
                                     <div className="ps-checkout__order">
                                         <header>
                                             <h3>Đơn hàng của bạn</h3>
@@ -173,19 +173,37 @@ const Checkout = () => {
                                         <footer>
                                             <h3>Phương thức thanh toán</h3>
                                             <div className="form-group cheque">
-                                                <div className="ps-radio">
-                                                    <input className="form-control" type="radio" id="rdo01" name="payment" checked readOnly />
+                                                <div className="ps-radio" >
+                                                    <input className="form-control" type="radio" id="rdo01" name="payment"
+                                                        onClick={() => setCheck(false)}
+
+                                                    />
                                                     <label htmlFor="rdo01">Thanh toán khi nhận hàng</label>
+
                                                 </div>
                                             </div>
-                                            <div className="form-group paypal">
+                                            <div className="form-group paypal" >
                                                 <div className="ps-radio ps-radio--inline">
-
-                                                    <Paypal />
-
+                                                    <input className="form-control" type="radio" name="payment" id="rdo02"
+                                                        onClick={() => setCheck(true)}
+                                                    />
+                                                    <label htmlFor="rdo02">Paypal</label>
                                                 </div>
 
-                                                <button className="ps-btn ps-btn--fullwidth" onClick={checkOutHandler}>Đặt hàng<i className="ps-icon-next"></i></button>
+
+                                            </div>
+                                            <div className="form-group paypal">
+                                                {
+                                                    check ? (
+                                                        <div className="ps-radio ps-radio--inline" style={{ width: '100%' }}>
+                                                            <Paypal />
+                                                        </div>
+                                                    ) : (
+                                                        <button className="ps-btn ps-btn--fullwidth" onClick={checkOutHandler}>Đặt hàng<i className="ps-icon-next"></i></button>
+                                                    )
+                                                }
+
+
                                             </div>
 
                                         </footer>

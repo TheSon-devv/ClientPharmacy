@@ -6,22 +6,134 @@ import detail from "../asset/detail.jpg";
 import { Link, useParams } from "react-router-dom";
 import axios from 'axios';
 import { headerAuthorization } from '../header';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { addCart, addCheckOut } from '../store/actions/cart';
+import { totalPage } from '../store/actions/pagination';
+import AddSuccess from '../UI/AddSuccess/AddSuccess';
 
 const DetailProduct = () => {
     let id = useParams();
     const dispatch = useDispatch();
     const [data, setData] = useState([])
+    const dataProduct = useSelector(state => state.cart.listProduct)
+    const [show, setShow] = useState(false)
     useEffect(() => {
         axios.get(`http://localhost:4000/pharmacy/${id.id}`)
             .then(res => {
                 setData(res.data.data)
             })
             .catch(err => console.log(err))
+        axios.get(`http://localhost:4000/pharmacy/topSale`)
+            .then(res => {
+                console.log(res.data)
+            })
+            .catch(err => console.log(err))
     }, [])
+
+    const showButton = () => {
+        setShow(true)
+        setTimeout(() => {
+            setShow(false)
+        }, 2000)
+    }
+    const resultData = () => {
+        dispatch(totalPage(Math.ceil(dataProduct.length / 4)))
+        const indexLastPost = 1 * 4;
+        const indexFirstPost = indexLastPost - 4;
+        const pageSlice = dataProduct.slice(indexFirstPost, indexLastPost)
+        if (dataProduct && dataProduct.length) {
+            let sttAcc = 0;
+            return pageSlice.map((item) => {
+                sttAcc++;
+                return (
+                    <div className="grid-item kids col-md-3 col-sm-6 col-xs-6" key={item._id}>
+                        <div className="grid-item__content-wrapper">
+                            <div className="ps-shoe mb-30">
+                                <div className="ps-shoe__thumbnail">
+                                    {item.status === "New" ? (
+                                        <div className="ps-badge"><span>New</span></div>
+                                    ) : null}
+                                    {
+                                        item.promotion ? (
+                                            <div className="ps-badge ps-badge--sale ps-badge--2nd">
+                                                <span>-{item.promotion}%</span>
+                                            </div>
+                                        ) : null
+                                    }
+                                    <a className="ps-shoe__favorite" href="#"><i className="fa fa-heart"></i></a>
+                                    <img src={item.pharmacyImage} alt="" width="700" height="350" />
+                                    <Link className="ps-shoe__overlay" to={`/detailProduct/${item._id}`}></Link>
+                                </div>
+                                <div className="ps-shoe__content">
+                                    <div className="ps-shoe__variants" style={{ width: '100%', display: 'flex', justifyContent: 'center' }}>
+                                        {
+                                            localStorage.getItem('userToken') ? (
+                                                <button
+                                                    onClick={() => {
+                                                        dispatch(addCart(item));
+                                                        dispatch(addCheckOut(item._id));
+                                                        showButton()
+                                                    }}
+                                                    style={{ border: 'none' }}
+                                                >Thêm vào giỏ hàng</button>
+                                            ) : (
+                                                <Link to="/signIn" style={{ textDecoration: 'none' }}>Đăng nhập ngay để mua sắm</Link>
+                                            )
+                                        }
+                                    </div>
+                                    <div className="ps-shoe__detail"><a className="ps-shoe__name" href="#">{item.namePharmacy}</a>
+                                        <p className="ps-shoe__categories">
+                                            {
+                                                item.typePharmacy.map(item => {
+                                                    return (
+                                                        <a href="#" key={item._id}>{item.nameTypePharmacy}</a>
+                                                    )
+                                                })
+                                            }
+                                        </p>
+
+                                        {
+                                            item.promotion ? (
+                                                <span className="ps-shoe__price">
+                                                    <del style={{ marginRight: 10 }}>{item.pricePharmacy}$</del>{item.totalPromotion}$
+                                                </span>
+                                            ) : (
+                                                <span className="ps-shoe__price">
+                                                    {item.totalPromotion}$
+                                                </span>
+                                            )
+                                        }
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                )
+            })
+        }
+        else {
+            // this.props.getTotalPage(0)
+            return (
+                <div style={{ display: 'flex', width: '100%', justifyContent: 'center' }}>
+                    <p
+                        style={{
+                            fontSize: "18px",
+                            textAlign: "center",
+                            margin: "20px 0 0 0",
+                        }}
+                    >
+                        Không có dữ liệu ! .
+                    </p>
+                </div>
+            );
+        }
+    }
     return (
         <main className="ps-main">
+            {
+                show ? <AddSuccess /> : null
+            }
             <div className="test">
                 <div className="container">
                     <div className="row">
@@ -45,8 +157,8 @@ const DetailProduct = () => {
 
                                             </div>
                                             <div className="ps-product__image">
-                                                <div className="item">
-                                                    <img className="zoom" src={item.pharmacyImage} alt="" width="1860" height="500" />
+                                                <div className="item" style={{ border: '1px solid #ffd6d6', borderRadius: '10px' }}>
+                                                    <img className="zoom" src={item.pharmacyImage} alt="" width="1500" height="500" />
                                                 </div>
                                             </div>
                                         </div>
@@ -88,7 +200,8 @@ const DetailProduct = () => {
                                                             style={{ textDecoration: 'none' }}
                                                             onClick={() => {
                                                                 dispatch(addCart(item));
-                                                                dispatch(addCheckOut(item._id))
+                                                                dispatch(addCheckOut(item._id));
+                                                                showButton()
                                                             }} /////////Add cart
                                                         >
                                                             Add to cart<i className="ps-icon-next"></i>
@@ -116,6 +229,26 @@ const DetailProduct = () => {
                                         </div>
                                     </div>
                                 </div>
+
+                                <div className="ps-section__header mb-50" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                                    <h3 className="ps-section__title" data-mask="pharmacy">- CÓ THỂ BẠN QUAN TÂM</h3>
+                                    <div>
+                                        <Link
+
+                                            style={{ textDecoration: 'none' }}
+                                            to="/productList"
+                                        >Xem tất cả<i className="fa fa-arrow-right" style={{ marginLeft: 20 }}></i></Link>
+                                    </div>
+                                </div>
+                                <div className="ps-section__content pb-80">
+                                    <div className="masonry-wrapper">
+                                        <div className="ps-masonry row">
+                                            {/* <div className="grid-sizer"></div> */}
+                                            {resultData()}
+                                        </div>
+                                    </div>
+                                </div>
+
                             </div>
                         </div>
                     )

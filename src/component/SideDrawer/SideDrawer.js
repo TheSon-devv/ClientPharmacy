@@ -25,6 +25,9 @@ const SideDrawer = (props) => {
                         <Link to="/" style={{ display: 'flex', textDecoration: 'none', padding: '10px', color: 'black' }}>Home</Link>
                     </div>
                     <div className={classes.Link}>
+                        <Link to="/productList" style={{ display: 'flex', textDecoration: 'none', padding: '10px', color: 'black' }}>Danh mục</Link>
+                    </div>
+                    <div className={classes.Link}>
                         <Link to="/blog" style={{ display: 'flex', textDecoration: 'none', padding: '10px', color: 'black' }}>Tin tức</Link>
                     </div>
                     <div className={classes.Link}>

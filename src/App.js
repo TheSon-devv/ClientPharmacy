@@ -1,3 +1,5 @@
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { BrowserRouter as Router, Redirect, Route, Switch } from "react-router-dom";
 import BlogContainer from "./container/Blog/BlogContainer";
 import CartContainer from "./container/cart/CartContainer";
@@ -10,9 +12,15 @@ import OrderContainer from "./container/Order/OrderContainer";
 import ProductListContainer from "./container/ProductList/ProductListContainer";
 import SignUp from "./container/SignUp/SignUp";
 import UserContaienr from "./container/User/UserContaienr";
+import { authCheckState } from "./store/actions/auth";
 
 function App() {
-  const token = localStorage.getItem('userToken');
+  const dispatch = useDispatch();
+  const token = useSelector(state => state.auth.userToken);
+
+  useEffect(() => {
+    dispatch(authCheckState())
+  },[])
   let router = (
     <Switch>
       <Route exact path="/" component={Home} />

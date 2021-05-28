@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from 'react-redux';
 import { addCart, addCheckOut, getProduct, getTypeProduct } from '../store/actions/cart';
-import { totalPage } from '../store/actions/pagination';
+import { getPage, totalPage } from '../store/actions/pagination';
 import axios from 'axios';
 import PaginationTable from './Pagination/PaginationTable';
 
@@ -24,6 +24,7 @@ const ProductList = () => {
     useEffect(() => {
         dispatch(getTypeProduct())
         dispatch(getProduct())
+        dispatch(getPage(1))
         const getDataReload = () => {
             if (typePharmacy) {
                 axios.get(`http://localhost:4000/typePharmacy/${typePharmacy}`)
@@ -99,11 +100,11 @@ const ProductList = () => {
                                         {
                                             item.promotion ? (
                                                 <span className="ps-shoe__price">
-                                                    <del style={{ marginRight: 10 }}>{item.pricePharmacy}</del>{item.totalPromotion}
+                                                    <del style={{ marginRight: 10 }}>{item.pricePharmacy} $</del>{item.totalPromotion} $
                                                 </span>
                                             ) : (
                                                 <span className="ps-shoe__price">
-                                                    {item.totalPromotion}
+                                                    {item.totalPromotion} $
                                                 </span>
                                             )
                                         }
@@ -147,7 +148,12 @@ const ProductList = () => {
                                     typeProduct.map(item => {
                                         return (
                                             <li key={item._id}>
-                                                <a href="#" onClick={() => handleChangeType(item._id)}>{item.nameTypePharmacy}(521)</a>
+                                                <a href="#"
+                                                    onClick={() => handleChangeType(item._id)}
+                                                >
+                                                    {item.nameTypePharmacy}
+                                                    {item.total}
+                                                </a>
                                             </li>
                                         )
                                     })

@@ -24,6 +24,32 @@ const Blog = () => {
             })
             .catch(err => console.log(err))
     }, [])
+
+    const convertDate = (date) => {
+        let todayTime = new Date(date);
+        let month = todayTime.getMonth() + 1;
+        let day = todayTime.getDate();
+        let year = todayTime.getFullYear();
+        let hours = todayTime.getHours();
+        let minutes = todayTime.getMinutes();
+        let seconds = todayTime.getSeconds();
+        if (day < 10) {
+            day = "0" + day;
+        }
+        if (month < 10) {
+            month = "0" + month;
+        }
+        if (hours < 10) {
+            hours = "0" + hours;
+        }
+        if (minutes < 10) {
+            minutes = "0" + minutes;
+        }
+        if (seconds < 10) {
+            seconds = "0" + seconds;
+        }
+        return `${day}/${month}/${year} - ${hours}:${minutes}:${seconds}`;
+    };
     const resultData = () => {
         dispatch(totalPage(Math.ceil(dataBlog.length / perPage)))
         const indexLastPost = currentPage * perPage;
@@ -42,8 +68,8 @@ const Blog = () => {
                             </div>
                             <div className="ps-post__content">
                                 <a className="ps-post__title" href="blog-detail.html">{item.nameBlog}</a>
-                                <p className="ps-post__meta"><span>By:<a className="mr-5" href="blog.html">Alena Studio</a></span> -<span className="ml-5">{item.dateCreate}</span></p>
-                                <p>{item.information}</p><a className="ps-morelink" href="blog-detail.html">Read more<i className="fa fa-long-arrow-right"></i></a>
+                                <p className="ps-post__meta"><span>By:<a className="mr-5" href="blog.html">Alena Studio</a></span> -<span className="ml-5">{convertDate(item.dateCreate)}</span></p>
+                                {/* <p>{item.information}</p><a className="ps-morelink" href="blog-detail.html">Read more<i className="fa fa-long-arrow-right"></i></a> */}
                             </div>
                         </div>
                     </div>

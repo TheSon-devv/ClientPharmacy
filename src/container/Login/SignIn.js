@@ -21,7 +21,7 @@ function Copyright() {
         <Typography variant="body2" color="textSecondary" align="center">
             {"Copyright © "}
             <Link color="inherit" to="/">
-                Restaurant
+                VietSkin
             </Link>{" "}
             {new Date().getFullYear()}
             {""}
@@ -34,7 +34,7 @@ const useStyles = makeStyles((theme) => ({
         height: "100vh",
     },
     image: {
-        backgroundImage: "url(https://images.pexels.com/photos/545014/pexels-photo-545014.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940)",
+        backgroundImage: "url(https://images.pexels.com/photos/545021/pexels-photo-545021.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940)",
         backgroundRepeat: "no-repeat",
         backgroundColor:
             theme.palette.type === "light"
