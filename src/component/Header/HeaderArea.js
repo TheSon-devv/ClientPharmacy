@@ -13,7 +13,7 @@ import { authLogOut, logOut } from '../../store/actions/auth';
 import SideDrawer from '../SideDrawer/SideDrawer';
 import classes from "../SideDrawer/SideDrawer.module.css";
 import { deleteCart } from '../../store/actions/cart';
-import axios from 'axios';
+import banner from "../../asset/banner.png";
 
 const HeaderArea = () => {
     const dispatch = useDispatch()
@@ -47,6 +47,8 @@ const HeaderArea = () => {
                                         <li className="menu-item"><a href="#">Homepage #2</a></li>
                                         <li className="menu-item"><a href="#">Homepage #3</a></li>
                                     </ul> */}
+                                </li>
+                                <li className="menu-item menu-item-has-children dropdown"><Link to="/doctor" style={{ textDecoration: 'none' }}>Bác sĩ</Link>
                                 </li>
                                 <li className="menu-item menu-item-has-children has-mega-menu"><Link to="/productList" style={{ textDecoration: 'none' }}>Danh mục</Link>
                                     {/* <div className="mega-menu">
@@ -119,7 +121,7 @@ const HeaderArea = () => {
                                     <div className="row" style={{ justifyContent: 'flex-end' }}>
                                         <div className="menu_hidden">
                                             <ul className="main-menu menu">
-                                                <li className="menu-item menu-item-has-children dropdown" style={{marginLeft:"-80px"}}>
+                                                <li className="menu-item menu-item-has-children dropdown" style={{ marginLeft: "-80px" }}>
                                                     <Link to="/" style={{ textDecoration: 'none' }}><i className="fa fa-user"></i></Link>
                                                     <ul className="sub-menu">
                                                         <li className="menu-item">
@@ -185,7 +187,7 @@ const HeaderArea = () => {
                                     :
                                     (
                                         <div className="ps-cart">
-                                            <button className="btn btn-info"><Link to="/signIn" style={{ textDecoration: 'none', color: '#fff' }}>Đăng nhập</Link></button>
+                                            <button className="btn" style={{backgroundColor:"rgb(48,101,193)"}}><Link to="/signIn" style={{ textDecoration: 'none', color: '#fff' }}>Đăng nhập</Link></button>
                                         </div>
                                     )
                             }
@@ -193,10 +195,15 @@ const HeaderArea = () => {
                     </div>
                 </nav>
             </header>
-            <div className="header-services mb-3">
+            <div className="header-services mb-3" style={{ backgroundColor: 'rgb(48,101,193)',zIndex:'10'}}>
                 <div className="ps-services owl-slider" data-owl-auto="true" data-owl-loop="true" data-owl-speed="7000" data-owl-gap="0" data-owl-nav="true" data-owl-dots="false" data-owl-item="1" data-owl-item-xs="1" data-owl-item-sm="1" data-owl-item-md="1" data-owl-item-lg="1" data-owl-duration="1000" data-owl-mousedrag="on">
-                    <p className="ps-service"><i className="ps-icon-delivery"></i><strong>Miễn phí vận chuyển</strong>: Ưu đãi dành riêng cho khách hàng thanh toán qua PalPay</p>
+                    <p className="ps-service" style={{color:"#fff"}}>
+                        <i className="ps-icon-delivery"></i>
+                        <strong style={{color:"#fff"}}>Miễn phí vận chuyển</strong>: Ưu đãi dành riêng cho khách hàng thanh toán qua PalPay</p>
                 </div>
+            </div>
+            <div className="banner" >
+                <img src={banner} className="bgBanner" alt=""/>
             </div>
         </div>
     )

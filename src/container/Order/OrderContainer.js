@@ -2,6 +2,7 @@ import React from 'react'
 import HeaderArea from "../../component/Header/HeaderArea";
 import Footer from "../../component/Footer";
 import Order from '../../component/Order';
+import Chat from '../../component/Chat';
 
 const OrderContainer = () => {
     return (
@@ -9,6 +10,7 @@ const OrderContainer = () => {
             <HeaderArea />
             <Order />
             <Footer />
+            <Chat />
         </div>
     )
 }

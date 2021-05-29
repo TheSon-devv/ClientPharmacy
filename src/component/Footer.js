@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 const Footer = () => {
     return (
         <>
-            <div className="ps-subscribe">
+            {/* <div className="ps-subscribe">
                 <div className="ps-container">
                     <div className="row">
                         <div className="col-lg-3 col-md-12 col-sm-12 col-xs-12 ">
@@ -22,7 +22,7 @@ const Footer = () => {
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> */}
 
             <div className="ps-footer bg--cover" data-background="images/background/parallax.jpg">
                 <div className="ps-footer__content">
@@ -50,11 +50,10 @@ const Footer = () => {
                                         <p><strong>235 Hoàng Quốc Việt, Hà Nội</strong></p>
                                         <p>Email: <a href='mailto:support@store.com'>luudinhkien@gmail.com</a></p>
                                         <p>Phone: 032.142.2512</p>
-                                        
                                     </footer>
                                 </aside>
                             </div>
-                            <div className="col-lg-2 col-md-2 col-sm-4 col-xs-12 ">
+                            {/* <div className="col-lg-2 col-md-2 col-sm-4 col-xs-12 ">
                                 <aside className="ps-widget--footer ps-widget--link">
                                     <header>
                                         <h3 className="ps-widget__title">Find Our store</h3>
@@ -68,8 +67,8 @@ const Footer = () => {
                                         </ul>
                                     </footer>
                                 </aside>
-                            </div>
-                            <div className="col-lg-2 col-md-2 col-sm-4 col-xs-12 ">
+                            </div> */}
+                            <div className="col-lg-3 col-md-3 col-sm-12 col-xs-12">
                                 <aside className="ps-widget--footer ps-widget--link">
                                     <header>
                                         <h3 className="ps-widget__title">Vể VietSkin</h3>
@@ -84,7 +83,7 @@ const Footer = () => {
                                     </footer>
                                 </aside>
                             </div>
-                            <div className="col-lg-2 col-md-2 col-sm-4 col-xs-12 ">
+                            <div className="col-lg-3 col-md-3 col-sm-12 col-xs-12">
                                 <aside className="ps-widget--footer ps-widget--link">
                                     <header>
                                         <h3 className="ps-widget__title">Nổi bật</h3>
@@ -106,7 +105,7 @@ const Footer = () => {
                     <div className="ps-container">
                         <div className="row">
                             <div className="col-lg-6 col-md-6 col-sm-6 col-xs-12 ">
-                                <p>&copy; <a href="#">VIETSKIN</a>, Inc. All rights Resevered. Design by <a href="#"> Kien </a></p>
+                                <p>&copy; <a href="#">VIETSKIN</a>, Inc. Tất cả đều được cho phép. Thiết kế bởi<a href="#"> Kien </a></p>
                             </div>
                             <div className="col-lg-6 col-md-6 col-sm-6 col-xs-12 ">
                                 <ul className="ps-social">

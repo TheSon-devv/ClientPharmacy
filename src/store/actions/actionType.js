@@ -26,3 +26,7 @@ export const RELOAD_CART = 'RELOAD_CART';
 export const TOTAL_PAGE = 'TOTAL_PAGE';
 export const GET_PAGE = 'GET_PAGE';
 export const GET_PER_PAGE = 'GET_PER_PAGE';
+
+//Chat
+export const CHANGE_STATE_CHAT = 'CHANGE_STATE_CHAT';
+export const CLOSE_CHAT = 'CLOSE_CHAT';

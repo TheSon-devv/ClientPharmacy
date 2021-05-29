@@ -226,7 +226,7 @@ const CategoryProduct = () => {
     return (
         <main className="ps-main">
             {
-                show ? <AddSuccess /> : null
+                show ? <AddSuccess title="Đã thêm vào giỏ hàng !"/> : null
             }
             <div className="ps-section--features-product ps-section masonry-root pt-100 pb-100">
                 <div className="ps-container">
@@ -253,7 +253,7 @@ const CategoryProduct = () => {
                     </div>
                 </div>
             </div>
-            <div className="ps-section--offer">
+            {/* <div className="ps-section--offer">
                 <div className="ps-column"><a className="ps-offer" href="product-listing.html"><img src={banner3} alt="" /></a></div>
                 <div className="ps-column"><a className="ps-offer" href="product-listing.html"><img src={banner2} alt="" /></a></div>
             </div>
@@ -276,7 +276,8 @@ const CategoryProduct = () => {
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> */}
+
         </main>
     )
 }

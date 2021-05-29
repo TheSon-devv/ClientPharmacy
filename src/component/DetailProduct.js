@@ -51,7 +51,7 @@ const DetailProduct = () => {
                             <div className="ps-shoe mb-30">
                                 <div className="ps-shoe__thumbnail">
                                     {item.status === "New" ? (
-                                        <div className="ps-badge"><span>New</span></div>
+                                        <div className="ps-badge"><span>Mới</span></div>
                                     ) : null}
                                     {
                                         item.promotion ? (
@@ -132,7 +132,7 @@ const DetailProduct = () => {
     return (
         <main className="ps-main">
             {
-                show ? <AddSuccess /> : null
+                show ? <AddSuccess title="Đã thêm vào giỏ hàng !" /> : null
             }
             <div className="test">
                 <div className="container">
@@ -204,7 +204,7 @@ const DetailProduct = () => {
                                                                 showButton()
                                                             }} /////////Add cart
                                                         >
-                                                            Add to cart<i className="ps-icon-next"></i>
+                                                            Thêm vào giỏ hàng<i className="ps-icon-next"></i>
                                                         </button>
                                                     ) : (
                                                         <button
@@ -214,7 +214,7 @@ const DetailProduct = () => {
                                                                 alert("Vui lòng đăng nhập để mua hàng !")
                                                             }} /////////Add cart
                                                         >
-                                                            Add to cart<i className="ps-icon-next"></i>
+                                                            Thêm vào giỏ hàng<i className="ps-icon-next"></i>
                                                         </button>
                                                     )
                                                 }

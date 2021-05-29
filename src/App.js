@@ -6,6 +6,7 @@ import CartContainer from "./container/cart/CartContainer";
 import CheckOutContainer from "./container/checkout/CheckOutContainer";
 import ContactContainer from "./container/Contact/ContactContainer";
 import DetailProductContainer from "./container/detailProduct/DetailProductContainer";
+import DoctorContainer from "./container/Doctor/DoctorContainer";
 import Home from "./container/home/home";
 import SignIn from "./container/Login/SignIn";
 import OrderContainer from "./container/Order/OrderContainer";
@@ -29,6 +30,7 @@ function App() {
       <Route path="/detailProduct/:id" component={DetailProductContainer} />
       <Route path="/blog" component={BlogContainer} />
       <Route path="/contact" component={ContactContainer} />
+      <Route path="/doctor" component={DoctorContainer} />
       <Redirect to="/signIn" />
     </Switch>
   )
@@ -44,6 +46,7 @@ function App() {
         <Route path="/detailUser" component={UserContaienr} />
         <Route path="/order" component={OrderContainer} />
         <Route path="/productList" component={ProductListContainer} />
+        <Route path="/doctor" component={DoctorContainer} />
         <Redirect to="/" />
       </Switch>
     )

@@ -8,12 +8,12 @@ const Contact = () => {
                 <div className="row">
                     <div className="col-lg-6 col-md-6 col-sm-12 col-xs-12 ">
                         <div className="ps-section__header mb-50">
-                            <h2 className="ps-section__title" data-mask="Contact">- Get in touch</h2>
+                            <h2 className="ps-section__title" data-mask="Contact">- Thông tin liên hệ</h2>
                             <form className="ps-contact__form" action="do_action" method="post">
                                 <div className="row">
                                     <div className="col-lg-6 col-md-6 col-sm-6 col-xs-12 ">
                                         <div className="form-group">
-                                            <label>Name <sub>*</sub></label>
+                                            <label>Tên <sub>*</sub></label>
                                             <input className="form-control" type="text" placeholder="" />
                                         </div>
                                     </div>
@@ -25,11 +25,11 @@ const Contact = () => {
                                     </div>
                                     <div className="col-lg-12 col-md-12 col-sm-12 col-xs-12 ">
                                         <div className="form-group mb-25">
-                                            <label>Your Message <sub>*</sub></label>
+                                            <label>Nội dung <sub>*</sub></label>
                                             <textarea className="form-control" rows="6"></textarea>
                                         </div>
                                         <div className="form-group">
-                                            <button className="ps-btn">Send Message<i className="ps-icon-next"></i></button>
+                                            <button className="ps-btn">Gửi tin nhắn<i className="ps-icon-next"></i></button>
                                         </div>
                                     </div>
                                 </div>

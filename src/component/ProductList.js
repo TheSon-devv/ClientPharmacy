@@ -148,7 +148,7 @@ const ProductList = () => {
     return (
         <div className="row px-3 mt-30">
             {
-                show ? <AddSuccess /> : null
+                show ? <AddSuccess title="Đã thêm vào giỏ hàng !"/> : null
             }
             <div className="col-md-3 col-sm-12 col-xs-12">
                 <div className="ps-sidebar" data-mh="product-listing">
@@ -161,11 +161,12 @@ const ProductList = () => {
                                 {
                                     typeProduct.map(item => {
                                         return (
-                                            <li key={item._id}>
+                                            <li key={item._id} className="textProduct">
                                                 <a href="#"
                                                     onClick={() => handleChangeType(item._id)}
+                                                    style={{textDecoration:'none'}}
                                                 >
-                                                    {item.nameTypePharmacy}
+                                                    <p className="textProduct">{item.nameTypePharmacy}</p>
                                                     {item.total}
                                                 </a>
                                             </li>

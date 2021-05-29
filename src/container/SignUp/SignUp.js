@@ -14,6 +14,7 @@ import Container from '@material-ui/core/Container';
 import { Link, useHistory } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import axios from "axios";
+import imgSignUp from "../../asset/imgSignUp.png";
 
 
 function Copyright() {
@@ -74,91 +75,93 @@ export default function SignUp() {
     }
 
     return (
-        <Container component="main" maxWidth="xs">
-            <CssBaseline />
-            <div className={classes.paper}>
-                <Avatar className={classes.avatar}>
-                    <LockOutlinedIcon />
-                </Avatar>
-                <Typography component="h1" variant="h5">
-                    Sign up
+        <div style={{backgroundImage:`url(${imgSignUp})`,display:'flex',height:'935px'}}>
+            <Container component="main" maxWidth="xs" >
+                <CssBaseline />
+                <div className={classes.paper} >
+                    <Avatar className={classes.avatar}>
+                        <LockOutlinedIcon />
+                    </Avatar>
+                    <Typography component="h1" variant="h5">
+                        Sign up
                 </Typography>
-                <form className={classes.form} noValidate onSubmit={handleSubmit(onSubmit)}>
-                    <Grid container spacing={2}>
-                        <Grid item xs={12}>
-                            <TextField
-                                autoComplete="name"
-                                name="name"
-                                variant="outlined"
-                                required
-                                fullWidth
-                                id="name"
-                                label="Tên"
-                                autoFocus
-                                inputProps={{ ...register("nameKH", { required: true }) }}
-                            />
-                            <div style={{ width: '100%', height: 20, paddingLeft: 10, paddingTop: 5 }}>
-                                {errors.nameKH && <p style={{ color: 'red' }}>Vui lòng nhập tên !!!</p>}
-                            </div>
-                        </Grid>
+                    <form className={classes.form} noValidate onSubmit={handleSubmit(onSubmit)}>
+                        <Grid container spacing={2}>
+                            <Grid item xs={12}>
+                                <TextField
+                                    autoComplete="name"
+                                    name="name"
+                                    variant="outlined"
+                                    required
+                                    fullWidth
+                                    id="name"
+                                    label="Tên"
+                                    autoFocus
+                                    inputProps={{ ...register("nameKH", { required: true }) }}
+                                />
+                                <div style={{ width: '100%', height: 20, paddingLeft: 10, paddingTop: 5 }}>
+                                    {errors.nameKH && <p style={{ color: 'red' }}>Vui lòng nhập tên !!!</p>}
+                                </div>
+                            </Grid>
 
-                        <Grid item xs={12}>
-                            <TextField
-                                variant="outlined"
-                                required
-                                fullWidth
-                                id="email"
-                                label="Email Address"
-                                name="email"
-                                autoComplete="email"
-                                inputProps={{ ...register("email", { required: true }) }}
-                            />
-                            <div style={{ width: '100%', height: 20, paddingLeft: 10, paddingTop: 5 }}>
-                                {errors.email && <p style={{ color: 'red' }}>Vui lòng nhập email !!!</p>}
-                            </div>
-                        </Grid>
-                        <Grid item xs={12}>
-                            <TextField
-                                variant="outlined"
-                                required
-                                fullWidth
-                                name="password"
-                                label="Password"
-                                type="password"
-                                id="password"
-                                autoComplete="current-password"
-                                inputProps={{ ...register("password", { required: true, minLength: 6, maxLength: 10 }) }}
-                            />
-                            <div style={{ width: '100%', height: 20, paddingLeft: 10, paddingTop: 5 }}>
-                                {errors.password && <p style={{ color: 'red' }}>Vui lòng nhập password !!!</p>}
-                            </div>
-                        </Grid>
-                        {/* <Grid item xs={12}>
+                            <Grid item xs={12}>
+                                <TextField
+                                    variant="outlined"
+                                    required
+                                    fullWidth
+                                    id="email"
+                                    label="Email Address"
+                                    name="email"
+                                    autoComplete="email"
+                                    inputProps={{ ...register("email", { required: true }) }}
+                                />
+                                <div style={{ width: '100%', height: 20, paddingLeft: 10, paddingTop: 5 }}>
+                                    {errors.email && <p style={{ color: 'red' }}>Vui lòng nhập email !!!</p>}
+                                </div>
+                            </Grid>
+                            <Grid item xs={12}>
+                                <TextField
+                                    variant="outlined"
+                                    required
+                                    fullWidth
+                                    name="password"
+                                    label="Password"
+                                    type="password"
+                                    id="password"
+                                    autoComplete="current-password"
+                                    inputProps={{ ...register("password", { required: true, minLength: 6, maxLength: 10 }) }}
+                                />
+                                <div style={{ width: '100%', height: 20, paddingLeft: 10, paddingTop: 5 }}>
+                                    {errors.password && <p style={{ color: 'red' }}>Vui lòng nhập password !!!</p>}
+                                </div>
+                            </Grid>
+                            {/* <Grid item xs={12}>
                             <FormControlLabel
                                 control={<Checkbox value="allowExtraEmails" color="primary" />}
                                 label="I want to receive inspiration, marketing promotions and updates via email."
                             />
                         </Grid> */}
-                    </Grid>
-                    <Button
-                        type="submit"
-                        fullWidth
-                        variant="contained"
-                        color="primary"
-                        className={classes.submit}
-                    >
-                        Sign Up
-                    </Button>
-                    <Grid container justify="flex-end">
-                        <Grid item>
-                            Bạn đã có tài khoản ? <Link to="/signIn" style={{ textDecoration: 'none', color: 'red' }}>Đăng nhập ngay</Link>
                         </Grid>
-                    </Grid>
-                </form>
-            </div>
-            <Box mt={5}>
-                <Copyright />
-            </Box>
-        </Container>
+                        <Button
+                            type="submit"
+                            fullWidth
+                            variant="contained"
+                            color="primary"
+                            className={classes.submit}
+                        >
+                            Sign Up
+                    </Button>
+                        <Grid container justify="flex-end">
+                            <Grid item>
+                                Bạn đã có tài khoản ? <Link to="/signIn" style={{ textDecoration: 'none', color: 'red' }}>Đăng nhập ngay</Link>
+                            </Grid>
+                        </Grid>
+                    </form>
+                </div>
+                <Box mt={5}>
+                    <Copyright />
+                </Box>
+            </Container>
+        </div>
     );
 }
