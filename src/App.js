@@ -5,6 +5,8 @@ import BlogContainer from "./container/Blog/BlogContainer";
 import CartContainer from "./container/cart/CartContainer";
 import CheckOutContainer from "./container/checkout/CheckOutContainer";
 import ContactContainer from "./container/Contact/ContactContainer";
+import detailBlogContainer from "./container/detailBlog/detailBlogContainer";
+import detailDoctorContainer from "./container/detailDoctor/detailDoctorContainer";
 import DetailProductContainer from "./container/detailProduct/DetailProductContainer";
 import DoctorContainer from "./container/Doctor/DoctorContainer";
 import Home from "./container/home/home";
@@ -21,13 +23,15 @@ function App() {
 
   useEffect(() => {
     dispatch(authCheckState())
-  },[])
+  }, [])
   let router = (
     <Switch>
       <Route exact path="/" component={Home} />
       <Route path="/signIn" component={SignIn} />
       <Route path="/signUp" component={SignUp} />
       <Route path="/detailProduct/:id" component={DetailProductContainer} />
+      <Route path="/detailDoctor/:id" component={detailDoctorContainer} />
+      <Route path="/blog/:id" component={detailBlogContainer} />
       <Route path="/blog" component={BlogContainer} />
       <Route path="/contact" component={ContactContainer} />
       <Route path="/doctor" component={DoctorContainer} />
@@ -39,6 +43,8 @@ function App() {
       <Switch>
         <Route exact path="/" component={Home} />
         <Route path="/detailProduct/:id" component={DetailProductContainer} />
+        <Route path="/detailDoctor/:id" component={detailDoctorContainer} />
+        <Route path="/blog/:id" component={detailBlogContainer} />
         <Route path="/checkOut" component={CheckOutContainer} />
         <Route path="/cart" component={CartContainer} />
         <Route path="/blog" component={BlogContainer} />

@@ -49,6 +49,114 @@
   display: none; 
 } */
 
+.btnFB{
+  padding: 15px;
+  border-radius: 5px;
+  border: none;
+  background-color: #3f51b5;
+  color: #fff;
+  font-size: 16px;
+}
+
+.titleBanner {
+  width: 95%;
+  margin: 70px 0 0 0;
+}
+.titleBannerRight{
+  width: 95%;
+  margin-left: 20px;
+}
+
+.sliderRight {
+  background-color: #4ce1c6;
+  /* padding: 70px 10px; */
+  border-radius: 180px 0 0 180px;
+  position: relative;
+  display: flex;
+  height: 80%;
+  margin-top: 70px;
+  padding: 50px;
+}
+
+.sliderRight::before {
+  content: "";
+  position: absolute;
+  height: 100%;
+  width: 1000px;
+  background-color: #4ce1c6;
+  right: -999px;
+  top: 0;
+}
+
+.sliderLeft {
+  background-color: #567fea;
+  /* padding: 70px 10px; */
+  border-radius: 0 180px 180px 0;
+  position: relative;
+}
+
+.sliderLeft::before {
+  content: "";
+  position: absolute;
+  height: 100%;
+  width: 1000px;
+  background-color: #567fea;
+  left: -999px;
+  top: 0;
+}
+
+.selectControl {
+  outline: none;
+  -webkit-box-shadow: none;
+  -moz-box-shadow: none;
+  -ms-box-shadow: none;
+  box-shadow: none;
+  -webkit-border-radius: 0;
+  -moz-border-radius: 0;
+  -ms-border-radius: 0;
+  border-radius: 0;
+  padding: 10px 10px;
+  border-radius: 5px;
+  width: 200px;
+  margin-left: 10px;
+}
+
+.search {
+  justify-content: center;
+  align-items: center;
+  padding: 20px 0;
+}
+
+.detailTitle {
+  font-weight: bold;
+  text-transform: uppercase;
+  color: rgb(0, 201, 0);
+  padding-bottom: 10px;
+  font-size: 20px;
+}
+
+.detailDoctorBox {
+  background-color: rgb(255, 233, 233);
+  padding: 20px;
+  border-radius: 60px;
+}
+
+.info {
+  margin-top: 10px;
+  padding: 10px 0 0 20px;
+}
+
+.customImgDetail {
+  justify-content: center;
+  align-items: center;
+  margin: 15px 0;
+}
+
+.customImgDetail img {
+  border-radius: 1000px;
+  height: 300px;
+}
+
 .textProduct {
   font-family: 'Raleway', sans-serif;
   font-size: 16px;
@@ -62,11 +170,12 @@
   bottom: 0;
   right: 0;
   z-index: 10000000;
+  margin: 0 10px 20px 0;
 }
 
 .boxOpen {
   background-color: rgb(216, 216, 216);
-  border-radius: 5px 5px 0 0;
+  border-radius: 5px;
   color: #fff;
   height: 500px;
   width: 350px;
@@ -110,12 +219,13 @@
   bottom: 0;
   right: 0;
   z-index: 10000000;
+  margin: 0 10px 10px 0;
 }
 
 .box {
-  padding: 20px 20px 20px 20px;
+  padding: 15px;
   background-color: rgb(66, 148, 73);
-  border-radius: 5px 5px 0 0;
+  border-radius: 1000px;
   color: #fff;
   cursor: pointer;
 }
@@ -129,6 +239,7 @@
   border-radius: 10px;
   border: 2px solid rgb(255, 223, 223);
   width: 100%;
+  margin-bottom: 30px;
 }
 
 .customImg {
@@ -141,6 +252,7 @@
 .workplace {
   width: 100%;
   height: 70px;
+  padding-top: 10px;
 }
 
 .customImg img {
@@ -7145,7 +7257,6 @@ textarea.form-control {
   width: 100%;
   height: 100%;
   z-index: 10;
-  background-color: rgba(0, 0, 0, 0.85);
   z-index: 0;
 }
 
@@ -7172,6 +7283,7 @@ textarea.form-control {
   font-family: inherit;
   font-weight: 700;
   color: #2AC37D;
+  text-decoration: none;
 }
 
 .ps-footer__copyright .ps-social {

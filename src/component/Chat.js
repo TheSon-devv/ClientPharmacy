@@ -21,25 +21,35 @@ const Chat = () => {
                                 </div>
                             </div>
 
-                            <div className="boxBot row">
-                                <div className="col-2" style={{ color: 'black' }}>
-                                    Tên :
+                            <div className="boxBot">
+
+                                <div className="row pb-2">
+                                    <div className="col-2" style={{ color: 'black', justifyContent: 'center', alignItems: 'center' }}>
+                                        Tên
                                     </div>
-                                <div className="col-10">
-                                    <input className="form-control" />
-                                </div>
-                                <div className="col-2" style={{ color: 'black' }}>
-                                    SĐT :
+                                    <div className="col-10">
+                                        <input className="form-control" />
                                     </div>
-                                <div className="col-10">
-                                    <input className="form-control" />
                                 </div>
-                                <div className="col-12" style={{ color: 'black' }}>
-                                    Bệnh lý cần tư vấn :
+
+                                <div className="row pb-2">
+                                    <div className="col-2" style={{ color: 'black' }}>
+                                        SĐT
                                     </div>
-                                <div className="col-12">
-                                    <textarea style={{ width: '100%' }} rows="5" className="form-control" />
+                                    <div className="col-10">
+                                        <input className="form-control" />
+                                    </div>
                                 </div>
+
+                                <div className="row pb-2">
+                                    <div className="col-12" style={{ color: 'black' }}>
+                                        Bệnh lý cần tư vấn
+                                    </div>
+                                    <div className="col-12">
+                                        <textarea style={{ width: '100%' }} rows="5" className="form-control" />
+                                    </div>
+                                </div>
+
                             </div>
 
                             <div className="customBtnInformation">
@@ -50,7 +60,7 @@ const Chat = () => {
                 ) : (
                     <div className="chatBox" onClick={() => dispatch(changeStateChat())}>
                         <div className="box">
-                            Tư vấn miễn phí !!!
+                            <i className="fa fa-comments" style={{fontSize:'40px'}}></i>
                         </div>
                     </div>
                 )

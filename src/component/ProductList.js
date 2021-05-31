@@ -81,21 +81,15 @@ const ProductList = () => {
                                     <Link className="ps-shoe__overlay" to={`/detailProduct/${item._id}`}></Link>
                                 </div>
                                 <div className="ps-shoe__content">
-                                    <div className="ps-shoe__variants" style={{ width: '100%', display: 'flex', justifyContent: 'center' }}>
-                                        {
-                                            localStorage.getItem('userToken') ? (
-                                                <button
-                                                    onClick={() => {
-                                                        dispatch(addCart(item));
-                                                        dispatch(addCheckOut(item._id));
-                                                        showButton()
-                                                    }}
-                                                    style={{ border: 'none' }}
-                                                >Thêm vào giỏ hàng</button>
-                                            ) : (
-                                                <Link to="/signIn">Đăng nhập ngay để mua sắm</Link>
-                                            )
-                                        }
+                                    <div className="ps-shoe__variants" >
+                                        <button
+                                            onClick={() => {
+                                                dispatch(addCart(item));
+                                                dispatch(addCheckOut(item._id));
+                                                showButton()
+                                            }}
+                                            style={{ border: 'none', display: 'flex', width: '100%', justifyContent: 'center', padding: 20, backgroundColor: '#242A61', color: '#fff' }}
+                                        >Thêm vào giỏ hàng</button>
                                     </div>
                                     <div className="ps-shoe__detail"><a className="ps-shoe__name" href="#">{item.namePharmacy}</a>
                                         <p className="ps-shoe__categories">
@@ -148,7 +142,7 @@ const ProductList = () => {
     return (
         <div className="row px-3 mt-30">
             {
-                show ? <AddSuccess title="Đã thêm vào giỏ hàng !"/> : null
+                show ? <AddSuccess title="Đã thêm vào giỏ hàng !" /> : null
             }
             <div className="col-md-3 col-sm-12 col-xs-12">
                 <div className="ps-sidebar" data-mh="product-listing">
@@ -164,7 +158,7 @@ const ProductList = () => {
                                             <li key={item._id} className="textProduct">
                                                 <a href="#"
                                                     onClick={() => handleChangeType(item._id)}
-                                                    style={{textDecoration:'none'}}
+                                                    style={{ textDecoration: 'none' }}
                                                 >
                                                     <p className="textProduct">{item.nameTypePharmacy}</p>
                                                     {item.total}

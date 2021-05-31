@@ -1,6 +1,7 @@
 import React from 'react'
 import '../css/style.css'
 import { Link } from "react-router-dom";
+import imgSignUp from "../asset/imgSignUp.png";
 
 const Footer = () => {
     return (
@@ -24,7 +25,7 @@ const Footer = () => {
                 </div>
             </div> */}
 
-            <div className="ps-footer bg--cover" data-background="images/background/parallax.jpg">
+            <div className="ps-footer" style={{backgroundColor:'#242a61'}}>
                 <div className="ps-footer__content">
                     <div className="ps-container">
                         <div className="row">
@@ -109,10 +110,10 @@ const Footer = () => {
                             </div>
                             <div className="col-lg-6 col-md-6 col-sm-6 col-xs-12 ">
                                 <ul className="ps-social">
-                                    <li><a href="#"><i className="fa fa-facebook"></i></a></li>
-                                    <li><a href="#"><i className="fa fa-google-plus"></i></a></li>
-                                    <li><a href="#"><i className="fa fa-twitter"></i></a></li>
-                                    <li><a href="#"><i className="fa fa-instagram"></i></a></li>
+                                    <li><a style={{color:'#fff'}} href="https://www.facebook.com/bacsidalieuvietskin/" target="_blank"><i className="fa fa-facebook"></i></a></li>
+                                    <li><a style={{color:'#fff'}} href="#"><i className="fa fa-google-plus"></i></a></li>
+                                    <li><a style={{color:'#fff'}} href="#"><i className="fa fa-twitter"></i></a></li>
+                                    <li><a style={{color:'#fff'}} href="#"><i className="fa fa-instagram"></i></a></li>
                                 </ul>
                             </div>
                         </div>

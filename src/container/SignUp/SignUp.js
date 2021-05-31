@@ -83,7 +83,7 @@ export default function SignUp() {
                         <LockOutlinedIcon />
                     </Avatar>
                     <Typography component="h1" variant="h5">
-                        Sign up
+                        Đăng ký
                 </Typography>
                     <form className={classes.form} noValidate onSubmit={handleSubmit(onSubmit)}>
                         <Grid container spacing={2}>
@@ -110,7 +110,7 @@ export default function SignUp() {
                                     required
                                     fullWidth
                                     id="email"
-                                    label="Email Address"
+                                    label="Địa chỉ Email"
                                     name="email"
                                     autoComplete="email"
                                     inputProps={{ ...register("email", { required: true }) }}
@@ -125,7 +125,7 @@ export default function SignUp() {
                                     required
                                     fullWidth
                                     name="password"
-                                    label="Password"
+                                    label="Mật khẩu"
                                     type="password"
                                     id="password"
                                     autoComplete="current-password"
@@ -149,7 +149,7 @@ export default function SignUp() {
                             color="primary"
                             className={classes.submit}
                         >
-                            Sign Up
+                            Đăng ký
                     </Button>
                         <Grid container justify="flex-end">
                             <Grid item>

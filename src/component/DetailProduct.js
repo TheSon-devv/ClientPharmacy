@@ -66,20 +66,14 @@ const DetailProduct = () => {
                                 </div>
                                 <div className="ps-shoe__content">
                                     <div className="ps-shoe__variants" style={{ width: '100%', display: 'flex', justifyContent: 'center' }}>
-                                        {
-                                            localStorage.getItem('userToken') ? (
-                                                <button
-                                                    onClick={() => {
-                                                        dispatch(addCart(item));
-                                                        dispatch(addCheckOut(item._id));
-                                                        showButton()
-                                                    }}
-                                                    style={{ border: 'none' }}
-                                                >Thêm vào giỏ hàng</button>
-                                            ) : (
-                                                <Link to="/signIn" style={{ textDecoration: 'none' }}>Đăng nhập ngay để mua sắm</Link>
-                                            )
-                                        }
+                                        <button
+                                            onClick={() => {
+                                                dispatch(addCart(item));
+                                                dispatch(addCheckOut(item._id));
+                                                showButton()
+                                            }}
+                                            style={{ border: 'none' }}
+                                        >Thêm vào giỏ hàng</button>
                                     </div>
                                     <div className="ps-shoe__detail"><a className="ps-shoe__name" href="#">{item.namePharmacy}</a>
                                         <p className="ps-shoe__categories">
@@ -187,9 +181,9 @@ const DetailProduct = () => {
                                                 )
                                             }
 
-                                            <div className="ps-product__block ps-product__quickview" style={{ height: '390px' }}>
+                                            <div className="ps-product__block ps-product__quickview">
                                                 <h4>Thông tin chi tiết</h4>
-                                                <p >{item.information}</p>
+                                                <pre style={{ fontFamily: 'Montserrat', fontSize: 16 }}>{item.information}</pre>
                                             </div>
 
                                             <div className="ps-product__shopping">

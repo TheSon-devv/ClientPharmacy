@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Avatar from "@material-ui/core/Avatar";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import Box from "@material-ui/core/Box";
@@ -14,7 +14,9 @@ import { useForm } from "react-hook-form";
 import { Button } from "@material-ui/core";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
-import { auth } from "../../store/actions/auth";
+import { auth, authFail, authLogOut, authSuccess } from "../../store/actions/auth";
+
+import FacebookLogin from 'react-facebook-login/dist/facebook-login-render-props'
 
 function Copyright() {
     return (
@@ -84,6 +86,22 @@ const SignIn = ({ ...props }) => {
     const onSubmit = data => {
         dispatch(auth(data.email, data.password))
     }
+    useEffect(() => {
+        dispatch(authFail(""))
+    }, [dispatch])
+
+    const responseFacebook = (res) => {
+        console.log(res);
+        const expriesTime = new Date(new Date().getTime() + (res.expiresIn * 100))
+        localStorage.setItem('userToken', res.accessToken);
+        localStorage.setItem('expiresIn', expriesTime);
+        localStorage.setItem('userId', res.userID);
+        localStorage.setItem('email', res.email);
+        localStorage.setItem('name', res.name);
+
+        dispatch(authSuccess(res.accessToken, res.userID));
+        dispatch(authLogOut(res.expiresIn));
+    }
 
     return (
         <>
@@ -96,7 +114,7 @@ const SignIn = ({ ...props }) => {
                             <LockOutlinedIcon />
                         </Avatar>
                         <Typography component="h1" variant="h5">
-                            Sign in
+                            Đăng nhập
                         </Typography>
                         <form className={classes.form} onSubmit={handleSubmit(onSubmit)}>
                             <div className="row px-3 py-2">
@@ -129,10 +147,25 @@ const SignIn = ({ ...props }) => {
                                 color="primary"
                                 className={classes.submit}
                             >
-                                Sign In
+                                Đăng nhập
                             </Button>
                             <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-                                <p>Bạn chưa có tài khoản ?<Link to="/signUp" style={{textDecoration:'none'}}> Đăng ký tại đây</Link></p>
+                                <p>Bạn chưa có tài khoản ?<Link to="/signUp" style={{ textDecoration: 'none' }}> Đăng ký tại đây</Link></p>
+                            </div>
+
+                            <div style={{ display: 'flex', justifyContent: 'center' ,alignItems:'center'}}>
+                                <div style={{fontSize:16,marginRight:10}}>
+                                    Hoặc
+                                </div>
+                                <FacebookLogin
+                                    appId="969792837168056"
+                                    // autoLoad={true}
+                                    fields="name,email,picture"
+                                    callback={responseFacebook}
+                                    render={renderProps => (
+                                        <button className="btnFB" onClick={renderProps.onClick}>Đăng nhập bằng Facebook</button>
+                                    )}
+                                />
                             </div>
 
                             <div style={{ width: '100%', height: 380 }}>

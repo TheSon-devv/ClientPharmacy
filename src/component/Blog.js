@@ -4,6 +4,7 @@ import { headerAuthorization } from '../header'
 import PaginationTable from "../component/Pagination/PaginationTable";
 import { totalPage } from "../store/actions/pagination";
 import { useDispatch, useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
 
 const Blog = () => {
     const [dataBlog, setDataBlog] = useState([])
@@ -12,7 +13,7 @@ const Blog = () => {
     const perPage = useSelector(state => state.pagination.perPage)
 
     useEffect(() => {
-        axios.get(`http://localhost:4000/blog`, headerAuthorization())
+        axios.get(`http://localhost:4000/blog`)
             .then(res => {
                 if (res.data.code === 200) {
                     console.log(res.data);
@@ -63,12 +64,17 @@ const Blog = () => {
                     <div className="col-lg-4 col-md-4 col-sm-12 col-xs-12 " key={item._id}>
                         <div className="ps-post mb-30">
                             <div className="ps-post__thumbnail">
-                                <a className="ps-post__overlay" href="blog-detail.html"></a>
+                                <Link to={`/blog/${item._id}`} className="ps-post__overlay"></Link>
                                 <img src={item.blogImage} alt="image" height="300" />
                             </div>
-                            <div className="ps-post__content">
+                            <div className="ps-post__content" >
                                 <a className="ps-post__title" href="blog-detail.html">{item.nameBlog}</a>
-                                <p className="ps-post__meta"><span>By:<a className="mr-5" href="blog.html">Alena Studio</a></span> -<span className="ml-5">{convertDate(item.dateCreate)}</span></p>
+                                <div style={{ display: 'flex', justifyContent: 'flex-end'}}>
+                                    <p className="ps-post__meta" >
+                                        <span className="ml-5">{convertDate(item.dateCreate)}</span>
+                                    </p>
+                                </div>
+
                                 {/* <p>{item.information}</p><a className="ps-morelink" href="blog-detail.html">Read more<i className="fa fa-long-arrow-right"></i></a> */}
                             </div>
                         </div>

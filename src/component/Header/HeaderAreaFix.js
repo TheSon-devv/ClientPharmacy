@@ -15,7 +15,7 @@ import classes from "../SideDrawer/SideDrawer.module.css";
 import { deleteCart, reloadCart } from '../../store/actions/cart';
 import banner from "../../asset/banner.png";
 
-const HeaderArea = () => {
+const HeaderAreaFix = () => {
     const dispatch = useDispatch()
     const [showDrawer, setShowDrawer] = useState(true)
     const numberCart = useSelector(state => state.cart.numberCart)
@@ -170,6 +170,10 @@ const HeaderArea = () => {
                                                     }
 
                                                 </div>
+                                                {/* <div className="ps-cart__total">
+                                                    <p>Number of items:<span>36</span></p>
+                                                    <p>Item Total:<span>£528.00</span></p>
+                                                </div> */}
                                                 {
                                                     numberCart !== 0
                                                         ? (<div className="ps-cart__footer"><Link className="ps-btn" to="/cart" style={{ textDecoration: 'none' }}>Check out<i className="fa fa-arrow-right"></i></Link></div>)
@@ -238,8 +242,11 @@ const HeaderArea = () => {
                         <strong style={{ color: "#fff" }}>Miễn phí vận chuyển</strong>: Ưu đãi dành riêng cho khách hàng thanh toán qua PalPay</p>
                 </div>
             </div>
+            <div className="banner" >
+                <img src={banner} className="bgBanner" alt="" />
+            </div>
         </div>
     )
 }
 
-export default HeaderArea
+export default HeaderAreaFix
