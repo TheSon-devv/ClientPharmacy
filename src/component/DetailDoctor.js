@@ -23,7 +23,7 @@ const Doctor = () => {
             {
                 dataDetail.map(item => {
                     return (
-                        <div className="container mb-100" key={item._id}>
+                        <div className="container mt-100 mb-100" key={item._id}>
                             <div className="detailDoctorBox">
                                 <div className="row">
                                     <div className="col-md-4 col-sm-4 col-xs-12 customImgDetail" >

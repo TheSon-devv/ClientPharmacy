@@ -21,9 +21,7 @@ const Doctor = (props) => {
     }, [])
     return (
         <>
-
-
-            <div className="container mb-30">
+            <div className="container mb-30 mt-30">
                 <div className="search row">
                     <div style={{ marginRight: '20px' }}>Tìm kiếm bác sỹ theo : </div>
                     <select

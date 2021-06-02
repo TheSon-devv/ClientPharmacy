@@ -30,7 +30,7 @@ const Chat = (props) => {
         axios.post('http://localhost:4000/message', data)
             .then(res => {
                 if (res.data.code === 200) {
-                    alert("Chúng tôi sẽ sớm liên hệ lại với bạn !")
+                    alert("Cảm ơn bạn đã để lại thông tin . Chúng tôi sẽ sớm liên hệ lại với bạn !")
                 }
                 else {
                     alert("Lỗi")

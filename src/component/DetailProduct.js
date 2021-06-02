@@ -65,14 +65,14 @@ const DetailProduct = () => {
                                     <Link className="ps-shoe__overlay" to={`/detailProduct/${item._id}`}></Link>
                                 </div>
                                 <div className="ps-shoe__content">
-                                    <div className="ps-shoe__variants" style={{ width: '100%', display: 'flex', justifyContent: 'center' }}>
+                                    <div className="ps-shoe__variants" style={{ width: '100%' }}>
                                         <button
                                             onClick={() => {
                                                 dispatch(addCart(item));
                                                 dispatch(addCheckOut(item._id));
                                                 showButton()
                                             }}
-                                            style={{ border: 'none' }}
+                                            style={{ border: 'none',display:'flex',width:'100%',justifyContent:'center',padding:20,backgroundColor:'#242A61',color:'#fff'}}
                                         >Thêm vào giỏ hàng</button>
                                     </div>
                                     <div className="ps-shoe__detail"><a className="ps-shoe__name" href="#">{item.namePharmacy}</a>

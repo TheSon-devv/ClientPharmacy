@@ -1,12 +1,12 @@
 import React from 'react'
 import Footer from '../../component/Footer'
-import HeaderAreaFix from '../../component/Header/HeaderAreaFix'
+import HeaderArea from '../../component/Header/HeaderArea'
 import DetailDoctor from '../../component/DetailDoctor'
 
 const detailDoctorContainer = () => {
     return (
         <div>
-            <HeaderAreaFix />
+            <HeaderArea />
             <DetailDoctor />
             <Footer />
         </div>

@@ -76,7 +76,7 @@ const ProductList = () => {
                             <div className="ps-shoe mb-30">
                                 <div className="ps-shoe__thumbnail">
                                     {item.status === "New" ? (
-                                        <div className="ps-badge"><span>New</span></div>
+                                        <div className="ps-badge"><span>Mới</span></div>
                                     ) : null}
                                     {
                                         item.promotion ? (
