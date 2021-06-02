@@ -1,15 +1,53 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import '../css/style.css'
 import { changeStateChat, closeChat } from '../store/actions/chat'
+import MessengerCustomerChat from 'react-messenger-customer-chat';
+import axios from 'axios';
 
-const Chat = () => {
+const Chat = (props) => {
     const dispatch = useDispatch()
     const open = useSelector(state => state.chat.open)
+    const [messageSend, setMessageSend] = useState({
+        nameCustomer: localStorage.getItem('name') ? localStorage.getItem('name') : "",
+        phone: "",
+        information: ""
+    })
+    const handlerChange = (e) => {
+        setMessageSend({
+            ...messageSend,
+            [e.target.name]: e.target.value
+        })
+    }
 
-
+    const postMessage = () => {
+        const data = {
+            nameCustomer: messageSend.nameCustomer,
+            phone: messageSend.phone,
+            information: messageSend.information
+        }
+        console.log(data)
+        axios.post('http://localhost:4000/message', data)
+            .then(res => {
+                if (res.data.code === 200) {
+                    alert("Chúng tôi sẽ sớm liên hệ lại với bạn !")
+                }
+                else {
+                    alert("Lỗi")
+                }
+            })
+            .catch(err => console.log(err))
+    }
+    console.log(props,'props')
     return (
         <>
+            {/* <div className="chatBoxOpen">
+                <MessengerCustomerChat
+                    pageId="100567068919638"
+                    appId="969792837168056"
+                    htmlRef="<REF_STRING>"
+                />
+            </div> */}
 
             {
                 open ? (
@@ -17,7 +55,7 @@ const Chat = () => {
                         <div className="boxOpen">
                             <div className="boxTop" onClick={() => dispatch(closeChat())}>
                                 <div style={{ padding: '5px' }}>
-                                    <div>Hộp thoại liên hệ</div>
+                                    <div>Để lại thông tin cho chúng tôi !</div>
                                 </div>
                             </div>
 
@@ -28,7 +66,11 @@ const Chat = () => {
                                         Tên
                                     </div>
                                     <div className="col-10">
-                                        <input className="form-control" />
+                                        <input
+                                            name="nameCustomer"
+                                            className="form-control"
+                                            value={messageSend.nameCustomer}
+                                            onChange={handlerChange} />
                                     </div>
                                 </div>
 
@@ -37,7 +79,11 @@ const Chat = () => {
                                         SĐT
                                     </div>
                                     <div className="col-10">
-                                        <input className="form-control" />
+                                        <input
+                                            name="phone"
+                                            className="form-control"
+                                            value={messageSend.phone}
+                                            onChange={handlerChange} />
                                     </div>
                                 </div>
 
@@ -46,21 +92,27 @@ const Chat = () => {
                                         Bệnh lý cần tư vấn
                                     </div>
                                     <div className="col-12">
-                                        <textarea style={{ width: '100%' }} rows="5" className="form-control" />
+                                        <textarea
+                                            name="information"
+                                            style={{ width: '100%' }}
+                                            rows="5"
+                                            className="form-control"
+                                            value={messageSend.information}
+                                            onChange={handlerChange} />
                                     </div>
                                 </div>
 
                             </div>
 
                             <div className="customBtnInformation">
-                                <button>Gửi thông tin</button>
+                                <button onClick={postMessage}>Gửi thông tin</button>
                             </div>
                         </div>
                     </div>
                 ) : (
                     <div className="chatBox" onClick={() => dispatch(changeStateChat())}>
                         <div className="box">
-                            <i className="fa fa-comments" style={{fontSize:'40px'}}></i>
+                            <i className="fa fa-comments" style={{ fontSize: '40px' }}></i>
                         </div>
                     </div>
                 )

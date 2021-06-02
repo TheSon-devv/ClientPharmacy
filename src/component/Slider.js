@@ -17,7 +17,7 @@ import '../css/style.css'
 const Slider = () => {
     return (
         <>
-            <main
+            {/* <main
                 style={{ paddingBottom: 100, backgroundImage: `url(${anh_nen1})`, backgroundPosition: '500px 0', backgroundRepeat: 'no-repeat' }}>
                 <div className="row container" style={{ height: '100%', margin: '0 auto' }}>
                     <div className="col-md-5 col-sm-12 pt-50" >
@@ -39,8 +39,8 @@ const Slider = () => {
                     </div>
                 </div>
 
-            </main>
-            <main style={{ paddingBottom: 60, backgroundImage: `url(${anh_nen2})`, backgroundPosition: '200px 0', backgroundRepeat: 'no-repeat' }}>
+            </main> */}
+            <main style={{marginBottom:100,paddingBottom: 60, backgroundImage: `url(${anh_nen2})`, backgroundPosition: '200px 0', backgroundRepeat: 'no-repeat' }}>
                 <div className="row container" style={{ height: '100%', margin: '0 auto', marginTop: 100 }}>
                     <div className="col-md-8 col-sm-12 pt-50" >
                         <div className="title-section mb-md-5">

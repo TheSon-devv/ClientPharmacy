@@ -126,6 +126,10 @@
   align-items: center;
   padding: 20px 0;
 }
+.searchProduct {
+  justify-content: center;
+  align-items: center;
+}
 
 .detailTitle {
   font-weight: bold;
@@ -287,9 +291,20 @@
   position: relative;
 }
 
-.title-section h3 {
+.title-section h1 {
+  font-size: 50px;
+  color: rgb(0, 89, 131);
+  font-weight: bold;
+}
+.title-section h2 {
   font-size: 35px;
-  color: rgb(0, 145, 212);
+  color: rgb(0, 89, 131);
+  font-weight: bold;
+}
+.title-section h3 {
+
+  color: rgb(0, 89, 131);
+  font-weight: bold;
 }
 
 .title-section p {
@@ -341,7 +356,7 @@
 
 .customBtn button:hover {
   background-color: rgb(0, 145, 212);
-  transition: 0.5s all ease-in-out;
+  transition: 0.3s all ease-in-out;
 }
 
 .customBtnInformation button:hover {
@@ -5670,10 +5685,10 @@ textarea.form-control {
   font-family: "Archivo Narrow", sans-serif;
   padding: 5px 20px;
   font-size: 16px;
-  font-weight: 700;
+  font-weight: 500;
   line-height: 80px;
   text-transform: uppercase;
-  color: #000;
+  color: rgb(0, 89, 131);
 }
 
 .menu>li>a:before {
@@ -5688,7 +5703,7 @@ textarea.form-control {
   transform: translate(-50%, -50%);
   height: 30px;
   width: 100%;
-  background-color: #2AC37D;
+  background-color: #2ac395;
   z-index: -1;
   -webkit-transition: all 0.4s ease;
   -moz-transition: all 0.4s ease;

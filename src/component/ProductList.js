@@ -17,6 +17,8 @@ const ProductList = () => {
     const currentPage = useSelector(state => state.pagination.currentPage)
     const perPageList = useSelector(state => state.pagination.perPageList)
     const [show, setShow] = useState(false)
+    const [dataFilter, setDataFilter] = useState("")
+    const [search, setDataSearch] = useState("")
 
     const handleChangeType = (value) => {
         setTypePharmacy(value);
@@ -42,6 +44,7 @@ const ProductList = () => {
         }
         console.log('reload')
         getDataReload()
+        setDataSearch("")
     }, [typePharmacy])
 
 
@@ -59,7 +62,13 @@ const ProductList = () => {
         const pageSlice = dataReload.slice(indexFirstPost, indexLastPost)
         if (dataReload && dataReload.length) {
             let sttAcc = 0;
-            return pageSlice.map((item) => {
+            return pageSlice.filter(val => {
+                if (search === "") {
+                    return val
+                } else if (val.namePharmacy.toLowerCase().includes(search.toLowerCase())) {
+                    return val
+                }
+            }).map((item) => {
                 sttAcc++;
                 return (
                     <div className="grid-item kids col-md-3 col-sm-6 col-xs-6 px-3" key={item._id}>
@@ -174,8 +183,19 @@ const ProductList = () => {
             </div>
 
             <div className="col-md-9 col-sm-12 mb-20">
-                <div className="mb-30">
-                    <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
+                <div className="mb-50">
+                    <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                        <div className="searchProduct row">
+                            <div style={{ marginRight: '20px' }}>Tìm kiếm sản phẩm: </div>
+                            <input
+                                value={dataFilter}
+                                onChange={e => setDataFilter(e.target.value)}
+                                className="formControl"
+                            />
+                            <div className="ml-20">
+                                <button className="btn btn-info" onClick={() => setDataSearch(dataFilter)}>Tìm kiếm</button>
+                            </div>
+                        </div>
                         <PaginationTable />
                     </div>
                 </div>

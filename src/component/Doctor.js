@@ -6,7 +6,7 @@ import { changeStateChat } from '../store/actions/chat';
 import { useDispatch } from 'react-redux';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
-const Doctor = () => {
+const Doctor = (props) => {
     const dispatch = useDispatch();
     const [data, setData] = useState([])
     const [dataFilter, setDataFilter] = useState("")

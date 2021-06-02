@@ -31,7 +31,7 @@ const HeaderArea = () => {
             <header className="header px-2">
                 <nav className="navigation">
                     <div className="container-fluid row">
-                        <div className={showDrawer ? "navigation__column left" : "navigation__column left showX"}>
+                        <div className={showDrawer ? "navigation__column left" : "navigation__column left showX"} style={{ zIndex: 10, display: 'flex', justifyContent: 'center' }}>
                             <div className="header__logo ml-2">
                                 <a className="ps-logo" href="index.html"><img src={Logo} alt="" style={{ width: '65px', height: '60px' }} /></a>
 
@@ -115,7 +115,7 @@ const HeaderArea = () => {
                                 </li>
                             </ul>
                         </div>
-                        <div className="navigation__column right">
+                        <div className="navigation__column right" style={{ zIndex: 10, display: 'flex', justifyContent: 'center' }}>
                             {
                                 localStorage.getItem('userToken') !== null ? (
                                     <div className="row" style={{ justifyContent: 'flex-end' }}>
@@ -186,7 +186,9 @@ const HeaderArea = () => {
                                     :
                                     (
                                         <>
-                                            <button className="btn" style={{ backgroundColor: "rgb(48,101,193)", marginRight: '10px' }}><Link to="/signIn" style={{ textDecoration: 'none', color: '#fff' }}>Đăng nhập</Link></button>
+                                            <div style={{ marginTop: 25, marginRight: 10 }}>
+                                                <button style={{ backgroundColor: "rgb(48,101,193)", padding: '10px 15px', border: 'none', borderRadius: 30 }}><Link to="/signIn" style={{ textDecoration: 'none', color: '#fff' }}>Đăng nhập</Link></button>
+                                            </div>
                                             <div className="ps-cart">
                                                 <div className="ps-cart">
                                                     <a className="ps-cart__toggle" href="#">

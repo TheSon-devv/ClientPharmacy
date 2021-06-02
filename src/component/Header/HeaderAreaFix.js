@@ -1,11 +1,5 @@
 import React, { useEffect, useState } from 'react'
 import '../../css/style.css'
-// import '../css/plugins/revolution/css/navigation.css'
-// import '../css/plugins/owl-carousel/assets/owl.carousel.css'
-// import '../css/plugins/slick/slick/slick.css'
-// import '../css/plugins/Magnific-Popup/dist/magnific-popup.css'
-// import '../css/plugins/revolution/css/settings.css'
-// import '../css/plugins/revolution/css/layers.css'
 import { Link, Redirect } from "react-router-dom";
 import Logo from "../../asset/logo-app.png";
 import { useDispatch, useSelector } from 'react-redux';
@@ -14,6 +8,9 @@ import SideDrawer from '../SideDrawer/SideDrawer';
 import classes from "../SideDrawer/SideDrawer.module.css";
 import { deleteCart, reloadCart } from '../../store/actions/cart';
 import banner from "../../asset/banner.png";
+import bannerHomeHeader from "../../asset/bannerHomeHeader.svg";
+import bannerHotHeader2 from "../../asset/bannerHotHeader2.svg";
+import bacsy from "../../asset/bacsy.png";
 
 const HeaderAreaFix = () => {
     const dispatch = useDispatch()
@@ -31,15 +28,15 @@ const HeaderAreaFix = () => {
             <header className="header px-2">
                 <nav className="navigation">
                     <div className="container-fluid row">
-                        <div className={showDrawer ? "navigation__column left" : "navigation__column left showX"}>
+                        <div className={showDrawer ? "navigation__column left" : "navigation__column left showX"} style={{ zIndex: 10, display: 'flex', justifyContent: 'center' }}>
                             <div className="header__logo ml-2">
-                                <a className="ps-logo" href="index.html"><img src={Logo} alt="" style={{ width: '65px', height: '60px' }} /></a>
+                                <Link className="ps-logo" to="/"><img src={Logo} alt="" style={{ width: '65px', height: '60px' }} /></Link>
 
-                                <span style={{ color: 'blue', fontSize: 20, fontWeight: '600', marginLeft: 10 }}>Viet<span style={{ color: 'red' }}>Skin</span></span>
+                                <span style={{ color: 'blue', fontSize: 25, fontWeight: 'bold', marginLeft: 10 }}>Viet<span style={{ color: 'red',fontWeight: 'bold' }}>Skin</span></span>
 
                             </div>
                         </div>
-                        <div className="navigation__column center menu_hidden">
+                        <div className="navigation__column center menu_hidden" style={{ zIndex: 10 }}>
                             <ul className="main-menu menu">
                                 <li className="menu-item menu-item-has-children dropdown"><Link to="/" style={{ textDecoration: 'none' }}>Trang chủ</Link>
                                     {/* <ul className="sub-menu">
@@ -115,10 +112,10 @@ const HeaderAreaFix = () => {
                                 </li>
                             </ul>
                         </div>
-                        <div className="navigation__column right">
+                        <div className="navigation__column right" style={{ zIndex: 10 }}>
                             {
                                 localStorage.getItem('userToken') !== null ? (
-                                    <div className="row" style={{ justifyContent: 'flex-end' }}>
+                                    <div className="row" style={{ justifyContent: 'center' }}>
                                         <div className="menu_hidden">
                                             <ul className="main-menu menu">
                                                 <li className="menu-item menu-item-has-children dropdown" style={{ marginLeft: "-80px" }}>
@@ -142,12 +139,12 @@ const HeaderAreaFix = () => {
                                                 </li>
                                             </ul>
                                         </div>
-                                        <div className="ps-cart">
+                                        <div className="ps-cart" >
                                             <a className="ps-cart__toggle" href="#">
                                                 <span><i>{numberCart}</i></span><i className="fa fa-shopping-cart"></i>
                                             </a>
-                                            <div className="ps-cart__listing">
-                                                <div className="ps-cart__content">
+                                            <div className="ps-cart__listing" >
+                                                <div className="ps-cart__content" >
 
                                                     {
                                                         item.map((e, key) => {
@@ -190,9 +187,12 @@ const HeaderAreaFix = () => {
                                     :
                                     (
                                         <>
-                                            <button className="btn" style={{ backgroundColor: "rgb(48,101,193)", marginRight: '10px' }}><Link to="/signIn" style={{ textDecoration: 'none', color: '#fff' }}>Đăng nhập</Link></button>
-                                            <div className="ps-cart">
-                                                <div className="ps-cart">
+
+                                            <div style={{ display: 'flex', justifyContent: 'center' }}>
+                                                <div style={{marginTop:25, marginRight: 10}}>
+                                                    <button style={{backgroundColor: "rgb(48,101,193)",padding :'10px 15px',border:'none',borderRadius:30}}><Link to="/signIn" style={{ textDecoration: 'none', color: '#fff' }}>Đăng nhập</Link></button>
+                                                </div>
+                                                <div className="ps-cart" >
                                                     <a className="ps-cart__toggle" href="#">
                                                         <span><i>{numberCart}</i></span><i className="fa fa-shopping-cart"></i>
                                                     </a>
@@ -235,16 +235,40 @@ const HeaderAreaFix = () => {
                     </div>
                 </nav>
             </header>
-            <div className="header-services mb-3" style={{ backgroundColor: 'rgb(48,101,193)', zIndex: '10' }}>
+            {/* <div className="header-services mb-3" style={{ backgroundColor: 'rgb(48,101,193)', zIndex: '10' }}>
                 <div className="ps-services owl-slider" data-owl-auto="true" data-owl-loop="true" data-owl-speed="7000" data-owl-gap="0" data-owl-nav="true" data-owl-dots="false" data-owl-item="1" data-owl-item-xs="1" data-owl-item-sm="1" data-owl-item-md="1" data-owl-item-lg="1" data-owl-duration="1000" data-owl-mousedrag="on">
                     <p className="ps-service" style={{ color: "#fff" }}>
                         <i className="ps-icon-delivery"></i>
                         <strong style={{ color: "#fff" }}>Miễn phí vận chuyển</strong>: Ưu đãi dành riêng cho khách hàng thanh toán qua PalPay</p>
                 </div>
+            </div> */}
+            <div
+                style={{
+                    backgroundImage: `url(${bannerHomeHeader})`, height: '900px', backgroundRepeat: 'no-repeat', backgroundSize: 'cover',
+                    position: 'relative', backgroundPosition: 'center', margin: '-110px 0 80px 0', paddingTop: 200
+                }}>
+                <div style={{ position: 'absolute', left: 0, top: 0, right: 0, bottom: 0, backgroundImage: `url(${bannerHotHeader2})`, backgroundSize: '100% 100%', backgroundPosition: 'center' }}></div>
+                <div className="container row" style={{ height: '100%', margin: '0 auto', zIndex: 1000000 }} >
+                    <div className="col-md-5 col-sm-12 pt-50" >
+                        <div className="title-section mb-md-5">
+                            <h1 className="animate__animated animate__fadeInLeft">Chào mừng đến với VietSkin</h1>
+                        </div>
+                        <div className="title-section mb-4">
+                            <p className="animate__animated animate__fadeInLeft">Đội ngũ bác sĩ VietSkin là những bác sĩ chuyên khoa
+                        Phó giáo sư, Tiến sĩ, Thạc sĩ với trên 30 năm kinh nghiệm. Đều đang công tác và giảng dạy tại các bệnh viện uy tín hàng đầu Việt Nam.</p>
+                        </div>
+                        <div className="customBtn mt-70" >
+                            <button className="animate__animated animate__slow animate__bounce animate__infinite" >
+                                <Link to="/doctor" style={{ textDecoration: 'none', color: "black" }}>Xem chi tiết <i className="fa fa-arrow-right ml-3"></i></Link>
+                            </button>
+                        </div>
+                    </div>
+                    <div className="col-md-7 col-sm-12 animate__animated animate__fadeInRight">
+                        <img src={bacsy} alt="" />
+                    </div>
+                </div>
             </div>
-            <div className="banner" >
-                <img src={banner} className="bgBanner" alt="" />
-            </div>
+
         </div>
     )
 }

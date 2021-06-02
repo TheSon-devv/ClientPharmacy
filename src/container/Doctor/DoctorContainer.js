@@ -2,12 +2,12 @@ import React from 'react'
 import Chat from '../../component/Chat'
 import Doctor from '../../component/Doctor'
 import Footer from '../../component/Footer'
-import HeaderAreaFix from '../../component/Header/HeaderAreaFix'
-const DoctorContainer = () => {
+import HeaderArea from '../../component/Header/HeaderArea'
+const DoctorContainer = (props) => {
     return (
         <div>
-            <HeaderAreaFix />
-            <Doctor />
+            <HeaderArea />
+            <Doctor {...props}/>
             <Footer />
             <Chat />
         </div>

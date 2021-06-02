@@ -2,30 +2,16 @@ import React from 'react'
 import '../css/style.css'
 import { Link } from "react-router-dom";
 import imgSignUp from "../asset/imgSignUp.png";
+import bannerFooter from "../asset/bannerFooter.svg";
 
 const Footer = () => {
     return (
         <>
-            {/* <div className="ps-subscribe">
-                <div className="ps-container">
-                    <div className="row">
-                        <div className="col-lg-3 col-md-12 col-sm-12 col-xs-12 ">
-                            <h3><i className="fa fa-envelope"></i>Đăng ký tài khoản</h3>
-                        </div>
-                        <div className="col-lg-5 col-md-7 col-sm-12 col-xs-12 ">
-                            <form className="ps-subscribe__form">
-                                <input className="form-control" type="text" placeholder="" />
-                                <button><Link to="/signUp" style={{textDecoration:'none',color:'#fff'}}>Đăng ký ngay</Link></button>
-                            </form>
-                        </div>
-                        <div className="col-lg-4 col-md-5 col-sm-12 col-xs-12 ">
-                            <p>...tặng <span> 200.000 </span> cho lần đầu tiên mua sắm.</p>
-                        </div>
-                    </div>
-                </div>
-            </div> */}
+            <div style={{ height: 200, backgroundSize: '100% auto', backgroundImage: `url(${bannerFooter})`, backgroundPosition: '0 0', backgroundRepeat: 'no-repeat' }}>
 
-            <div className="ps-footer" style={{backgroundColor:'#242a61'}}>
+            </div>
+
+            <div className="ps-footer" style={{ backgroundColor: '#242a61' }}>
                 <div className="ps-footer__content">
                     <div className="ps-container">
                         <div className="row">
@@ -37,8 +23,8 @@ const Footer = () => {
                                     <footer>
                                         <p><strong>Số 3 Ngõ 152 P. Phương Liệt, Phương Liệt, Thanh Xuân, Hà Nội</strong></p>
                                         <p>Email: <a href='mailto:support@store.com'>vietskin@gmail.com</a></p>
-                                        <p>Phone: 036.678.2288</p>
-                                        
+                                        <p>Điện thoại: 036.678.2288</p>
+
                                     </footer>
                                 </aside>
                             </div>
@@ -50,7 +36,7 @@ const Footer = () => {
                                     <footer>
                                         <p><strong>235 Hoàng Quốc Việt, Hà Nội</strong></p>
                                         <p>Email: <a href='mailto:support@store.com'>luudinhkien@gmail.com</a></p>
-                                        <p>Phone: 032.142.2512</p>
+                                        <p>Điện thoại: 032.142.2512</p>
                                     </footer>
                                 </aside>
                             </div>
@@ -76,10 +62,10 @@ const Footer = () => {
                                     </header>
                                     <footer>
                                         <ul className="ps-list--line">
-                                            <li><a href="#">Các sản phẩm bán chạy</a></li>
-                                            <li><a href="#">Giới thiệu về chúng tôi</a></li>
-                                            <li><a href="#">Chính sách đảm bảo</a></li>
-                                            <li><a href="#">Vận chuyển nhanh chóng</a></li>
+                                            <li><Link to="/productList" style={{ textDecoration: 'none' }}>Các sản phẩm bán chạy</Link></li>
+                                            <li><Link to="/productList" style={{ textDecoration: 'none' }}>Giới thiệu về chúng tôi</Link></li>
+                                            <li><Link to="/productList" style={{ textDecoration: 'none' }}>Chính sách đảm bảo</Link></li>
+                                            <li><Link to="/productList" style={{ textDecoration: 'none' }}>Vận chuyển nhanh chóng</Link></li>
                                         </ul>
                                     </footer>
                                 </aside>
@@ -91,10 +77,10 @@ const Footer = () => {
                                     </header>
                                     <footer>
                                         <ul className="ps-list--line">
-                                            <li><a href="#">Tự chuẩn đoán</a></li>
-                                            <li><a href="#">Tin tức</a></li>
-                                            <li><a href="#">Bệnh da liễu</a></li>
-                                            <li><a href="#">Chăm sóc da</a></li>
+                                            <li><Link to="/productList" style={{ textDecoration: 'none' }}>Tự chuẩn đoán</Link></li>
+                                            <li><Link to="/blog" style={{ textDecoration: 'none' }}>Tin tức</Link></li>
+                                            <li><Link to="/productList" style={{ textDecoration: 'none' }}>Bác sỹ</Link></li>
+                                            <li><Link to="/contact" style={{ textDecoration: 'none' }}>Liên hệ</Link></li>
                                         </ul>
                                     </footer>
                                 </aside>
@@ -110,10 +96,8 @@ const Footer = () => {
                             </div>
                             <div className="col-lg-6 col-md-6 col-sm-6 col-xs-12 ">
                                 <ul className="ps-social">
-                                    <li><a style={{color:'#fff'}} href="https://www.facebook.com/bacsidalieuvietskin/" target="_blank"><i className="fa fa-facebook"></i></a></li>
-                                    <li><a style={{color:'#fff'}} href="#"><i className="fa fa-google-plus"></i></a></li>
-                                    <li><a style={{color:'#fff'}} href="#"><i className="fa fa-twitter"></i></a></li>
-                                    <li><a style={{color:'#fff'}} href="#"><i className="fa fa-instagram"></i></a></li>
+                                    <li style={{ color: '#fff' }}>Liên hệ với chúng tôi </li>
+                                    <li><a style={{ color: '#fff' }} href="https://www.facebook.com/bacsidalieuvietskin/" target="_blank"><i className="fa fa-facebook"></i></a></li>
                                 </ul>
                             </div>
                         </div>
