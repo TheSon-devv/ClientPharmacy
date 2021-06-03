@@ -73,15 +73,10 @@ const Footer = () => {
                             <div className="col-lg-3 col-md-3 col-sm-12 col-xs-12">
                                 <aside className="ps-widget--footer ps-widget--link">
                                     <header>
-                                        <h3 className="ps-widget__title">Nổi bật</h3>
+                                        <h3 className="ps-widget__title">Kết nối với chúng tôi</h3>
                                     </header>
                                     <footer>
-                                        <ul className="ps-list--line">
-                                            <li><Link to="/productList" style={{ textDecoration: 'none' }}>Tự chuẩn đoán</Link></li>
-                                            <li><Link to="/blog" style={{ textDecoration: 'none' }}>Tin tức</Link></li>
-                                            <li><Link to="/productList" style={{ textDecoration: 'none' }}>Bác sỹ</Link></li>
-                                            <li><Link to="/contact" style={{ textDecoration: 'none' }}>Liên hệ</Link></li>
-                                        </ul>
+                                    <div class="fb-page" data-href="https://www.facebook.com/bacsidalieuvietskin/" data-tabs="" data-width="" data-height="" data-small-header="false" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"><blockquote cite="https://www.facebook.com/bacsidalieuvietskin/" class="fb-xfbml-parse-ignore"><a href="https://www.facebook.com/bacsidalieuvietskin/">Bác sĩ da liễu VietSkin</a></blockquote></div>
                                     </footer>
                                 </aside>
                             </div>
@@ -95,15 +90,13 @@ const Footer = () => {
                                 <p>&copy; <a href="#">VIETSKIN</a>, Inc. Tất cả đều được cho phép. Thiết kế bởi<a href="#"> Kien </a></p>
                             </div>
                             <div className="col-lg-6 col-md-6 col-sm-6 col-xs-12 ">
-                                <ul className="ps-social">
-                                    <li style={{ color: '#fff' }}>Liên hệ với chúng tôi </li>
-                                    <li><a style={{ color: '#fff' }} href="https://www.facebook.com/bacsidalieuvietskin/" target="_blank"><i className="fa fa-facebook"></i></a></li>
-                                </ul>
+                            
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
+
         </>
     )
 }
