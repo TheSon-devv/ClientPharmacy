@@ -28,7 +28,7 @@ export const orderSucces = (payload) => {
 
 export const getOrder = (userId) => {
     return dispatch => {
-        axios.get(`http://localhost:4000/checkout/${userId}`,headerAuthorization())
+        axios.get(`https://vietskin.herokuapp.com/checkout/${userId}`,headerAuthorization())
             .then(res => {
                 console.log(res.data.getCheckout)
                 dispatch(orderSucces(res.data.getCheckout))
@@ -39,7 +39,7 @@ export const getOrder = (userId) => {
 
 export const getProduct = () => {
     return dispatch => {
-        axios.get('http://localhost:4000/pharmacy')
+        axios.get('https://vietskin.herokuapp.com/pharmacy')
             .then(res => {
                 dispatch(Success(res.data.getPharmacy))
             })
@@ -49,7 +49,7 @@ export const getProduct = () => {
 
 export const getTypeProduct = () => {
     return dispatch => {
-        axios.get(`http://localhost:4000/typePharmacy`)
+        axios.get(`https://vietskin.herokuapp.com/typePharmacy`)
             .then(res => {
                 if (res.data.code === 200) {
                     dispatch(TypeProduct(res.data.getTypePharmacy))

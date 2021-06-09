@@ -90,18 +90,18 @@ const SignIn = ({ ...props }) => {
         dispatch(authFail(""))
     }, [dispatch])
 
-    const responseFacebook = (res) => {
-        console.log(res);
-        const expriesTime = new Date(new Date().getTime() + (res.expiresIn * 100))
-        localStorage.setItem('userToken', res.accessToken);
-        localStorage.setItem('expiresIn', expriesTime);
-        localStorage.setItem('userId', res.userID);
-        localStorage.setItem('email', res.email);
-        localStorage.setItem('name', res.name);
+    // const responseFacebook = (res) => {
+    //     console.log(res);
+    //     const expriesTime = new Date(new Date().getTime() + (res.expiresIn * 100))
+    //     localStorage.setItem('userToken', res.accessToken);
+    //     localStorage.setItem('expiresIn', expriesTime);
+    //     localStorage.setItem('userId', res.userID);
+    //     localStorage.setItem('email', res.email);
+    //     localStorage.setItem('name', res.name);
 
-        dispatch(authSuccess(res.accessToken, res.userID));
-        dispatch(authLogOut(res.expiresIn));
-    }
+    //     dispatch(authSuccess(res.accessToken, res.userID));
+    //     dispatch(authLogOut(res.expiresIn));
+    // }
 
     return (
         <>
@@ -157,7 +157,7 @@ const SignIn = ({ ...props }) => {
                                 <div style={{fontSize:16,marginRight:10}}>
                                     Hoặc
                                 </div>
-                                <FacebookLogin
+                                {/* <FacebookLogin
                                     appId="969792837168056"
                                     // autoLoad={true}
                                     fields="name,email,picture"
@@ -165,7 +165,7 @@ const SignIn = ({ ...props }) => {
                                     render={renderProps => (
                                         <button className="btnFB" onClick={renderProps.onClick}>Đăng nhập bằng Facebook</button>
                                     )}
-                                />
+                                /> */}
                             </div>
 
                             <div style={{ width: '100%', height: 380 }}>

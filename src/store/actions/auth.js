@@ -49,7 +49,7 @@ export const auth = (email, password) => {
             email: email,
             password: password
         }
-        axios.post(`http://localhost:4000/customer/login`, authData)
+        axios.post(`https://vietskin.herokuapp.com/customer/login`, authData)
             .then(res => {
                 if (res.data.code === 200) {
                     console.log(res.data);

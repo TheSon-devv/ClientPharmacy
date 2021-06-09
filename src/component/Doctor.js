@@ -12,7 +12,7 @@ const Doctor = (props) => {
     const [dataFilter, setDataFilter] = useState("")
     const [search, setDataSearch] = useState("")
     useEffect(() => {
-        axios.get('http://localhost:4000/doctor')
+        axios.get('https://vietskin.herokuapp.com/doctor')
             .then(res => {
                 console.log(res.data)
                 setData(res.data.getDoctor)

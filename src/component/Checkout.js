@@ -47,7 +47,7 @@ const Checkout = () => {
             totalPrice: totalCartCheckout,
             details: listCheckout
         }
-        axios.post(`http://localhost:4000/checkout`, data, headerAuthorization())
+        axios.post(`https://vietskin.herokuapp.com/checkout`, data, headerAuthorization())
             .then(res => {
                 console.log(res.data.saveCheckout);
                 alert('Thanh toán thành công ! Tiếp tục mua sắm nhé')
