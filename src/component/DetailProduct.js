@@ -18,12 +18,12 @@ const DetailProduct = () => {
     const dataProduct = useSelector(state => state.cart.listProduct)
     const [show, setShow] = useState(false)
     useEffect(() => {
-        axios.get(`https://vietskin.herokuapp.com/pharmacy/${id.id}`)
+        axios.get(`http://localhost:4000/pharmacy/${id.id}`)
             .then(res => {
                 setData(res.data.data)
             })
             .catch(err => console.log(err))
-        axios.get(`https://vietskin.herokuapp.com/pharmacy/topSale`)
+        axios.get(`http://localhost:4000/pharmacy/topSale`)
             .then(res => {
                 console.log(res.data)
             })

@@ -11,7 +11,7 @@ const Doctor = () => {
     const id = useParams();
     const [dataDetail, setDataDetail] = useState([])
     useEffect(() => {
-        axios.get(`https://vietskin.herokuapp.com/doctor/${id.id}`)
+        axios.get(`http://localhost:4000/doctor/${id.id}`)
             .then(res => {
                 console.log(res.data)
                 setDataDetail(res.data.data)
