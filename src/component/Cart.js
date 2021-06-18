@@ -69,7 +69,9 @@ const Cart = () => {
                                     <button className="ps-btn ps-btn--gray" onClick={() => history.push('/')}>Tiếp tục mua sắm</button>
                                 </div>
                             </div>
-                            <div className="ps-cart__total" onClick={() => dispatch(getTotalCart(Number(TotalCart).toFixed(2)))}>
+                            <div className="ps-cart__total" onClick={() => {
+                                dispatch(getTotalCart(Number(TotalCart).toFixed(2)));
+                                }}>
                                 <h3>Tổng tiền: <span>{Number(TotalCart).toFixed(2)} $</span></h3>
                                 <Link
                                     className="ps-btn"

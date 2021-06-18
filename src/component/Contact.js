@@ -58,7 +58,7 @@ const Contact = () => {
                                         </header>
                                         <footer>
                                             <p><i className="fa fa-map-marker"></i> 235 Hoàng Quốc Việt - Hà Nội</p>
-                                            <p><i className="fa fa-envelope-o"></i><a href="mailto@supportShoes@shoes.net">luudinhkien@gmail.com</a></p>
+                                            <p><i className="fa fa-envelope-o"></i><a href="mailto@supportShoes@shoes.net">thesonk7@gmail.com</a></p>
                                             <p><i className="fa fa-phone"></i> 032.142.2512</p>
                                         </footer>
                                     </div>

@@ -7,9 +7,7 @@ import bannerFooter from "../asset/bannerFooter.svg";
 const Footer = () => {
     return (
         <>
-            <div style={{ height: 200, backgroundSize: '100% auto', backgroundImage: `url(${bannerFooter})`, backgroundPosition: '0 0', backgroundRepeat: 'no-repeat' }}>
-
-            </div>
+            <div className="hideFooter"></div>
 
             <div className="ps-footer" style={{ backgroundColor: '#242a61' }}>
                 <div className="ps-footer__content">
@@ -35,7 +33,7 @@ const Footer = () => {
                                     </header>
                                     <footer>
                                         <p><strong>235 Hoàng Quốc Việt, Hà Nội</strong></p>
-                                        <p>Email: <a href='mailto:support@store.com'>luudinhkien@gmail.com</a></p>
+                                        <p>Email: <a href='mailto:support@store.com'>thesonk7@gmail.com</a></p>
                                         <p>Điện thoại: 032.142.2512</p>
                                     </footer>
                                 </aside>
@@ -76,7 +74,7 @@ const Footer = () => {
                                         <h3 className="ps-widget__title">Kết nối với chúng tôi</h3>
                                     </header>
                                     <footer>
-                                    <div class="fb-page" data-href="https://www.facebook.com/bacsidalieuvietskin/" data-tabs="" data-width="" data-height="" data-small-header="false" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"><blockquote cite="https://www.facebook.com/bacsidalieuvietskin/" class="fb-xfbml-parse-ignore"><a href="https://www.facebook.com/bacsidalieuvietskin/">Bác sĩ da liễu VietSkin</a></blockquote></div>
+                                        <div className="fb-page" data-href="https://www.facebook.com/bacsidalieuvietskin/" data-tabs="" data-width="" data-height="" data-small-header="false" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"><blockquote cite="https://www.facebook.com/bacsidalieuvietskin/" className="fb-xfbml-parse-ignore"><a href="https://www.facebook.com/bacsidalieuvietskin/">Bác sĩ da liễu VietSkin</a></blockquote></div>
                                     </footer>
                                 </aside>
                             </div>
@@ -87,10 +85,10 @@ const Footer = () => {
                     <div className="ps-container">
                         <div className="row">
                             <div className="col-lg-6 col-md-6 col-sm-6 col-xs-12 ">
-                                <p>&copy; <a href="#">VIETSKIN</a>, Inc. Tất cả đều được cho phép. Thiết kế bởi<a href="#"> Kien </a></p>
+                                <p>&copy; <a href="#">VIETSKIN</a>, Inc. Tất cả đều được cho phép. Thiết kế bởi<a href="#"> Son - Hieu </a></p>
                             </div>
                             <div className="col-lg-6 col-md-6 col-sm-6 col-xs-12 ">
-                            
+
                             </div>
                         </div>
                     </div>

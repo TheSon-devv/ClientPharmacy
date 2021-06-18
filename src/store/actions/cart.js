@@ -88,9 +88,16 @@ export const getTotalCart = (payload) => {
         payload
     }
 }
+
 export const reloadCart = () => {
     return {
         type: actionType.RELOAD_CART
+    }
+}
+
+export const saveCart = () => {
+    return {
+        type: actionType.SAVE_CART
     }
 }
 

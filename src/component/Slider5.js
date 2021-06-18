@@ -9,10 +9,9 @@ import '../css/style.css'
 const Slider5 = () => {
     return (
         <>
-            <main
-                style={{ paddingBottom: 100}}>
-                <div className="row" style={{position:'relative',marginLeft:'30px',marginRight:'-20px',paddingBottom:200}}>
-                    <div className="col-md-5 col-sm-12 " style={{marginTop:400}}>
+            <main className="noWrap">
+                <div className="row " style={{position:'relative',marginLeft:'30px',marginRight:'-20px',paddingBottom:200}}>
+                    <div className="col-lg-5 col-md-12 col-sm-12 titleSupport">
                         <div className="title-section mb-md-5">
                             <h1 className="animate__animated animate__fadeInLeft">Bạn cảm thấy không khỏe ?</h1>
                             <h1 className="animate__animated animate__fadeInLeft">Hãy để VietSkin chăm sóc cho bạn !</h1>
@@ -22,7 +21,7 @@ const Slider5 = () => {
                         </div>
                         
                     </div>
-                    <div className="col-md-7 col-sm-12 pt-20 " style={{position:'absolute',top:0,right:0}}>
+                    <div className="col-lg-7 col-md-12 col-sm-12 pt-20 hide" style={{position:'absolute',top:0,right:0}}>
                         <img src={well} alt="" style={{height:'1000px'}}/>
                     </div>
                 </div>

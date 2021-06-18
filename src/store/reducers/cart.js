@@ -1,4 +1,6 @@
 import * as actions from "../actions/actionType";
+import axios from "axios";
+import { headerAuthorization } from "../../header";
 
 const initState = {
     listCart: [],
@@ -11,9 +13,9 @@ const initState = {
     handling: 1.00,
     shipping_discount: 1,
     listCartPaypal: [],
-    listOrder : [],
-    loading : false,
-    quantityCheckout : 0
+    listOrder: [],
+    loading: false,
+    quantityCheckout: 0
 }
 
 export const cart = (state = initState, action) => {
@@ -22,6 +24,68 @@ export const cart = (state = initState, action) => {
             return {
                 ...state,
                 listProduct: [...action.payload]
+            }
+        case actions.SAVE_CART:
+            if (localStorage.getItem('idCart') === null) {
+                let dataCart = {
+                    userId: localStorage.getItem('userId'),
+                    listCart: state.listCart,
+                    listCartPaypal: state.listCartPaypal,
+                    listCheckout: state.listCheckout,
+                    numberCart: state.numberCart,
+                }
+                axios.post(`http://localhost:4000/cart`, dataCart)
+                    .then(res => {
+                        const { _id } = res.data.saveCart;
+                        console.log(res.data, 'post');
+                        console.log(_id, '_id');
+                        localStorage.setItem('idCart', _id);
+                    })
+                    .catch(err => console.log(err))
+            }
+            if (localStorage.getItem('idCart')) {
+                let dataCart = {
+                    userId: localStorage.getItem('userId'),
+                    listCart: state.listCart,
+                    listCartPaypal: state.listCartPaypal,
+                    listCheckout: state.listCheckout,
+                    numberCart: state.numberCart,
+                }
+                axios.put(`http://localhost:4000/cart/${localStorage.getItem('idCart')}`, dataCart)
+                    .then(res => {
+                        console.log(res.data, 'put')
+                    })
+                    .catch(err => console.log(err))
+            }
+
+            return {
+                ...state,
+                numberCart: state.listCart.length
+            }
+        case actions.SET_LIST_CART:
+
+            axios.get(`http://localhost:4000/cart/${localStorage.getItem('userId')}`)
+                .then(res => {
+                    const { getCart } = res.data;
+                    const { _id, listCart, listCartPaypal, listCheckout, numberCart } = getCart;
+                    let fakeNumberCart = numberCart;
+                    console.log(getCart, 'asdas')
+                    console.log(...listCart, 'listCart')
+                    console.log(numberCart, 'listCart')
+                    if (res.data.code === 200) {
+                        if (getCart !== null) {
+                            state.listCart.push(...listCart);
+                            state.listCartPaypal.push(...listCartPaypal);
+                            state.listCheckout.push(...listCheckout);
+                            localStorage.setItem('idCart', _id)
+                        }
+                        state.listCart = []
+                    }
+                })
+                .catch(err => console.log(err))
+
+            return {
+                ...state
             }
         case actions.GET_ORDER:
             return {
@@ -117,7 +181,7 @@ export const cart = (state = initState, action) => {
         case actions.GET_NUMBER_CART:
             return {
                 ...state,
-                // numberCart : state.listCart.length 
+                numberCart: state.listCart.length
             }
         case actions.GET_TOTAL_CART:
             return {
@@ -125,13 +189,25 @@ export const cart = (state = initState, action) => {
                 totalCart: action.payload
             }
         case actions.RELOAD_CART:
+            let dataCart = {
+                userId: localStorage.getItem('userId'),
+                listCart: [],
+                listCartPaypal: [],
+                listCheckout: [],
+                numberCart: 0,
+            }
+            axios.put(`http://localhost:4000/cart/${localStorage.getItem('idCart')}`, dataCart)
+                .then(res => {
+                    console.log(res.data, 'put')
+                })
+                .catch(err => console.log(err))
             return {
                 ...state,
                 listCart: [],
                 numberCart: 0,
                 listCheckout: [],
                 listCartPaypal: [],
-                quantityCheckout : 0
+                quantityCheckout: 0
             }
         case actions.INCREASE_QUANTITY:
             state.listCart[action.payload].quantity++;

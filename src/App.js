@@ -23,7 +23,7 @@ function App() {
 
   useEffect(() => {
     dispatch(authCheckState())
-  }, [])
+  }, [dispatch])
   let router = (
     <Switch>
       <Route exact path="/" component={Home} />
@@ -35,6 +35,7 @@ function App() {
       <Route path="/blog" component={BlogContainer} />
       <Route path="/contact" component={ContactContainer} />
       <Route path="/doctor" component={DoctorContainer} />
+      <Route path="/productList" component={ProductListContainer} />
       <Redirect to="/signIn" />
     </Switch>
   )

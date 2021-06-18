@@ -60,26 +60,29 @@ export default function Paypal() {
                 onApprove: async (data, actions) => {
                     const order = await actions.order.capture();
                     console.log(order);
+
                     if (order.status === "COMPLETED") {
                         const data = {
                             userId: localStorage.getItem('userId'),
                             quantity: quantityCheckout,
                             totalPrice: totalCartPayPal,
                             details: listCheckout,
-                            checkoutPaypal : "PayPal"
+                            checkoutPaypal: "PayPal",
+                            nameCustomer: localStorage.getItem('name')
                         }
                         axios.post(`http://localhost:4000/checkout`, data, headerAuthorization())
                             .then(res => {
                                 console.log(res.data.saveCheckout);
+                                alert('Thanh toán thành công ! Tiếp tục mua sắm nhé')
+                                dispatch(reloadCart())
                             })
                             .catch(err => console.log(err))
-                        alert('Thanh toán thành công ! Tiếp tục mua sắm nhé')
-                        dispatch(reloadCart())
                         history.push('/')
                     }
                     else {
                         alert("Thanh toán thất bại !")
                     }
+
                 },
                 onError: (err) => {
                     alert("Thanh toán thất bại !")

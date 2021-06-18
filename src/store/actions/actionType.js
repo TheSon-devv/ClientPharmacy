@@ -21,6 +21,8 @@ export const DELETE_CART = 'DELETE_CART';
 export const GET_NUMBER_CART = 'GET_NUMBER_CART';
 export const GET_TOTAL_CART = 'GET_TOTAL_CART';
 export const RELOAD_CART = 'RELOAD_CART';
+export const SAVE_CART = 'SAVE_CART';
+export const SET_LIST_CART = 'SET_LIST_CART';
 
 //Pagination
 export const TOTAL_PAGE = 'TOTAL_PAGE';

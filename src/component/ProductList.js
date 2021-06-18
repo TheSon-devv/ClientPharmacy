@@ -29,9 +29,9 @@ const ProductList = () => {
         dispatch(getTypeProduct())
         dispatch(getProduct())
         dispatch(getPage(1))
-        const getDataReload = () => {
+        const getDataReload = async () => {
             if (typePharmacy) {
-                axios.get(`http://localhost:4000/typePharmacy/${typePharmacy}`)
+                await axios.get(`http://localhost:4000/typePharmacy/${typePharmacy}`)
                     .then(res => {
                         // console.log(typePharmacy, 'typePharmacy');
                         setDataReload(res.data.getTypePharmacy)
@@ -71,7 +71,7 @@ const ProductList = () => {
             }).map((item) => {
                 sttAcc++;
                 return (
-                    <div className="grid-item kids col-md-3 col-sm-6 col-xs-6 px-3" key={item._id}>
+                    <div className="grid-item kids col-lg-3 col-sm-6 col-xs-6 px-3" key={item._id} style={{zIndex:1}}>
                         <div className="grid-item__content-wrapper">
                             <div className="ps-shoe mb-30">
                                 <div className="ps-shoe__thumbnail">
@@ -153,7 +153,7 @@ const ProductList = () => {
             {
                 show ? <AddSuccess title="Đã thêm vào giỏ hàng !" /> : null
             }
-            <div className="col-md-3 col-sm-12 col-xs-12">
+            <div className="col-lg-3 col-md-12 col-sm-12 col-xs-12">
                 <div className="ps-sidebar" data-mh="product-listing">
                     <aside className="ps-widget--sidebar ps-widget--category">
                         <div className="ps-widget__header">
@@ -182,7 +182,7 @@ const ProductList = () => {
                 </div>
             </div>
 
-            <div className="col-md-9 col-sm-12 mb-20">
+            <div className="col-lg-9 col-md-12 col-sm-12 mb-20">
                 <div className="mb-50">
                     <div style={{ display: 'flex', justifyContent: 'space-between' }}>
                         <div className="searchProduct row">

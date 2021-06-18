@@ -14,9 +14,10 @@ import { useForm } from "react-hook-form";
 import { Button } from "@material-ui/core";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
-import { auth, authFail, authLogOut, authSuccess } from "../../store/actions/auth";
+import { auth, authFail, authLogOut, authSuccess, getNumberCart, setListCart } from "../../store/actions/auth";
 
 import FacebookLogin from 'react-facebook-login/dist/facebook-login-render-props'
+import { reloadCart, saveCart } from "../../store/actions/cart";
 
 function Copyright() {
     return (
@@ -85,23 +86,29 @@ const SignIn = ({ ...props }) => {
 
     const onSubmit = data => {
         dispatch(auth(data.email, data.password))
+        dispatch(reloadCart())
     }
     useEffect(() => {
         dispatch(authFail(""))
     }, [dispatch])
 
-    // const responseFacebook = (res) => {
-    //     console.log(res);
-    //     const expriesTime = new Date(new Date().getTime() + (res.expiresIn * 100))
-    //     localStorage.setItem('userToken', res.accessToken);
-    //     localStorage.setItem('expiresIn', expriesTime);
-    //     localStorage.setItem('userId', res.userID);
-    //     localStorage.setItem('email', res.email);
-    //     localStorage.setItem('name', res.name);
+    const responseFacebook = (res) => {
+        console.log(res);
+        const expriesTime = new Date(new Date().getTime() + (res.expiresIn * 100))
+        localStorage.setItem('userToken', res.accessToken);
+        localStorage.setItem('expiresIn', expriesTime);
+        localStorage.setItem('userId', res.userID);
+        localStorage.setItem('email', res.email);
+        localStorage.setItem('name', res.name);
 
-    //     dispatch(authSuccess(res.accessToken, res.userID));
-    //     dispatch(authLogOut(res.expiresIn));
-    // }
+        dispatch(authSuccess(res.accessToken, res.userID));
+        dispatch(authLogOut(res.expiresIn));
+        dispatch(reloadCart())
+        dispatch(setListCart())
+        setTimeout(() => {
+            dispatch(getNumberCart())
+        },1000)
+    }
 
     return (
         <>
@@ -152,36 +159,35 @@ const SignIn = ({ ...props }) => {
                             <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
                                 <p>Bạn chưa có tài khoản ?<Link to="/signUp" style={{ textDecoration: 'none' }}> Đăng ký tại đây</Link></p>
                             </div>
-
-                            <div style={{ display: 'flex', justifyContent: 'center' ,alignItems:'center'}}>
-                                <div style={{fontSize:16,marginRight:10}}>
-                                    Hoặc
-                                </div>
-                                {/* <FacebookLogin
-                                    appId="969792837168056"
-                                    // autoLoad={true}
-                                    fields="name,email,picture"
-                                    callback={responseFacebook}
-                                    render={renderProps => (
-                                        <button className="btnFB" onClick={renderProps.onClick}>Đăng nhập bằng Facebook</button>
-                                    )}
-                                /> */}
-                            </div>
-
-                            <div style={{ width: '100%', height: 380 }}>
-                                {
-                                    error !== null ? (
-                                        <div style={{ display: 'flex', justifyContent: 'center', paddingTop: 50 }}>
-                                            <p style={{ color: 'red', fontWeight: '700', fontSize: 18 }}>{error}</p>
-                                        </div>
-                                    ) : null
-                                }
-                            </div>
-                            <Box mt={5}>
-                                <Copyright />
-                            </Box>
                         </form>
+                        <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+                            <div style={{ fontSize: 16, marginRight: 10 }}>
+                                Hoặc
+                                </div>
+                            <FacebookLogin
+                                appId="969792837168056"
+                                autoLoad={true}
+                                fields="name,email,picture"
+                                callback={responseFacebook}
+                                render={renderProps => (
+                                    <button className="btnFB" onClick={renderProps.onClick}>Đăng nhập bằng Facebook</button>
+                                )}
+                            />
+                        </div>
 
+                        <div style={{ width: '100%', height: 380 }}>
+                            {
+                                error !== null ? (
+                                    <div style={{ display: 'flex', justifyContent: 'center', paddingTop: 50 }}>
+                                        <p style={{ color: 'red', fontWeight: '700', fontSize: 18 }}>{error}</p>
+                                    </div>
+                                ) : null
+                            }
+                        </div>
+
+                        <Box mt={5}>
+                            <Copyright />
+                        </Box>
                     </div>
                 </Grid>
             </Grid>

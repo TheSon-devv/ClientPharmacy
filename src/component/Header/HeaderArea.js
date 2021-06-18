@@ -12,7 +12,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { authLogOut, logOut } from '../../store/actions/auth';
 import SideDrawer from '../SideDrawer/SideDrawer';
 import classes from "../SideDrawer/SideDrawer.module.css";
-import { deleteCart, reloadCart } from '../../store/actions/cart';
+import { deleteCart, reloadCart, saveCart } from '../../store/actions/cart';
 import banner from "../../asset/banner.png";
 
 const HeaderArea = () => {
@@ -136,43 +136,45 @@ const HeaderArea = () => {
                                                         }}>
                                                             <Link to="/" style={{ textDecoration: 'none' }}>
                                                                 Đăng xuất
-                                                        </Link>
+                                                            </Link>
                                                         </li>
                                                     </ul>
                                                 </li>
                                             </ul>
                                         </div>
-                                        <div className="ps-cart">
+                                        <div className="ps-cart" >
                                             <a className="ps-cart__toggle" href="#">
                                                 <span><i>{numberCart}</i></span><i className="fa fa-shopping-cart"></i>
                                             </a>
-                                            <div className="ps-cart__listing">
-                                                <div className="ps-cart__content">
+                                            <div className="ps-cart__listing" >
+                                                <div className="ps-cart__content" >
 
                                                     {
-                                                        item.map((e, key) => {
-                                                            return (
-                                                                <div className="ps-cart-item" key={e._id}>
-                                                                    <div className="ps-cart-item__close" onClick={() => dispatch(deleteCart(key))}></div>
-                                                                    <div className="ps-cart-item__thumbnail">
-                                                                        <a href="#"></a><img src={e.pharmacyImage} alt="" />
+                                                        item && item.length ? (
+                                                            item.map((e, key) => {
+                                                                return (
+                                                                    <div className="ps-cart-item" key={e._id}>
+                                                                        <div className="ps-cart-item__close" onClick={() => dispatch(deleteCart(key))}></div>
+                                                                        <div className="ps-cart-item__thumbnail">
+                                                                            <a href="#"></a><img src={e.pharmacyImage} alt="" />
+                                                                        </div>
+                                                                        <div className="ps-cart-item__content">
+                                                                            <p className="ps-cart-item__title" style={{ color: '#fff' }}>{e.namePharmacy}</p>
+                                                                            <p>
+                                                                                <span>Quantity:<i>{e.quantity}</i></span>
+                                                                                <span style={{ marginLeft: '-10px' }}>Total:<i>{TotalPrice(e.quantity, e.pricePharmacy)}$</i></span>
+                                                                            </p>
+                                                                        </div>
                                                                     </div>
-                                                                    <div className="ps-cart-item__content">
-                                                                        <p className="ps-cart-item__title" style={{ color: '#fff' }}>{e.namePharmacy}</p>
-                                                                        <p>
-                                                                            <span>Quantity:<i>{e.quantity}</i></span>
-                                                                            <span style={{ marginLeft: '-10px' }}>Total:<i>{TotalPrice(e.quantity, e.pricePharmacy)}$</i></span>
-                                                                        </p>
-                                                                    </div>
-                                                                </div>
-                                                            )
-                                                        })
+                                                                )
+                                                            })
+                                                        ) : null
                                                     }
 
                                                 </div>
                                                 {
                                                     numberCart !== 0
-                                                        ? (<div className="ps-cart__footer"><Link className="ps-btn" to="/cart" style={{ textDecoration: 'none' }}>Check out<i className="fa fa-arrow-right"></i></Link></div>)
+                                                        ? (<div className="ps-cart__footer" onClick={() => dispatch(saveCart())}><Link className="ps-btn" to="/cart" style={{ textDecoration: 'none' }}>Xem giỏ hàng<i className="fa fa-arrow-right"></i></Link></div>)
                                                         : (<div className="ps-cart__footer py-5 px-2" style={{}}>Chưa có sản phẩm trong giỏ hàng</div>)
                                                 }
                                             </div>
@@ -198,30 +200,42 @@ const HeaderArea = () => {
                                                         <div className="ps-cart__content">
 
                                                             {
-                                                                item.map((e, key) => {
-                                                                    return (
-                                                                        <div className="ps-cart-item" key={e._id}>
-                                                                            <div className="ps-cart-item__close" onClick={() => dispatch(deleteCart(key))}></div>
-                                                                            <div className="ps-cart-item__thumbnail">
-                                                                                <a href="#"></a><img src={e.pharmacyImage} alt="" />
+                                                                item && item.length ? (
+                                                                    item.map((e, key) => {
+                                                                        return (
+                                                                            <div className="ps-cart-item" key={e._id}>
+                                                                                <div className="ps-cart-item__close" onClick={() => dispatch(deleteCart(key))}></div>
+                                                                                <div className="ps-cart-item__thumbnail">
+                                                                                    <a href="#"></a><img src={e.pharmacyImage} alt="" />
+                                                                                </div>
+                                                                                <div className="ps-cart-item__content">
+                                                                                    <p className="ps-cart-item__title" style={{ color: '#fff' }}>{e.namePharmacy}</p>
+                                                                                    <p>
+                                                                                        <span>Quantity:<i>{e.quantity}</i></span>
+                                                                                        <span style={{ marginLeft: '-10px' }}>Total:<i>{TotalPrice(e.quantity, e.pricePharmacy)}$</i></span>
+                                                                                    </p>
+                                                                                </div>
                                                                             </div>
-                                                                            <div className="ps-cart-item__content">
-                                                                                <p className="ps-cart-item__title" style={{ color: '#fff' }}>{e.namePharmacy}</p>
-                                                                                <p>
-                                                                                    <span>Quantity:<i>{e.quantity}</i></span>
-                                                                                    <span style={{ marginLeft: '-10px' }}>Total:<i>{TotalPrice(e.quantity, e.pricePharmacy)}$</i></span>
-                                                                                </p>
-                                                                            </div>
-                                                                        </div>
-                                                                    )
-                                                                })
+                                                                        )
+                                                                    })
+                                                                ) : null
                                                             }
 
                                                         </div>
                                                         {
                                                             numberCart !== 0
-                                                                ? (<div className="ps-cart__footer"><Link className="ps-btn" to="/cart" style={{ textDecoration: 'none' }}>Check out<i className="fa fa-arrow-right"></i></Link></div>)
-                                                                : (<div className="ps-cart__footer py-5 px-2" style={{}}>Chưa có sản phẩm trong giỏ hàng</div>)
+                                                                ? (
+                                                                    <div className="ps-cart__footer" >
+                                                                        <Link className="ps-btn" to="/cart" style={{ textDecoration: 'none' }}>
+                                                                            Xem giỏ hàng<i className="fa fa-arrow-right"></i>
+                                                                        </Link>
+                                                                    </div>
+                                                                )
+                                                                : (
+                                                                    <div className="ps-cart__footer py-5 px-2" style={{}}>
+                                                                        Chưa có sản phẩm trong giỏ hàng
+                                                                    </div>
+                                                                )
                                                         }
                                                     </div>
                                                 </div>

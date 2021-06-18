@@ -5,10 +5,15 @@ import App from './App';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Provider } from 'react-redux';
 import { store } from './store/actions/store';
+import MessengerCustomerChat from 'react-messenger-customer-chat';
 
 ReactDOM.render(
   <Provider store={store}>
-    <App />
+    <App />,
+    <MessengerCustomerChat
+      pageId="100567068919638"
+      appId="969792837168056"
+    />
   </Provider>
   ,
   document.getElementById('root')

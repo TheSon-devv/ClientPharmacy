@@ -16,7 +16,11 @@ const Checkout = () => {
     const listCheckout = useSelector(state => state.cart.listCheckout)
     const quantityCheckout = useSelector(state => state.cart.quantityCheckout)
     const [check, setCheck] = useState(false)
-
+    const [dataShip, setDataShip] = useState({
+        name: "",
+        phone: "",
+        address: ""
+    })
 
     const shipping = useSelector(state => state.cart.shipping)
     const handling = useSelector(state => state.cart.handling)
@@ -39,22 +43,47 @@ const Checkout = () => {
         ]
     }
 
+    const checkDataShip = () => {
+        if (dataShip.name !== "") {
+            console.log('true')
+        } else {
+            console.log('false')
+        }
+    }
+
+    const handlerChangeInput = (e) => {
+        setDataShip({
+            ...dataShip,
+            [e.target.name]: e.target.value
+        })
+    }
+
     const checkOutHandler = (e) => {
         e.preventDefault();
-        const data = {
-            userId: localStorage.getItem('userId'),
-            quantity: quantityCheckout,
-            totalPrice: totalCartCheckout,
-            details: listCheckout
+        if (dataShip.name !== "" && dataShip.phone !== "" && dataShip.address !== "") {
+            const data = {
+                userId: localStorage.getItem('userId'),
+                quantity: quantityCheckout,
+                totalPrice: totalCartCheckout,
+                details: listCheckout,
+                nameCustomer: localStorage.getItem('name'),
+                name: dataShip.name,
+                phone: dataShip.phone,
+                address: dataShip.address
+
+            }
+            axios.post(`http://localhost:4000/checkout`, data, headerAuthorization())
+                .then(res => {
+                    console.log(res.data.saveCheckout);
+                    alert('Thanh toán thành công ! Tiếp tục mua sắm nhé')
+                    dispatch(reloadCart())
+                    history.push('/')
+                })
+                .catch(err => console.log(err))
+        } else {
+            alert("Vui lòng thêm địa chỉ giao hàng !")
         }
-        axios.post(`http://localhost:4000/checkout`, data, headerAuthorization())
-            .then(res => {
-                console.log(res.data.saveCheckout);
-                alert('Thanh toán thành công ! Tiếp tục mua sắm nhé')
-                dispatch(reloadCart())
-                history.push('/')
-            })
-            .catch(err => console.log(err))
+
     }
 
     function TotalPrice(quantity, price) {
@@ -71,35 +100,43 @@ const Checkout = () => {
                             <div className="row">
                                 <div className="col-lg-6 col-md-6 col-sm-12 col-xs-12">
                                     <div className="ps-checkout__billing">
-                                        <h3>Thông tin liên hệ</h3>
+                                        <h3>Thông tin nhận hàng</h3>
                                         <div className="form-group form-group--inline">
-                                            <label>Họ<span></span>
+                                            <label>Họ tên<span></span>
                                             </label>
-                                            <input className="form-control" type="text" />
-                                        </div>
-                                        <div className="form-group form-group--inline">
-                                            <label>Tên<span></span>
-                                            </label>
-                                            <input className="form-control" type="text" />
-                                        </div>
-
-                                        <div className="form-group form-group--inline">
-                                            <label>Địa chỉ email<span></span>
-                                            </label>
-                                            <input className="form-control" type="email" />
+                                            <input
+                                                className="form-control"
+                                                type="text"
+                                                name="name"
+                                                value={dataShip.name}
+                                                onChange={handlerChangeInput}
+                                            />
                                         </div>
 
                                         <div className="form-group form-group--inline">
                                             <label>Số điện thoại<span></span>
                                             </label>
-                                            <input className="form-control" type="text" />
+                                            <input
+                                                className="form-control"
+                                                type="text"
+                                                name="phone"
+                                                value={dataShip.phone}
+                                                onChange={handlerChangeInput}
+                                            />
                                         </div>
+
                                         <div className="form-group form-group--inline">
                                             <label>Địa chỉ<span></span>
                                             </label>
-                                            <input className="form-control" type="text" />
+                                            <input
+                                                className="form-control"
+                                                type="text"
+                                                name="address"
+                                                value={dataShip.address}
+                                                onChange={handlerChangeInput}
+                                            />
                                         </div>
-                                      
+
 
                                     </div>
                                 </div>

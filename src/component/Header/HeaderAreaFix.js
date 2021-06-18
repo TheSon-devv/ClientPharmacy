@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { authLogOut, logOut } from '../../store/actions/auth';
 import SideDrawer from '../SideDrawer/SideDrawer';
 import classes from "../SideDrawer/SideDrawer.module.css";
-import { deleteCart, reloadCart } from '../../store/actions/cart';
+import { deleteCart, reloadCart, saveCart } from '../../store/actions/cart';
 import banner from "../../asset/banner.png";
 import bannerHomeHeader from "../../asset/bannerHomeHeader.svg";
 import bannerHotHeader2 from "../../asset/bannerHotHeader2.svg";
@@ -32,7 +32,7 @@ const HeaderAreaFix = () => {
                             <div className="header__logo ml-2">
                                 <Link className="ps-logo" to="/"><img src={Logo} alt="" style={{ width: '65px', height: '60px' }} /></Link>
 
-                                <span style={{ color: 'blue', fontSize: 25, fontWeight: 'bold', marginLeft: 10 }}>Viet<span style={{ color: 'red',fontWeight: 'bold' }}>Skin</span></span>
+                                <span style={{ color: 'blue', fontSize: 25, fontWeight: 'bold', marginLeft: 10 }}>Viet<span style={{ color: 'red', fontWeight: 'bold' }}>Skin</span></span>
 
                             </div>
                         </div>
@@ -133,13 +133,13 @@ const HeaderAreaFix = () => {
                                                         }}>
                                                             <Link to="/" style={{ textDecoration: 'none' }}>
                                                                 Đăng xuất
-                                                        </Link>
+                                                            </Link>
                                                         </li>
                                                     </ul>
                                                 </li>
                                             </ul>
                                         </div>
-                                        <div className="ps-cart" >
+                                        <div className="ps-cart">
                                             <a className="ps-cart__toggle" href="#">
                                                 <span><i>{numberCart}</i></span><i className="fa fa-shopping-cart"></i>
                                             </a>
@@ -147,23 +147,25 @@ const HeaderAreaFix = () => {
                                                 <div className="ps-cart__content" >
 
                                                     {
-                                                        item.map((e, key) => {
-                                                            return (
-                                                                <div className="ps-cart-item" key={e._id}>
-                                                                    <div className="ps-cart-item__close" onClick={() => dispatch(deleteCart(key))}></div>
-                                                                    <div className="ps-cart-item__thumbnail">
-                                                                        <a href="#"></a><img src={e.pharmacyImage} alt="" />
+                                                        item && item.length ? (
+                                                            item.map((e, key) => {
+                                                                return (
+                                                                    <div className="ps-cart-item" key={e._id}>
+                                                                        <div className="ps-cart-item__close" onClick={() => dispatch(deleteCart(key))}></div>
+                                                                        <div className="ps-cart-item__thumbnail">
+                                                                            <a href="#"></a><img src={e.pharmacyImage} alt="" />
+                                                                        </div>
+                                                                        <div className="ps-cart-item__content">
+                                                                            <p className="ps-cart-item__title" style={{ color: '#fff' }}>{e.namePharmacy}</p>
+                                                                            <p>
+                                                                                <span>Quantity:<i>{e.quantity}</i></span>
+                                                                                <span style={{ marginLeft: '-10px' }}>Total:<i>{TotalPrice(e.quantity, e.pricePharmacy)}$</i></span>
+                                                                            </p>
+                                                                        </div>
                                                                     </div>
-                                                                    <div className="ps-cart-item__content">
-                                                                        <p className="ps-cart-item__title" style={{ color: '#fff' }}>{e.namePharmacy}</p>
-                                                                        <p>
-                                                                            <span>Quantity:<i>{e.quantity}</i></span>
-                                                                            <span style={{ marginLeft: '-10px' }}>Total:<i>{TotalPrice(e.quantity, e.pricePharmacy)}$</i></span>
-                                                                        </p>
-                                                                    </div>
-                                                                </div>
-                                                            )
-                                                        })
+                                                                )
+                                                            })
+                                                        ) : null
                                                     }
 
                                                 </div>
@@ -173,7 +175,7 @@ const HeaderAreaFix = () => {
                                                 </div> */}
                                                 {
                                                     numberCart !== 0
-                                                        ? (<div className="ps-cart__footer"><Link className="ps-btn" to="/cart" style={{ textDecoration: 'none' }}>Check out<i className="fa fa-arrow-right"></i></Link></div>)
+                                                        ? (<div className="ps-cart__footer" onClick={() => dispatch(saveCart())}><Link className="ps-btn" to="/cart" style={{ textDecoration: 'none' }}>Xem giỏ hàng<i className="fa fa-arrow-right"></i></Link></div>)
                                                         : (<div className="ps-cart__footer py-5 px-2" style={{}}>Chưa có sản phẩm trong giỏ hàng</div>)
                                                 }
                                             </div>
@@ -189,8 +191,8 @@ const HeaderAreaFix = () => {
                                         <>
 
                                             <div style={{ display: 'flex', justifyContent: 'center' }}>
-                                                <div style={{marginTop:25, marginRight: 10}}>
-                                                    <button style={{backgroundColor: "rgb(48,101,193)",padding :'10px 15px',border:'none',borderRadius:30}}><Link to="/signIn" style={{ textDecoration: 'none', color: '#fff' }}>Đăng nhập</Link></button>
+                                                <div style={{ marginTop: 25, marginRight: 10 }}>
+                                                    <button style={{ backgroundColor: "rgb(48,101,193)", padding: '10px 15px', border: 'none', borderRadius: 30 }}><Link to="/signIn" style={{ textDecoration: 'none', color: '#fff' }}>Đăng nhập</Link></button>
                                                 </div>
                                                 <div className="ps-cart" >
                                                     <a className="ps-cart__toggle" href="#">
@@ -200,29 +202,31 @@ const HeaderAreaFix = () => {
                                                         <div className="ps-cart__content">
 
                                                             {
-                                                                item.map((e, key) => {
-                                                                    return (
-                                                                        <div className="ps-cart-item" key={e._id}>
-                                                                            <div className="ps-cart-item__close" onClick={() => dispatch(deleteCart(key))}></div>
-                                                                            <div className="ps-cart-item__thumbnail">
-                                                                                <a href="#"></a><img src={e.pharmacyImage} alt="" />
+                                                                item && item.length ? (
+                                                                    item.map((e, key) => {
+                                                                        return (
+                                                                            <div className="ps-cart-item" key={e._id}>
+                                                                                <div className="ps-cart-item__close" onClick={() => dispatch(deleteCart(key))}></div>
+                                                                                <div className="ps-cart-item__thumbnail">
+                                                                                    <a href="#"></a><img src={e.pharmacyImage} alt="" />
+                                                                                </div>
+                                                                                <div className="ps-cart-item__content">
+                                                                                    <p className="ps-cart-item__title" style={{ color: '#fff' }}>{e.namePharmacy}</p>
+                                                                                    <p>
+                                                                                        <span>Quantity:<i>{e.quantity}</i></span>
+                                                                                        <span style={{ marginLeft: '-10px' }}>Total:<i>{TotalPrice(e.quantity, e.pricePharmacy)}$</i></span>
+                                                                                    </p>
+                                                                                </div>
                                                                             </div>
-                                                                            <div className="ps-cart-item__content">
-                                                                                <p className="ps-cart-item__title" style={{ color: '#fff' }}>{e.namePharmacy}</p>
-                                                                                <p>
-                                                                                    <span>Quantity:<i>{e.quantity}</i></span>
-                                                                                    <span style={{ marginLeft: '-10px' }}>Total:<i>{TotalPrice(e.quantity, e.pricePharmacy)}$</i></span>
-                                                                                </p>
-                                                                            </div>
-                                                                        </div>
-                                                                    )
-                                                                })
+                                                                        )
+                                                                    })
+                                                                ) : null
                                                             }
 
                                                         </div>
                                                         {
                                                             numberCart !== 0
-                                                                ? (<div className="ps-cart__footer"><Link className="ps-btn" to="/cart" style={{ textDecoration: 'none' }}>Check out<i className="fa fa-arrow-right"></i></Link></div>)
+                                                                ? (<div className="ps-cart__footer"><Link className="ps-btn" to="/cart" style={{ textDecoration: 'none' }}>Xem giỏ hàng<i className="fa fa-arrow-right"></i></Link></div>)
                                                                 : (<div className="ps-cart__footer py-5 px-2" style={{}}>Chưa có sản phẩm trong giỏ hàng</div>)
                                                         }
                                                     </div>
@@ -249,21 +253,21 @@ const HeaderAreaFix = () => {
                 }}>
                 <div style={{ position: 'absolute', left: 0, top: 0, right: 0, bottom: 0, backgroundImage: `url(${bannerHotHeader2})`, backgroundSize: '100% 100%', backgroundPosition: 'center' }}></div>
                 <div className="container row" style={{ height: '100%', margin: '0 auto', zIndex: 1000000 }} >
-                    <div className="col-md-5 col-sm-12 pt-50" >
+                    <div className="col-lg-5 col-md-12 col-sm-12 pt-50" >
                         <div className="title-section mb-md-5">
                             <h1 className="animate__animated animate__fadeInLeft">Chào mừng đến với VietSkin</h1>
                         </div>
                         <div className="title-section mb-4">
                             <p className="animate__animated animate__fadeInLeft">Đội ngũ bác sĩ VietSkin là những bác sĩ chuyên khoa
-                        Phó giáo sư, Tiến sĩ, Thạc sĩ với trên 30 năm kinh nghiệm. Đều đang công tác và giảng dạy tại các bệnh viện uy tín hàng đầu Việt Nam.</p>
+                                Phó giáo sư, Tiến sĩ, Thạc sĩ với trên 30 năm kinh nghiệm. Đều đang công tác và giảng dạy tại các bệnh viện uy tín hàng đầu Việt Nam.</p>
                         </div>
-                        <div className="customBtn mt-70" >
-                            <button className="animate__animated animate__slow animate__bounce animate__infinite" >
-                                <Link to="/doctor" style={{ textDecoration: 'none', color: "black" }}>Xem chi tiết <i className="fa fa-arrow-right ml-3"></i></Link>
-                            </button>
+                        <div className="customBtn mt-70 animate__animated animate__slow animate__bounce " >
+
+                            <Link className="" to="/doctor" style={{ textDecoration: 'none', color: "black" }}>Đặt lịch khám <i className="fa fa-arrow-right ml-3"></i></Link>
+
                         </div>
                     </div>
-                    <div className="col-md-7 col-sm-12 animate__animated animate__fadeInRight">
+                    <div className="col-lg-7 col-md-12 col-sm-12 animate__animated animate__fadeInRight hide">
                         <img src={bacsy} alt="" />
                     </div>
                 </div>
