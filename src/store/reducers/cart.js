@@ -189,18 +189,6 @@ export const cart = (state = initState, action) => {
                 totalCart: action.payload
             }
         case actions.RELOAD_CART:
-            let dataCart = {
-                userId: localStorage.getItem('userId'),
-                listCart: [],
-                listCartPaypal: [],
-                listCheckout: [],
-                numberCart: 0,
-            }
-            axios.put(`http://localhost:4000/cart/${localStorage.getItem('idCart')}`, dataCart)
-                .then(res => {
-                    console.log(res.data, 'put')
-                })
-                .catch(err => console.log(err))
             return {
                 ...state,
                 listCart: [],

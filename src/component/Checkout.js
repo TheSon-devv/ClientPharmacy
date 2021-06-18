@@ -78,6 +78,20 @@ const Checkout = () => {
                     alert('Thanh toán thành công ! Tiếp tục mua sắm nhé')
                     dispatch(reloadCart())
                     history.push('/')
+                    if (res.data.code === 200) {
+                        let dataCart = {
+                            userId: localStorage.getItem('userId'),
+                            listCart: [],
+                            listCartPaypal: [],
+                            listCheckout: [],
+                            numberCart: 0,
+                        }
+                        axios.put(`http://localhost:4000/cart/${localStorage.getItem('idCart')}`, dataCart)
+                            .then(res => {
+                                console.log(res.data, 'put')
+                            })
+                            .catch(err => console.log(err))
+                    }
                 })
                 .catch(err => console.log(err))
         } else {

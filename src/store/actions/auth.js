@@ -78,10 +78,10 @@ export const auth = (email, password) => {
 
                     dispatch(authSuccess(res.data.dataLogin.accessToken, res.data.dataLogin.userId));
                     dispatch(authLogOut(res.data.dataLogin.expiresIn));
-                    // dispatch(setListCart())
-                    // setTimeout(() => {
-                    //     dispatch(getNumberCart())
-                    // },2000)
+                    dispatch(setListCart())
+                    setTimeout(() => {
+                        dispatch(getNumberCart())
+                    },1000)
                 }
                 else {
                     dispatch(authFail("Tài khoản hoặc mật khẩu không chính xác !"))
@@ -108,10 +108,10 @@ export const authCheckState = () => {
             }
             else {
                 const userId = localStorage.getItem('userId');
-                // dispatch(setListCart())
-                // setTimeout(() => {
-                //     dispatch(getNumberCart())
-                // },1000)
+                dispatch(setListCart())
+                setTimeout(() => {
+                    dispatch(getNumberCart())
+                },1000)
                 // let noneCart = [];
                 // const listCart = localStorage.getItem('listCart') ? JSON.parse(localStorage.getItem('listCart')) : noneCart;
                 dispatch(authSuccess(token, userId));
