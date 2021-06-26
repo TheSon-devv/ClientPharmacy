@@ -24,7 +24,7 @@ const Slider3 = () => {
                                 </div>
                             </div>
                         </div>
-                        <div className="col-md-6 col-sm-12">
+                        <div className="col-md-6 col-sm-12 hide">
                             <img src={banner2} alt="" />
                         </div>
                     </div>

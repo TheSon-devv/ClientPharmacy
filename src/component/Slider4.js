@@ -15,7 +15,7 @@ const Slider3 = () => {
                 <div className="container">
 
                     <div className="row mt-60">
-                        <div className="col-md-6 col-sm-12">
+                        <div className="col-md-6 col-sm-12 hide">
                             <img src={delivery} alt="" />
                         </div>
                         <div className="col-md-6 col-sm-12 sliderRight" >

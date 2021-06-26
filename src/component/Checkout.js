@@ -42,15 +42,7 @@ const Checkout = () => {
             { id: 2, name: 'Phí đóng gói', value: handling }
         ]
     }
-
-    const checkDataShip = () => {
-        if (dataShip.name !== "") {
-            console.log('true')
-        } else {
-            console.log('false')
-        }
-    }
-
+    
     const handlerChangeInput = (e) => {
         setDataShip({
             ...dataShip,

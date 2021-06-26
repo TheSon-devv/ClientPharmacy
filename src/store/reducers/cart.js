@@ -181,7 +181,8 @@ export const cart = (state = initState, action) => {
         case actions.GET_NUMBER_CART:
             return {
                 ...state,
-                numberCart: state.listCart.length
+                numberCart: state.listCart.length,
+                quantityCheckout : state.listCart.length
             }
         case actions.GET_TOTAL_CART:
             return {
@@ -195,7 +196,8 @@ export const cart = (state = initState, action) => {
                 numberCart: 0,
                 listCheckout: [],
                 listCartPaypal: [],
-                quantityCheckout: 0
+                quantityCheckout: 0,
+                totalCart : 0
             }
         case actions.INCREASE_QUANTITY:
             state.listCart[action.payload].quantity++;

@@ -77,7 +77,20 @@ export default function Paypal() {
                                 dispatch(reloadCart())
                             })
                             .catch(err => console.log(err))
+                        let dataCart = {
+                            userId: localStorage.getItem('userId'),
+                            listCart: [],
+                            listCartPaypal: [],
+                            listCheckout: [],
+                            numberCart: 0,
+                        }
+                        axios.put(`http://localhost:4000/cart/${localStorage.getItem('idCart')}`, dataCart)
+                            .then(res => {
+                                console.log(res.data, 'put')
+                            })
+                            .catch(err => console.log(err))
                         history.push('/')
+                        window.location.reload()
                     }
                     else {
                         alert("Thanh toán thất bại !")
