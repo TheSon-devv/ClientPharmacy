@@ -33,7 +33,7 @@ const Footer = () => {
                                     </header>
                                     <footer>
                                         <p><strong>235 Hoàng Quốc Việt, Hà Nội</strong></p>
-                                        <p>Email: <a href='mailto:support@store.com'>thesonk7@gmail.com</a></p>
+                                        <p>Email: <a href='mailto:support@store.com'>ldkien@gmail.com</a></p>
                                         <p>Điện thoại: 032.142.2512</p>
                                     </footer>
                                 </aside>
@@ -85,7 +85,7 @@ const Footer = () => {
                     <div className="ps-container">
                         <div className="row">
                             <div className="col-lg-6 col-md-6 col-sm-6 col-xs-12 ">
-                                <p>&copy; <a href="#">VIETSKIN</a>, Inc. Tất cả đều được cho phép. Thiết kế bởi<a href="#"> Son - Hieu </a></p>
+                                <p>&copy; <a href="#">VIETSKIN</a>, Inc. Tất cả đều được cho phép. Thiết kế bởi<a href="#"> Kien </a></p>
                             </div>
                             <div className="col-lg-6 col-md-6 col-sm-6 col-xs-12 ">
 
