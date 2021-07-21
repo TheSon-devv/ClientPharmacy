@@ -11,12 +11,19 @@ import banner from "../../asset/banner.png";
 import bannerHomeHeader from "../../asset/bannerHomeHeader.svg";
 import bannerHotHeader2 from "../../asset/bannerHotHeader2.svg";
 import bacsy from "../../asset/bacsy.png";
+import axios from 'axios';
 
 const HeaderAreaFix = () => {
     const dispatch = useDispatch()
     const [showDrawer, setShowDrawer] = useState(true)
     const numberCart = useSelector(state => state.cart.numberCart)
     const item = useSelector(state => state.cart.listCart)
+
+    useEffect(() => {
+        axios.get('http://localhost:3000/employee')
+            .then(res => console.log(res.data))
+            .catch(err => console.log(err))
+    }, [])
 
     function TotalPrice(quantity, price) {
         return Number(quantity * price).toFixed(2)

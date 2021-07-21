@@ -34,7 +34,6 @@ const Doctor = (props) => {
                     <PopupOrderHealthy
                         open={show}
                         closeModal={closeModal}
-                        title="Thêm bài đăng"
                         doctor={doctor}
                     />
                 ) : null

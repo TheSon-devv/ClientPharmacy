@@ -146,9 +146,7 @@ const DetailProduct = () => {
                                         <div className="ps-product__thumbnail">
                                             <div className="ps-product__preview">
                                                 <div className="ps-product__variants">
-
                                                 </div>
-
                                             </div>
                                             <div className="ps-product__image">
                                                 <div className="item" style={{ border: '1px solid #ffd6d6', borderRadius: '10px' }}>
@@ -183,7 +181,7 @@ const DetailProduct = () => {
 
                                             <div className="ps-product__block ps-product__quickview">
                                                 <h4>Thông tin chi tiết</h4>
-                                                <pre style={{ fontFamily: 'Montserrat', fontSize: 16 }}>{item.information}</pre>
+                                                <textarea cols="55" style={{ fontFamily: 'Montserrat', fontSize: 16,height:320,border:'none' }}>{item.information}</textarea>
                                             </div>
 
                                             <div className="ps-product__shopping">

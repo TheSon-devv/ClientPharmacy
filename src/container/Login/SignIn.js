@@ -165,7 +165,7 @@ const SignIn = ({ ...props }) => {
                                 Hoặc
                                 </div>
                             <FacebookLogin
-                                appId="969792837168056"
+                                appId="4306067106099833"
                                 autoLoad={true}
                                 fields="name,email,picture"
                                 callback={responseFacebook}
